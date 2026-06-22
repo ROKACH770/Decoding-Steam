@@ -11,6 +11,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 import re
+from tqdm.auto import tqdm
 
 # Set random seeds for reproducibility
 np.random.seed(42)
@@ -147,7 +148,7 @@ class SteamReviewDataset(Dataset):
         meta = self.metadata[item]
         target = self.targets[item]
 
-        encoding = self.tokenizer.encode_plus(
+        encoding = self.tokenizer(
             text,
             add_special_tokens=True,
             max_length=self.max_len,
@@ -246,7 +247,7 @@ def train_hybrid_model(df: pd.DataFrame) -> None:
     # Training loop (1 epoch for demonstration)
     print("Training model (1 Epoch)...")
     model.train()
-    for batch_idx, batch in enumerate(train_loader):
+    for batch_idx, batch in tqdm(enumerate(train_loader), desc="Training", total=len(train_loader)):
         input_ids = batch['input_ids'].to(device)
         attention_mask = batch['attention_mask'].to(device)
         metadata = batch['metadata'].to(device)
@@ -259,7 +260,7 @@ def train_hybrid_model(df: pd.DataFrame) -> None:
         optimizer.step()
 
         if batch_idx % 20 == 0:
-            print(f"Batch {batch_idx}/{len(train_loader)} - Loss: {loss.item():.4f}")
+            print(f"Batch {batch_idx}/{len(train_loader)} - Loss: {loss.item():.4f}\n")
 
     # Evaluation
     print("\nEvaluating Hybrid Model...")
