@@ -86,167 +86,289 @@ def get_soup_with_wait(driver, url, wait_selector):
         WebDriverWait(driver, 15).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, wait_selector))
         )
-        time.sleep(2)  # Generous safety buffer for slow-rendering layouts
+        time.sleep(1)  # Generous safety buffer for slow-rendering layouts
         return BeautifulSoup(driver.page_source, 'html.parser')
     except Exception as e:
         print(f"Error loading {url}: {e}")
         return None
 
-def get_all_game_links(driver, max_pages=3):
-    """
-    Scrapes the list page to extract game names and their absolute URLs.
-    """
-    print(f"Fetching games listing from {BASE_URL}...")
-    game_list = []
-    
-    # Wait for the item wrapper selector grid
-    # =====================================================================
-    # MANUAL CHANGE AREA 2: If Metacritic updates their grid, update this selector
-    # =====================================================================
-    list_selector = "div.c-finderProductCard" 
-    
-    current_url = BASE_URL
-    for page in range(max_pages):
-        soup = get_soup_with_wait(driver, current_url, list_selector)
-        if not soup:
-            break
-            
-        # Find item blocks
-        cards = soup.find_all('div', class_='c-finderProductCard')
-        for card in cards:
-            link_tag = card.find('a', href=True)
-            if link_tag:
-                title = card.find('div', class_='c-finderProductCard_title')
-                name = title.get_text(strip=True) if title else "Unknown Game"
-                url = urljoin("https://www.metacritic.com", link_tag['href'])
-                
-                if (name, url) not in game_list:
-                    game_list.append((name, url))
-                    
-        # Pagination handling
-        # Metacritic uses modern pagination structures; update if clicking 'Next' fails
-        print(f"Page {page + 1} scraped. Total items logged: {len(game_list)}")
-        # Simple loop continuation placeholder. In a full system, you would grab the 
-        # href of the "Next Page" chevron button.
-        break 
 
-    return game_list
-
-def parse_metacritic_data(soup, original_name, url):
-    """Parses a single item page and extracts its technical features safely."""
+def parse_game_data(soup, source_category, url):
+    """Parses a single game's detail page and extracts game features and scores."""
     if not soup:
         return None
 
-    # Initialize data dictionary schema matching your 19-field design format
     data = {field: None for field in [
-        'Title', 'Metascore', 'User Score', 'Summary', 'Summary length', 
-        'Release Date', 'Publisher', 'Developer', 'Genres', 'Rating', 'url'
+        'Title', 'Platform', 'Metascore', 'NumberOfCriticReviews', 
+        # 'ReleaseDate', 'Developer', 'Publisher', 'Genres',
+        'url'
     ]}
-    data['Title'] = original_name
+    
+    data['Platform'] = source_category
     data['url'] = url
 
-    # =====================================================================
-    # MANUAL CHANGE AREA 3: LAYOUT SELECTORS (Check these if returning None)
-    # =====================================================================
-    
-    # Extract Metascore
-    score_elem = soup.find('div', class_='c-productScore_score')
-    if score_elem:
-        raw_score = score_elem.get_text(strip=True)
-        data['Metascore'] = raw_score if raw_score.lower() != 'tbd' else None
+    # Title
+    title_elem = soup.find('h1', class_=re.compile(r'hero-title__text'))
+    if title_elem:
+        data['Title'] = title_elem.get_text(strip=True)
+    else:
+        print(f"Warning: Title not found for {url}")
 
-    # Extract Summary / Synopsis
-    summary_elem = soup.find('span', class_='c-productDetails_description') or soup.find('div', class_='c-pageProductDetails_description')
-    if summary_elem:
-        syn_text = summary_elem.get_text(strip=True)
-        data['Summary'] = syn_text
-        data['Summary length'] = len(syn_text)
+    # Metascore & Critic Reviews Count
+    metascore_elem = soup.find('span', attrs={'data-testid': re.compile(r'global-score-value')})
+    if metascore_elem:
+        score_text = metascore_elem.get_text(strip=True)
+        if score_text.isdigit():
+            data['Metascore'] = int(score_text)
+        else:
+            print(f"Warning: Metascore is not a digit for {url}: {score_text}")
+    else:
+        print(f"Warning: Metascore not found for {url}")
 
-    # Technical specifications list layout parsing
-    details_container = soup.find('div', class_='c-pageProductDetails')
-    if details_container:
-        text_content = details_container.get_text(separator=" ", strip=True)
+    critic_count_elem = soup.find('a', href=re.compile(r'/game/[^/]+/critic-reviews/'))
+    if critic_count_elem:
+        count_match = re.search(r'Based on (\d+) Critic Reviews', critic_count_elem.get_text())
+        if count_match:
+            data['NumberOfCriticReviews'] = int(count_match.group(1))
+        else: 
+            print(f"Warning: Critic review count not found for {url}")
+    else:
+        print(f"Warning: Critic review count element not found for {url}")
+
+
+    # # Details Block (Release Date, Developer, Publisher, Genres)
+    # details_meta = soup.find_all('div', class_=re.compile(r'c-gameDetails_Section|c-productionDetailsNonSpecs'))
+    # for block in details_meta:
+    #     text = block.get_text(separator=" ", strip=True)
         
-        # Regular Expressions to isolate metadata values dynamically
-        pub_match = re.search(r'Publisher:\s*([^,|.]+)', text_content, re.IGNORECASE)
-        if pub_match:
-            data['Publisher'] = pub_match.group(1).strip()
-            
-        release_match = re.search(r'Release Date:\s*([A-Za-z0-9, ]+)', text_content, re.IGNORECASE)
-        if release_match:
-            data['Release Date'] = release_match.group(1).strip()
+    #     if 'Release Date' in text and not data['ReleaseDate']:
+    #         date_match = re.search(r'Release Date:\s*([A-Za-z]+\s+\d+,\s+\d{4})', text)
+    #         if date_match:
+    #             data['ReleaseDate'] = date_match.group(1)
+        
+    #     if 'Developer' in text and not data['Developer']:
+    #         dev_elem = block.find('a') or block.find('span', class_=re.compile(r'value'))
+    #         if dev_elem:
+    #             data['Developer'] = dev_elem.get_text(strip=True)
+                
+    #     if 'Publisher' in text and not data['Publisher']:
+    #         pub_elem = block.find('a') or block.find('span', class_=re.compile(r'value'))
+    #         if pub_elem:
+    #             data['Publisher'] = pub_elem.get_text(strip=True)
+                
+    #     if 'Genre' in text and not data['Genres']:
+    #         genre_links = block.find_all('a')
+    #         if genre_links:
+    #             data['Genres'] = ", ".join([g.get_text(strip=True) for g in genre_links])
 
     return data
 
 
-def build_and_save_dataframe(all_scraped_items):
-    """Constructs the initial Pandas DataFrame and saves raw export metrics."""
-    if not all_scraped_items:
+def build_and_save_dataframe(all_games_data):
+    """
+    Constructs the initial Pandas DataFrame, casts numeric fields,
+    and exports the raw data to CSV and JSON formats.
+    """
+    if not all_games_data:
+        print("No games collected to save.")
         return None
 
     os.makedirs('output', exist_ok=True)
-    df_items = pd.DataFrame(all_scraped_items)
+    df_games = pd.DataFrame(all_games_data)
 
-    # Cast fields cleanly into appropriate data structures
-    numeric_columns = ['Metascore', 'Summary length']
+    numeric_columns = ['Metascore', 'NumberOfCriticReviews']
+
     for col in numeric_columns:
-        if col in df_items.columns:
-            df_items[col] = pd.to_numeric(df_items[col], errors='coerce')
+        if col in df_games.columns:
+            # safely handling missing or invalid data
+            df_games[col] = pd.to_numeric(df_games[col].replace("None", pd.NA), errors='coerce')
 
-    df_items.to_csv('output/metacritic_raw.csv', index=False, encoding='utf-8')
+    df_games.to_csv('output/games_raw.csv', index=False, encoding='utf-8')
 
-    # Convert to structured JSON array following your exact hierarchical nesting
     records_list = []
-    for index, row in df_items.iterrows():
+    for index, row in df_games.iterrows():
+        # Drop NaN values so missing fields are entirely excluded from the JSON record
         row_dict = row.dropna().to_dict()
+
         ordered_dict = {'id': str(index + 1)}
         if 'url' in row_dict:
             ordered_dict['url'] = row_dict.pop('url')
+
         ordered_dict.update(row_dict)
         records_list.append(ordered_dict)
 
-    with open('output/metacritic_raw.json', 'w', encoding='utf-8') as f:
-        json.dump({"records": {"record": records_list}}, f, indent=4, ensure_ascii=False)
+    with open('output/games_raw.json', 'w', encoding='utf-8') as f:
+        # json.dump({"records": {"record": records_list}}, f, indent=4, ensure_ascii=False)
+        json.dump({"records": records_list}, f, indent=4, ensure_ascii=False)
 
-    print(f"Export finished! Processed {len(df_items)} records safely.")
-    return df_items
+    print(f"Step 2 Complete! Processed {len(df_games)} raw games out of {len(all_games_data)}, which is {len(df_games)/len(all_games_data)*100:.2f}%.")
+    return df_games
 
-def scrape_metacritic_data(max_pages=3):
-    """Main function to scrape Metacritic data and save it to CSV and JSON."""
-    browser = get_browser()
-    try:
-        # Step 1: Scrape target URLs from a listing feed page
-        items_to_scrape = get_all_game_links(browser, max_pages=1)
+
+def remove_duplicates(df):
+    """
+    Removes duplicate games found within the same platform (sanity check, not supposed to happen).
+    """
+    print("\n" + "=" * 40)
+    print("   REMOVING DUPLICATES")
+    print("=" * 40)
+    print(f"Total games before removing dupes: {len(df)}")
+
+    # Drop duplicate URLs
+    if 'url' in df.columns:
+        df = df.drop_duplicates(subset=['Platform', 'url'], keep='first')
+
+    # Drop exact duplicate Titles within the same platform
+    df = df.drop_duplicates(subset=['Platform', 'Title'], keep='first')
+
+    print(f"Total games after removing dupes: {len(df)}")
+    return df
+
+
+def step_3_sorting_and_preview(df):
+    """Prints the first 10 rows before and after sorting the dataset by Title."""
+    print("\n" + "=" * 40)
+    print("   STEP 3: SORTING AND FINAL PREVIEW")
+    print("=" * 40)
+
+    url_col = 'url' if 'url' in df.columns else 'URL' if 'URL' in df.columns else None
+    display_cols = ['Title', 'Platform', 'Metascore', 'NumberOfCriticReviews']
+    if url_col: 
+        display_cols.append(url_col)
+
+    df_before = df.head(10)
+    print("--- First 10 rows (Before Sort) ---")
+    print(df_before[display_cols].to_string())
+
+    df_sorted = df.sort_values(by='Title', ascending=True)
+
+    df_after = df_sorted.head(10)
+    print("\n--- First 10 rows (After Sort) ---")
+    print(df_after[display_cols].to_string())
+    
+    # Save the final sorted baseline dataset
+    # df_sorted.to_csv('output/games_baseline_final.csv', index=False, encoding='utf-8')
+    # print("\nSaved final baseline dataset to output/games_baseline_final.csv")
+
+    return df_sorted
+
+
+def read_saved_data():
+    """Loads the saved CSV and JSON dataframes from the output directory."""
+    print("\n" + "=" * 40)
+    print("   LOADING SAVED DATA")
+    print("=" * 40)
+
+    csv_path = 'output/games_raw.csv'
+
+    if not os.path.exists(csv_path):
+        print("Error: The output files don't exist yet. Run the scraper first!")
+        return None, None
+
+    df_from_csv = pd.read_csv(csv_path)
+    return df_from_csv, None
+
+
+def create_metacritic_url(app_name):
+    """Generates a direct Metacritic PC game URL from a Steam app name."""
+    slug = str(app_name).lower()
+    # Remove special characters, keeping only lowercase letters, numbers, and spaces
+    slug = re.sub(r'[^a-z0-9\s]', '', slug)
+    # Replace one or more spaces with a single hyphen
+    slug = re.sub(r'\s+', '-', slug.strip())
+    
+    # Target the PC platform URL structure
+    return f"https://www.metacritic.com/game/{slug}/"
+
+
+def crawl_metacritic(consensus_df):
+    """Handles targeted web scraping on Metacritic based on Steam game titles."""
+    driver = get_browser()
+    all_games_data = []
+
+    # Get a list of unique game names from the Steam dataset
+    game_names = consensus_df['app_name'].unique()
+    print(f"Found {len(game_names)} unique Steam games to look up on Metacritic.")
+
+    for app_name in game_names:
+        url = create_metacritic_url(app_name)
+        print(f"\n  Fetching: {url}")
+
+        # Wait for the main h1 title block to load as confirmation the page exists
+        game_soup = get_soup_with_wait(driver, url, "h1")
         
-        all_data = []
-        # Step 2: Iterate directly over the items collected
-        for name, entry_url in items_to_scrape[:5]:  # Kept to 5 items for structural testing
-            print(f"Scraping detailed stats for: {name}")
-            
-            # Wait for the item profile to load its primary score box container
-            soup_profile = get_soup_with_wait(browser, entry_url, "div.c-productScore_score")
-            
-            item_data = parse_metacritic_data(soup_profile, name, entry_url)
-            if item_data:
-                all_data.append(item_data)
-                
-            time.sleep(1)  # Anti-throttling humanization pacing element
+        # If the page times out (e.g., game doesn't exist on Metacritic or URL is slightly off), skip it
+        if not game_soup:
+            print(f"    -> Skipping: Page not found or failed to load for '{app_name}'")
+            continue
 
-        # Step 3: Run pipeline analytics transformations and write database output files
-        build_and_save_dataframe(all_data)
+        # Parse the data, hardcoding "PC" as the platform since we are coming from Steam
+        game_info = parse_game_data(game_soup, "PC", url)
+        
+        if game_info and game_info.get('Title'):
+            all_games_data.append(game_info)
+            print(f"    Collected: {game_info['Title'][:50]} (Metascore: {game_info['Metascore']})")
 
-    finally:
-        browser.quit()
+        # Add a respectful delay to avoid getting IP-banned by Metacritic
+        time.sleep(1)
+
+    print(f"\nCrawling complete! Collected data for {len(all_games_data)} out of {len(game_names)} games, which is {len(all_games_data)/len(game_names)*100:.2f}%.")
+
+    driver.quit()
+    build_and_save_dataframe(all_games_data)
 
 
 def main():
-    # Read the Steam reviews dataset
+    print("\n" + "=" * 40)
+    print("   STAGE 1: STEAM CONSENSUS")
+    print("=" * 40)
+    # Read and calculate the Steam reviews dataset
     print("Reading the Steam reviews dataset...")
-    df = pd.read_csv("./steam_reviews_english.csv")
-    consensus_df = calculate_steam_consensus(df)
-    # plot_steam_consensus(consensus_df)
-    # consensus_df = calculate_metacritic_consensus(consensus_df)
-    scrape_metacritic_data(max_pages=3)
+    steam_df = pd.read_csv("./steam_reviews_english.csv")
+    consensus_df = calculate_steam_consensus(steam_df)
+    print(f"Successfully calculated consensus for {len(consensus_df)} Steam games.")
+
+    print("\n" + "=" * 40)
+    print("   STAGE 2: METACRITIC BASELINE")
+    print("=" * 40)
+    csv_path = 'output/games_raw.csv'
+
+    if not os.path.exists(csv_path):
+        print("Crawling Metacritic...")
+        crawl_metacritic(consensus_df)
+    else:
+        print("Metacritic raw data already exists, skipping crawl.")
+
+    # Load and clean the Metacritic data
+    df_from_csv, _ = read_saved_data()
+    if df_from_csv is not None and not df_from_csv.empty:
+        df_deduped = remove_duplicates(df_from_csv)
+        mc_baseline_df = step_3_sorting_and_preview(df_deduped)
+        print("Metacritic baseline extraction complete.")
+
+        print("\n" + "=" * 40)
+        print("   STAGE 3: MERGING & DELTA CALCULATION")
+        print("=" * 40)
+        
+        # Normalize titles to lowercase strings to ensure they match perfectly during the merge
+        consensus_df['merge_name'] = consensus_df['app_name'].str.lower().str.strip()
+        mc_baseline_df['merge_name'] = mc_baseline_df['Title'].str.lower().str.strip()
+
+        # Merge the datasets
+        merged_df = pd.merge(consensus_df, mc_baseline_df, on='merge_name', how='inner')
+        
+        # Calculate the anomaly Delta (Steam Consensus - Normalized Metascore)
+        merged_df['Metascore_Normalized'] = merged_df['Metascore'] / 100.0 # metascore is 0-100, normalize to 0.0-1.0
+        merged_df['delta'] = merged_df['steam_consensus'] - merged_df['Metascore_Normalized']
+        
+        # Clean up temporary columns and save
+        merged_df.drop(columns=['merge_name'], inplace=True)
+        merged_df.to_csv('output/final_project_dataset.csv', index=False)
+        
+        print("\nFinal Merged Dataset Created!")
+        print(merged_df[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].head(10).to_string())
+        print("\nSaved to: output/final_project_dataset.csv")
+
 
 
 if __name__ == "__main__":
