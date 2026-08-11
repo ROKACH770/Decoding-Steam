@@ -1,0 +1,238 @@
+app_id,app_name,total_reviews,total_positive,steam_consensus,Title,Platform,Metascore,NumberOfCriticReviews,url,Metascore_Normalized,delta
+1145360,Hades,65785,65197,0.9910617922018697,Hades,PC,93.0,58.0,https://www.metacritic.com/game/hades/,0.93,0.06106179220186969
+1291340,Townscaper,4469,4429,0.9910494517789215,Townscaper,PC,63.0,6.0,https://www.metacritic.com/game/townscaper/,0.63,0.36104945177892145
+1055540,A Short Hike,4203,4161,0.9900071377587437,A Short Hike,PC,88.0,17.0,https://www.metacritic.com/game/a-short-hike/,0.88,0.11000713775874371
+427520,Factorio,68492,67804,0.9899550312445249,Factorio,PC,90.0,8.0,https://www.metacritic.com/game/factorio/,0.9,0.08995503124452486
+413150,Stardew Valley,172698,170724,0.9885696418024529,Stardew Valley,PC,89.0,30.0,https://www.metacritic.com/game/stardew-valley/,0.89,0.09856964180245287
+620,Portal 2,107466,106237,0.9885638248376231,Portal 2,PC,95.0,66.0,https://www.metacritic.com/game/portal-2/,0.95,0.038563824837623106
+341800,Keep Talking and Nobody Explodes,5946,5863,0.9860410359905819,Keep Talking and Nobody Explodes,PC,84.0,10.0,https://www.metacritic.com/game/keep-talking-and-nobody-explodes/,0.84,0.14604103599058194
+294100,RimWorld,59579,58633,0.984121922153779,RimWorld,PC,87.0,8.0,https://www.metacritic.com/game/rimworld/,0.87,0.11412192215377903
+519860,DUSK,9274,9124,0.9838257494069441,DUSK,PC,88.0,19.0,https://www.metacritic.com/game/dusk/,0.88,0.10382574940694411
+253230,A Hat in Time,24944,24505,0.9824005772931367,A Hat in Time,PC,79.0,39.0,https://www.metacritic.com/game/a-hat-in-time/,0.79,0.19240057729313664
+787480,Phoenix Wright: Ace Attorney Trilogy,2981,2928,0.9822207312982221,Phoenix Wright: Ace Attorney Trilogy,PC,81.0,34.0,https://www.metacritic.com/game/phoenix-wright-ace-attorney-trilogy/,0.81,0.17222073129822202
+736260,Baba Is You,6960,6831,0.9814655172413793,Baba Is You,PC,84.0,24.0,https://www.metacritic.com/game/baba-is-you/,0.84,0.14146551724137935
+420530,OneShot,11350,11137,0.9812334801762115,OneShot,PC,80.0,8.0,https://www.metacritic.com/game/oneshot/,0.8,0.18123348017621144
+105600,Terraria,370240,362988,0.9804127052722559,Terraria,PC,81.0,39.0,https://www.metacritic.com/game/terraria/,0.81,0.17041270527225583
+250900,The Binding of Isaac: Rebirth,57771,56633,0.9803015353724187,The Binding of Isaac: Rebirth,PC,88.0,15.0,https://www.metacritic.com/game/the-binding-of-isaac-rebirth/,0.88,0.1003015353724187
+646570,Slay the Spire,41684,40861,0.9802562134152193,Slay the Spire,PC,89.0,24.0,https://www.metacritic.com/game/slay-the-spire/,0.89,0.09025621341521928
+531510,Just Shapes & Beats,5026,4923,0.9795065658575408,Just Shapes & Beats,PC,83.0,17.0,https://www.metacritic.com/game/just-shapes-beats/,0.83,0.14950656585754085
+1113000,Persona 4 Golden,28105,27522,0.9792563600782779,Persona 4 Golden,PC,93.0,61.0,https://www.metacritic.com/game/persona-4-golden/,0.93,0.04925636007827783
+337340,Finding Paradise,3805,3726,0.9792378449408673,Finding Paradise,PC,81.0,18.0,https://www.metacritic.com/game/finding-paradise/,0.81,0.16923784494086724
+739630,Phasmophobia,129630,126705,0.9774357787549178,Phasmophobia,PC,76.0,9.0,https://www.metacritic.com/game/phasmophobia/,0.76,0.21743577875491782
+292030,The Witcher 3: Wild Hunt,151460,147933,0.9767133236498086,The Witcher 3: Wild Hunt,PC,92.0,79.0,https://www.metacritic.com/game/the-witcher-3-wild-hunt/,0.92,0.05671332364980852
+48700,Mount & Blade: Warband,57618,56270,0.9766045333055642,Mount & Blade: Warband,PC,78.0,23.0,https://www.metacritic.com/game/mount-blade-warband/,0.78,0.19660453330556416
+433340,Slime Rancher,34562,33749,0.9764770557259418,Slime Rancher,PC,81.0,9.0,https://www.metacritic.com/game/slime-rancher/,0.81,0.16647705572594174
+504230,Celeste,14863,14512,0.9763843100316222,Celeste,PC,92.0,36.0,https://www.metacritic.com/game/celeste/,0.92,0.05638431003162214
+425580,The Room Two,5783,5646,0.9763098737679405,The Room Two,PC,88.0,25.0,https://www.metacritic.com/game/the-room-two/,0.88,0.09630987376794053
+526870,Satisfactory,25227,24612,0.9756213580687358,Satisfactory,PC,91.0,18.0,https://www.metacritic.com/game/satisfactory/,0.91,0.06562135806873581
+206190,Gunpoint,9340,9112,0.9755888650963598,Gunpoint,PC,83.0,33.0,https://www.metacritic.com/game/gunpoint/,0.83,0.14558886509635982
+227300,Euro Truck Simulator 2,81776,79739,0.9750904910976326,Euro Truck Simulator 2,PC,79.0,18.0,https://www.metacritic.com/game/euro-truck-simulator-2/,0.79,0.18509049109763254
+250320,The Wolf Among Us,15251,14871,0.9750836010753393,The Wolf Among Us,PC,80.0,13.0,https://www.metacritic.com/game/the-wolf-among-us/,0.8,0.17508360107533927
+413420,Danganronpa 2: Goodbye Despair,7347,7158,0.9742752143732135,Danganronpa 2: Goodbye Despair,PC,81.0,50.0,https://www.metacritic.com/game/danganronpa-2-goodbye-despair/,0.81,0.16427521437321346
+883710,Resident Evil 2,31904,31070,0.9738590772316951,Resident Evil 2,PC,91.0,85.0,https://www.metacritic.com/game/resident-evil-2/,0.91,0.06385907723169504
+548430,Deep Rock Galactic,47002,45773,0.9738521765031275,Deep Rock Galactic,PC,85.0,20.0,https://www.metacritic.com/game/deep-rock-galactic/,0.85,0.12385217650312752
+1240210,There Is No Game: Wrong Dimension,2973,2895,0.9737638748738647,There is no game : Wrong dimension,PC,87.0,10.0,https://www.metacritic.com/game/there-is-no-game-wrong-dimension/,0.87,0.10376387487386474
+238460,BattleBlock Theater,24711,24057,0.9735340536603132,BattleBlock Theater,PC,85.0,51.0,https://www.metacritic.com/game/battleblock-theater/,0.85,0.12353405366031323
+288160,The Room,8052,7828,0.972180824639841,The Room,PC,75.0,22.0,https://www.metacritic.com/game/the-room/,0.75,0.222180824639841
+205100,Dishonored,33594,32643,0.9716913734595464,Dishonored,PC,88.0,56.0,https://www.metacritic.com/game/dishonored/,0.88,0.09169137345954637
+413410,Danganronpa: Trigger Happy Havoc,10013,9724,0.9711375212224108,Danganronpa: Trigger Happy Havoc,PC,80.0,55.0,https://www.metacritic.com/game/danganronpa-trigger-happy-havoc/,0.8,0.17113752122241077
+219150,Hotline Miami,31172,30256,0.9706146541768254,Hotline Miami,PC,85.0,51.0,https://www.metacritic.com/game/hotline-miami/,0.85,0.12061465417682538
+213670,South Park™: The Stick of Truth™,23239,22549,0.9703085330694092,South Park: The Stick of Truth,PC,85.0,48.0,https://www.metacritic.com/game/south-park-the-stick-of-truth/,0.85,0.12030853306940925
+1057090,Ori and the Will of the Wisps,14417,13980,0.9696885621141708,Ori and the Will of the Wisps,PC,90.0,71.0,https://www.metacritic.com/game/ori-and-the-will-of-the-wisps/,0.9,0.06968856211417074
+214560,Mark of the Ninja,9245,8961,0.9692806922660898,Mark of the Ninja,PC,90.0,51.0,https://www.metacritic.com/game/mark-of-the-ninja/,0.9,0.0692806922660898
+367520,Hollow Knight,109538,106166,0.9692161624276506,Hollow Knight,PC,90.0,28.0,https://www.metacritic.com/game/hollow-knight/,0.9,0.06921616242765061
+698780,Doki Doki Literature Club,89504,86718,0.9688728995352163,Doki Doki Literature Club!,PC,78.0,7.0,https://www.metacritic.com/game/doki-doki-literature-club/,0.78,0.18887289953521624
+221640,Super Hexagon,14869,14398,0.9683233573205999,Super Hexagon,PC,86.0,17.0,https://www.metacritic.com/game/super-hexagon/,0.86,0.10832335732059994
+219740,Don't Starve,33978,32883,0.9677732650538584,Don't Starve,PC,78.0,36.0,https://www.metacritic.com/game/dont-starve/,0.78,0.18777326505385838
+512900,Streets of Rogue,6970,6729,0.9654232424677188,Streets of Rogue,PC,82.0,5.0,https://www.metacritic.com/game/streets-of-rogue/,0.82,0.14542324246771887
+239030,"Papers, Please",24075,23242,0.9653997923156802,"Papers, Please",PC,85.0,40.0,https://www.metacritic.com/game/papers-please/,0.85,0.1153997923156802
+274190,Broforce,19588,18908,0.9652848682867061,Broforce,PC,83.0,32.0,https://www.metacritic.com/game/broforce/,0.83,0.13528486828670616
+620980,Beat Saber,35767,34523,0.9652193362596807,Beat Saber,PC,86.0,24.0,https://www.metacritic.com/game/beat-saber/,0.86,0.10521933625968072
+555220,Detention,2046,1974,0.9648093841642229,Detention,PC,83.0,18.0,https://www.metacritic.com/game/detention/,0.83,0.13480938416422295
+250760,Shovel Knight: Treasure Trove,9830,9477,0.964089521871821,Shovel Knight: Treasure Trove,PC,91.0,17.0,https://www.metacritic.com/game/shovel-knight-treasure-trove/,0.91,0.05408952187182092
+204360,Castle Crashers,31427,30298,0.9640754765010978,Castle Crashers,PC,82.0,49.0,https://www.metacritic.com/game/castle-crashers/,0.82,0.14407547650109787
+588650,Dead Cells,21699,20906,0.9634545370754413,Dead Cells,PC,89.0,36.0,https://www.metacritic.com/game/dead-cells/,0.89,0.07345453707544125
+212680,FTL: Faster Than Light,43688,42084,0.9632851126167369,FTL: Faster Than Light,PC,84.0,42.0,https://www.metacritic.com/game/ftl-faster-than-light/,0.84,0.12328511261673691
+748490,The Legend of Heroes: Trails of Cold Steel II,1160,1117,0.9629310344827586,The Legend of Heroes: Trails of Cold Steel II,PC,80.0,26.0,https://www.metacritic.com/game/the-legend-of-heroes-trails-of-cold-steel-ii/,0.8,0.16293103448275859
+312530,Duck Game,13195,12705,0.9628647214854111,Duck Game,PC,83.0,9.0,https://www.metacritic.com/game/duck-game/,0.83,0.13286472148541117
+322330,Don't Starve Together,70020,67401,0.9625964010282776,Don't Starve Together,PC,83.0,4.0,https://www.metacritic.com/game/dont-starve-together/,0.83,0.13259640102827763
+270880,American Truck Simulator,35313,33975,0.9621102710050123,American Truck Simulator,PC,76.0,31.0,https://www.metacritic.com/game/american-truck-simulator/,0.76,0.20211027100501233
+412830,STEINS;GATE,2335,2246,0.9618843683083512,Steins;Gate,PC,83.0,16.0,https://www.metacritic.com/game/steinsgate/,0.83,0.13188436830835126
+206440,To the Moon,20886,20074,0.9611222828689074,To the Moon,PC,81.0,26.0,https://www.metacritic.com/game/to-the-moon/,0.81,0.1511222828689074
+8930,Sid Meier's Civilization V,104257,100167,0.9607700202384493,Sid Meier's Civilization V,PC,90.0,70.0,https://www.metacritic.com/game/sid-meiers-civilization-v/,0.9,0.06077002023844924
+945360,Among Us,295991,284307,0.9605258267987878,Among Us,PC,85.0,9.0,https://www.metacritic.com/game/among-us/,0.85,0.11052582679878786
+457140,Oxygen Not Included,24365,23402,0.9604760927560024,Oxygen Not Included,PC,85.0,5.0,https://www.metacritic.com/game/oxygen-not-included/,0.85,0.11047609275600245
+391540,Undertale,93756,90050,0.9604718631340927,Undertale,PC,92.0,43.0,https://www.metacritic.com/game/undertale/,0.92,0.04047186313409268
+268910,Cuphead,32880,31519,0.9586070559610705,Cuphead,PC,86.0,72.0,https://www.metacritic.com/game/cuphead/,0.86,0.09860705596107056
+311690,Enter the Gungeon,27625,26466,0.9580452488687783,Enter the Gungeon,PC,82.0,33.0,https://www.metacritic.com/game/enter-the-gungeon/,0.82,0.13804524886877834
+362890,Black Mesa,32851,31438,0.9569876107272229,Black Mesa,PC,84.0,26.0,https://www.metacritic.com/game/black-mesa/,0.84,0.11698761072722297
+638970,Yakuza 0,19181,18355,0.9569365517960482,Yakuza 0,PC,85.0,87.0,https://www.metacritic.com/game/yakuza-0/,0.85,0.10693655179604822
+264710,Subnautica,92479,88388,0.9557629299624779,Subnautica,PC,87.0,39.0,https://www.metacritic.com/game/subnautica/,0.87,0.08576292996247792
+683320,GRIS,13520,12911,0.9549556213017751,GRIS,PC,83.0,43.0,https://www.metacritic.com/game/gris/,0.83,0.12495562130177518
+238320,Outlast,22991,21945,0.954503936322909,Outlast,PC,80.0,59.0,https://www.metacritic.com/game/outlast/,0.8,0.15450393632290893
+113200,The Binding of Isaac,26259,25054,0.9541109714764462,The Binding of Isaac,PC,84.0,30.0,https://www.metacritic.com/game/the-binding-of-isaac/,0.84,0.11411097147644622
+502800,SENRAN KAGURA ESTIVAL VERSUS,1119,1067,0.9535299374441466,Senran Kagura: Estival Versus,PC,67.0,25.0,https://www.metacritic.com/game/senran-kagura-estival-versus/,0.67,0.28352993744414656
+825630,STEINS;GATE 0,775,738,0.952258064516129,Steins;Gate 0,PC,81.0,20.0,https://www.metacritic.com/game/steinsgate-0/,0.81,0.142258064516129
+743450,Monster Prom,6112,5820,0.9522251308900523,Monster Prom,PC,73.0,11.0,https://www.metacritic.com/game/monster-prom/,0.73,0.22222513089005236
+379720,DOOM,81046,77095,0.951249907459961,DOOM,PC,79.0,66.0,https://www.metacritic.com/game/doom/,0.79,0.16124990745996093
+55230,Saints Row: The Third,23661,22460,0.9492413676514095,Saints Row: The Third,PC,84.0,70.0,https://www.metacritic.com/game/saints-row-the-third/,0.84,0.10924136765140957
+477160,Human: Fall Flat,24684,23409,0.9483471074380165,Human: Fall Flat,PC,70.0,21.0,https://www.metacritic.com/game/human-fall-flat/,0.7,0.24834710743801658
+203160,Tomb Raider,55360,52342,0.9454841040462427,Tomb Raider,PC,86.0,70.0,https://www.metacritic.com/game/tomb-raider/,0.86,0.08548410404624274
+40800,Super Meat Boy,14414,13607,0.9440127653670043,Super Meat Boy,PC,90.0,51.0,https://www.metacritic.com/game/super-meat-boy/,0.9,0.04401276536700427
+728880,Overcooked! 2,6747,6366,0.9435304579813251,Overcooked! 2,PC,81.0,38.0,https://www.metacritic.com/game/overcooked-2/,0.81,0.133530457981325
+233860,Kenshi,23235,21893,0.9422423068646438,Kenshi,PC,75.0,9.0,https://www.metacritic.com/game/kenshi/,0.75,0.19224230686464383
+481510,Night in the Woods,8419,7919,0.94061052381518,Night in the Woods,PC,88.0,30.0,https://www.metacritic.com/game/night-in-the-woods/,0.88,0.06061052381517995
+1158310,Crusader Kings III,21903,20596,0.9403278089759394,Crusader Kings III,PC,91.0,61.0,https://www.metacritic.com/game/crusader-kings-iii/,0.91,0.03032780897593934
+594570,Total War: WARHAMMER II,47822,44952,0.9399857806030697,Total War: WARHAMMER II,PC,87.0,69.0,https://www.metacritic.com/game/total-war-warhammer-ii/,0.87,0.0699857806030697
+8870,BioShock Infinite,50275,47242,0.9396718050721035,BioShock Infinite,PC,94.0,68.0,https://www.metacritic.com/game/bioshock-infinite/,0.94,-0.00032819492789648574
+200900,Cave Story+,4805,4506,0.9377731529656608,Cave Story,PC,89.0,25.0,https://www.metacritic.com/game/cave-story/,0.89,0.04777315296566076
+590380,Into the Breach,7902,7404,0.9369779802581625,Into the Breach,PC,90.0,56.0,https://www.metacritic.com/game/into-the-breach/,0.9,0.03697798025816246
+291860,Pit People,4162,3899,0.9368092263334935,Pit People,PC,78.0,15.0,https://www.metacritic.com/game/pit-people/,0.78,0.15680922633349348
+322110,20XX,2593,2429,0.9367527959892017,20XX,PC,77.0,14.0,https://www.metacritic.com/game/20xx/,0.77,0.16675279598920167
+239140,Dying Light,62179,58240,0.9366506376750993,Dying Light,PC,74.0,58.0,https://www.metacritic.com/game/dying-light/,0.74,0.19665063767509927
+666140,My Time At Portia,10831,10141,0.9362939710091405,My Time At Portia,PC,73.0,37.0,https://www.metacritic.com/game/my-time-at-portia/,0.73,0.2062939710091405
+428550,Momodora: Reverie Under the Moonlight,3689,3433,0.9306044998644619,Momodora: Reverie Under the Moonlight,PC,76.0,22.0,https://www.metacritic.com/game/momodora-reverie-under-the-moonlight/,0.76,0.1706044998644619
+418370,Resident Evil 7 Biohazard,13839,12877,0.9304863068140762,Resident Evil 7: biohazard,PC,86.0,100.0,https://www.metacritic.com/game/resident-evil-7-biohazard/,0.86,0.0704863068140762
+673950,Farm Together,3478,3236,0.9304197814836113,Farm Together,PC,77.0,4.0,https://www.metacritic.com/game/farm-together/,0.77,0.16041978148361125
+332200,Axiom Verge,3052,2835,0.9288990825688074,Axiom Verge,PC,84.0,61.0,https://www.metacritic.com/game/axiom-verge/,0.84,0.08889908256880741
+609320,FAR: Lone Sails,3834,3556,0.927490871152843,FAR: Lone Sails,PC,80.0,24.0,https://www.metacritic.com/game/far-lone-sails/,0.8,0.12749087115284297
+72850,The Elder Scrolls V: Skyrim,160233,148583,0.9272933790168068,The Elder Scrolls V: Skyrim,PC,96.0,89.0,https://www.metacritic.com/game/the-elder-scrolls-v-skyrim/,0.96,-0.03270662098319321
+374320,DARK SOULS™ III,88860,82398,0.9272788656313302,Dark Souls III,PC,89.0,69.0,https://www.metacritic.com/game/dark-souls-iii/,0.89,0.037278865631330205
+569860,Thimbleweed Park,1815,1682,0.9267217630853994,Thimbleweed Park,PC,84.0,59.0,https://www.metacritic.com/game/thimbleweed-park/,0.84,0.08672176308539947
+814380,Sekiro™: Shadows Die Twice,34196,31689,0.9266873318516785,Sekiro: Shadows Die Twice,PC,90.0,77.0,https://www.metacritic.com/game/sekiro-shadows-die-twice/,0.9,0.026687331851678486
+673880,"Warhammer 40,000: Mechanicus",5159,4776,0.9257608063578213,"Warhammer 40,000: Mechanicus",PC,78.0,19.0,https://www.metacritic.com/game/warhammer-40000-mechanicus/,0.78,0.1457608063578213
+429660,Tales of Berseria,5367,4958,0.9237935531954538,Tales of Berseria,PC,79.0,57.0,https://www.metacritic.com/game/tales-of-berseria/,0.79,0.13379355319545372
+255710,Cities: Skylines,70066,64724,0.9237575999771643,Cities: Skylines,PC,85.0,60.0,https://www.metacritic.com/game/cities-skylines/,0.85,0.07375759997716436
+1190460,DEATH STRANDING,17137,15826,0.9234988621112213,Death Stranding,PC,82.0,111.0,https://www.metacritic.com/game/death-stranding/,0.82,0.10349886211122139
+391220,Rise of the Tomb Raider,24712,22651,0.9165992230495306,Rise of the Tomb Raider,PC,86.0,102.0,https://www.metacritic.com/game/rise-of-the-tomb-raider/,0.86,0.05659922304953058
+787860,Farming Simulator 19,14603,13385,0.9165924809970554,Farming Simulator 19,PC,73.0,16.0,https://www.metacritic.com/game/farming-simulator-19/,0.73,0.1865924809970554
+323190,Frostpunk,22463,20584,0.9163513333036549,Frostpunk,PC,84.0,67.0,https://www.metacritic.com/game/frostpunk/,0.84,0.07635133330365496
+535930,Two Point Hospital,11266,10308,0.9149653825670158,Two Point Hospital,PC,83.0,55.0,https://www.metacritic.com/game/two-point-hospital/,0.83,0.0849653825670158
+731490,Crash Bandicoot™ N. Sane Trilogy,5449,4982,0.9142962011378235,Crash Bandicoot N. Sane Trilogy,PC,80.0,85.0,https://www.metacritic.com/game/crash-bandicoot-n-sane-trilogy/,0.8,0.11429620113782346
+631510,Devil May Cry HD Collection,1439,1315,0.9138290479499652,Devil May Cry HD Collection,PC,77.0,32.0,https://www.metacritic.com/game/devil-may-cry-hd-collection/,0.77,0.1438290479499652
+275390,Guacamelee! Super Turbo Championship Edition,2203,2013,0.9137539718565593,Guacamelee! Super Turbo Championship Edition,PC,87.0,30.0,https://www.metacritic.com/game/guacamelee-super-turbo-championship-edition/,0.87,0.04375397185655927
+424840,Little Nightmares,8895,8117,0.9125351320966836,Little Nightmares,PC,78.0,52.0,https://www.metacritic.com/game/little-nightmares/,0.78,0.13253513209668355
+417290,Ghost of a Tale,1662,1515,0.9115523465703971,Ghost of a Tale,PC,75.0,25.0,https://www.metacritic.com/game/ghost-of-a-tale/,0.75,0.16155234657039708
+613100,House Flipper,18949,17271,0.9114465143279329,House Flipper,PC,67.0,7.0,https://www.metacritic.com/game/house-flipper/,0.67,0.24144651432793285
+583470,The End Is Nigh,1189,1083,0.9108494533221194,The End Is Nigh,PC,84.0,15.0,https://www.metacritic.com/game/the-end-is-nigh/,0.84,0.07084945332211945
+394360,Hearts of Iron IV,61009,55549,0.9105050074579161,Hearts of Iron IV,PC,83.0,37.0,https://www.metacritic.com/game/hearts-of-iron-iv/,0.83,0.08050500745791611
+107410,Arma 3,89777,81502,0.9078271717700525,Arma 3,PC,74.0,38.0,https://www.metacritic.com/game/arma-3/,0.74,0.16782717177005246
+357190,Ultimate Marvel vs. Capcom 3,1693,1530,0.9037212049616066,Ultimate Marvel vs. Capcom 3,PC,80.0,48.0,https://www.metacritic.com/game/ultimate-marvel-vs-capcom-3/,0.8,0.10372120496160653
+262060,Darkest Dungeon®,40521,36596,0.903136645196318,Darkest Dungeon,PC,84.0,56.0,https://www.metacritic.com/game/darkest-dungeon/,0.84,0.06313664519631801
+678950,DRAGON BALL FighterZ,16864,15220,0.9025142314990512,Dragon Ball FighterZ,PC,87.0,74.0,https://www.metacritic.com/game/dragon-ball-fighterz/,0.87,0.032514231499051194
+863550,HITMAN™ 2,21930,19754,0.9007751937984496,Hitman 2,PC,82.0,70.0,https://www.metacritic.com/game/hitman-2/,0.82,0.08077519379844966
+812140,Assassin's Creed Odyssey,31672,28506,0.9000378883556454,Assassin's Creed Odyssey,PC,83.0,86.0,https://www.metacritic.com/game/assassins-creed-odyssey/,0.83,0.0700378883556454
+242920,Banished,23568,21195,0.8993126272912424,Banished,PC,73.0,32.0,https://www.metacritic.com/game/banished/,0.73,0.1693126272912424
+283640,Salt and Sanctuary,4772,4288,0.8985750209555742,Salt and Sanctuary,PC,84.0,56.0,https://www.metacritic.com/game/salt-and-sanctuary/,0.84,0.05857502095557421
+582010,Monster Hunter: World,97809,87842,0.8980973121082927,Monster Hunter: World,PC,90.0,93.0,https://www.metacritic.com/game/monster-hunter-world/,0.9,-0.001902687891707333
+493340,Planet Coaster,22606,20288,0.8974608511014774,Planet Coaster,PC,84.0,57.0,https://www.metacritic.com/game/planet-coaster/,0.84,0.05746085110147747
+527230,For The King,6895,6186,0.8971718636693256,For the King,PC,79.0,12.0,https://www.metacritic.com/game/for-the-king/,0.79,0.10717186366932552
+359550,Tom Clancy's Rainbow Six Siege,371154,332894,0.8969161049052415,Tom Clancy's Rainbow Six Siege,PC,73.0,40.0,https://www.metacritic.com/game/tom-clancys-rainbow-six-siege/,0.73,0.16691610490524156
+760060,Mutant Year Zero: Road to Eden,8482,7600,0.8960150907804763,Mutant Year Zero: Road to Eden,PC,78.0,57.0,https://www.metacritic.com/game/mutant-year-zero-road-to-eden/,0.78,0.11601509078047623
+252950,Rocket League,248720,221834,0.891902541009971,Rocket League,PC,85.0,50.0,https://www.metacritic.com/game/rocket-league/,0.85,0.04190254100997104
+782330,DOOM Eternal,72323,64468,0.8913900142416659,DOOM Eternal,PC,88.0,61.0,https://www.metacritic.com/game/doom-eternal/,0.88,0.011390014241665858
+595520,FINAL FANTASY XII THE ZODIAC AGE,2553,2274,0.8907168037602821,Final Fantasy XII: The Zodiac Age,PC,86.0,75.0,https://www.metacritic.com/game/final-fantasy-xii-the-zodiac-age/,0.86,0.030716803760282074
+1222700,A Way Out,4398,3915,0.8901773533424284,A Way Out,PC,78.0,62.0,https://www.metacritic.com/game/a-way-out/,0.78,0.1101773533424284
+489830,The Elder Scrolls V: Skyrim Special Edition,84628,75127,0.8877321926549133,The Elder Scrolls V: Skyrim Special Edition,PC,84.0,63.0,https://www.metacritic.com/game/the-elder-scrolls-v-skyrim-special-edition/,0.84,0.04773219265491335
+39210,FINAL FANTASY XIV Online,22989,20376,0.8863369437557093,Final Fantasy XIV Online,PC,49.0,26.0,https://www.metacritic.com/game/final-fantasy-xiv-online/,0.49,0.39633694375570927
+312660,Sniper Elite 4,8926,7890,0.8839345731570692,Sniper Elite 4,PC,77.0,55.0,https://www.metacritic.com/game/sniper-elite-4/,0.77,0.11393457315706923
+899440,GOD EATER 3,1842,1627,0.8832790445168295,God Eater 3,PC,71.0,60.0,https://www.metacritic.com/game/god-eater-3/,0.71,0.17327904451682952
+872790,Football Manager 2019,4005,3512,0.8769038701622971,Football Manager 2019,PC,86.0,32.0,https://www.metacritic.com/game/football-manager-2019/,0.86,0.016903870162297108
+560130,Pillars of Eternity II: Deadfire,6472,5668,0.8757725587144622,Pillars of Eternity II: Deadfire,PC,88.0,71.0,https://www.metacritic.com/game/pillars-of-eternity-ii-deadfire/,0.88,-0.0042274412855377586
+537800,Bomber Crew,4783,4187,0.8753920133807234,Bomber Crew,PC,75.0,11.0,https://www.metacritic.com/game/bomber-crew/,0.75,0.12539201338072337
+281990,Stellaris,54232,47307,0.8723078625165954,Stellaris,PC,78.0,57.0,https://www.metacritic.com/game/stellaris/,0.78,0.0923078625165954
+857980,Void Bastards,2556,2225,0.8705007824726134,Void Bastards,PC,81.0,27.0,https://www.metacritic.com/game/void-bastards/,0.81,0.06050078247261337
+236850,Europa Universalis IV,45587,39657,0.8699190558711913,Europa Universalis IV,PC,87.0,34.0,https://www.metacritic.com/game/europa-universalis-iv/,0.87,-8.094412880865764e-05
+690830,Foundation,3665,3174,0.8660300136425648,Foundation,PC,84.0,5.0,https://www.metacritic.com/game/foundation/,0.84,0.026030013642564853
+701160,Kingdom Two Crowns,2818,2438,0.865152590489709,Kingdom Two Crowns,PC,85.0,11.0,https://www.metacritic.com/game/kingdom-two-crowns/,0.85,0.015152590489709072
+252490,Rust,283777,244971,0.8632517786853762,Rust,PC,69.0,11.0,https://www.metacritic.com/game/rust/,0.69,0.17325177868537622
+466560,Northgard,14811,12774,0.8624670852744581,Northgard,PC,81.0,14.0,https://www.metacritic.com/game/northgard/,0.81,0.05246708527445809
+779340,Total War: THREE KINGDOMS,16073,13861,0.8623779008274747,Total War: Three Kingdoms,PC,85.0,64.0,https://www.metacritic.com/game/total-war-three-kingdoms/,0.85,0.012377900827474697
+552500,Warhammer: Vermintide 2,30851,26438,0.8569576350847622,Warhammer: Vermintide 2,PC,82.0,54.0,https://www.metacritic.com/game/warhammer-vermintide-2/,0.82,0.03695763508476224
+570940,DARK SOULS™: REMASTERED,17685,15145,0.8563754594288946,Dark Souls Remastered,PC,84.0,53.0,https://www.metacritic.com/game/dark-souls-remastered/,0.84,0.016375459428894623
+518790,theHunter: Call of the Wild™,23396,20029,0.8560865105146179,theHunter: Call of the Wild,PC,64.0,13.0,https://www.metacritic.com/game/thehunter-call-of-the-wild/,0.64,0.2160865105146179
+393520,Iconoclasts,1492,1275,0.8545576407506702,Iconoclasts,PC,83.0,23.0,https://www.metacritic.com/game/iconoclasts/,0.83,0.02455764075067024
+268500,XCOM 2,36540,31173,0.85311986863711,XCOM 2,PC,88.0,104.0,https://www.metacritic.com/game/xcom-2/,0.88,-0.026880131362890025
+447820,Day of Infamy,11086,9402,0.8480966985386974,Day of Infamy,PC,77.0,10.0,https://www.metacritic.com/game/day-of-infamy/,0.77,0.07809669853869738
+581320,Insurgency: Sandstorm,38229,32334,0.8457976928509771,Insurgency: Sandstorm,PC,78.0,30.0,https://www.metacritic.com/game/insurgency-sandstorm/,0.78,0.06579769285097703
+613830,CHRONO TRIGGER,2317,1955,0.843763487268019,Chrono Trigger,PC,92.0,57.0,https://www.metacritic.com/game/chrono-trigger/,0.92,-0.07623651273198107
+629760,MORDHAU,54515,45990,0.8436210217371366,MORDHAU,PC,81.0,21.0,https://www.metacritic.com/game/mordhau/,0.81,0.03362102173713655
+589360,Ni no Kuni™ II: Revenant Kingdom,3778,3173,0.839862361037586,Ni no Kuni II: Revenant Kingdom,PC,84.0,84.0,https://www.metacritic.com/game/ni-no-kuni-ii-revenant-kingdom/,0.84,-0.00013763896241392182
+385560,Shadow Complex Remastered,385,323,0.8389610389610389,Shadow Complex Remastered,PC,74.0,14.0,https://www.metacritic.com/game/shadow-complex-remastered/,0.74,0.09896103896103892
+218620,PAYDAY 2,187096,156574,0.836864497370334,Payday 2,PC,79.0,51.0,https://www.metacritic.com/game/payday-2/,0.79,0.046864497370333935
+582160,Assassin's Creed Origins,17832,14918,0.8365859129654554,Assassin's Creed Origins,PC,81.0,63.0,https://www.metacritic.com/game/assassins-creed-origins/,0.81,0.026585912965455316
+626690,Sword Art Online: Fatal Bullet,4362,3646,0.8358551123337918,Sword Art Online: Fatal Bullet,PC,64.0,42.0,https://www.metacritic.com/game/sword-art-online-fatal-bullet/,0.64,0.19585511233379183
+632350,Cyberdimension Neptunia: 4 Goddesses Online,1282,1071,0.8354134165366615,Cyberdimension Neptunia: 4 Goddesses Online,PC,71.0,12.0,https://www.metacritic.com/game/cyberdimension-neptunia-4-goddesses-online/,0.71,0.1254134165366615
+648350,Jurassic World Evolution,18588,15524,0.8351624704110179,Jurassic World Evolution,PC,69.0,57.0,https://www.metacritic.com/game/jurassic-world-evolution/,0.69,0.14516247041101793
+397540,Borderlands 3,30246,25241,0.8345235733650731,Borderlands 3,PC,81.0,53.0,https://www.metacritic.com/game/borderlands-3/,0.81,0.024523573365073048
+696170,SENRAN KAGURA Peach Beach Splash,875,729,0.8331428571428572,Senran Kagura: Peach Beach Splash,PC,70.0,25.0,https://www.metacritic.com/game/senran-kagura-peach-beach-splash/,0.7,0.13314285714285723
+637090,BATTLETECH,17317,14346,0.8284344863429001,BattleTech,PC,78.0,62.0,https://www.metacritic.com/game/battletech/,0.78,0.04843448634290004
+485510,Nioh: Complete Edition,7254,6008,0.8282326992004412,Nioh: Complete Edition,PC,84.0,23.0,https://www.metacritic.com/game/nioh-complete-edition/,0.84,-0.011767300799558789
+524580,Fairy Fencer F Advent Dark Force,609,502,0.8243021346469622,Fairy Fencer F: Advent Dark Force,PC,71.0,21.0,https://www.metacritic.com/game/fairy-fencer-f-advent-dark-force/,0.71,0.11430213464696226
+464920,Surviving Mars,8234,6768,0.821957736215691,Surviving Mars,PC,76.0,39.0,https://www.metacritic.com/game/surviving-mars/,0.76,0.061957736215691006
+381210,Dead by Daylight,143988,118010,0.819582187404506,Dead by Daylight,PC,64.0,18.0,https://www.metacritic.com/game/dead-by-daylight/,0.64,0.17958218740450593
+544750,SOULCALIBUR VI,5021,4110,0.8185620394343757,SoulCalibur VI,PC,84.0,78.0,https://www.metacritic.com/game/soulcalibur-vi/,0.84,-0.021437960565624303
+644930,They Are Billions,14523,11855,0.8162913998485162,They Are Billions,PC,72.0,19.0,https://www.metacritic.com/game/they-are-billions/,0.72,0.0962913998485162
+594650,Hunt: Showdown,38954,31796,0.8162448015608154,Hunt: Showdown,PC,81.0,25.0,https://www.metacritic.com/game/hunt-showdown/,0.81,0.006244801560815305
+364360,Total War: WARHAMMER,25269,20567,0.8139221971585737,Total War: WARHAMMER,PC,86.0,77.0,https://www.metacritic.com/game/total-war-warhammer/,0.86,-0.04607780284142626
+379430,Kingdom Come: Deliverance,35653,28744,0.8062154657392084,Kingdom Come: Deliverance,PC,76.0,60.0,https://www.metacritic.com/game/kingdom-come-deliverance/,0.76,0.04621546573920843
+289070,Sid Meier's Civilization VI,68025,54568,0.8021756707092981,Sid Meier's Civilization VI,PC,88.0,84.0,https://www.metacritic.com/game/sid-meiers-civilization-vi/,0.88,-0.07782432929070193
+1017900,Age of Empires: Definitive Edition,2527,2025,0.8013454689354966,Age of Empires: Definitive Edition,PC,69.0,50.0,https://www.metacritic.com/game/age-of-empires-definitive-edition/,0.69,0.11134546893549668
+306130,The Elder Scrolls Online,49210,39371,0.800060963218858,The Elder Scrolls Online,PC,71.0,64.0,https://www.metacritic.com/game/the-elder-scrolls-online/,0.71,0.09006096321885804
+677160,We Were Here Too,1812,1447,0.7985651214128036,We Were Here Too,PC,69.0,7.0,https://www.metacritic.com/game/we-were-here-too/,0.69,0.10856512141280361
+355790,Styx: Shards of Darkness,1558,1243,0.7978177150192555,Styx: Shards of Darkness,PC,72.0,38.0,https://www.metacritic.com/game/styx-shards-of-darkness/,0.72,0.0778177150192555
+503940,Railway Empire,2983,2362,0.7918203151190077,Railway Empire,PC,74.0,21.0,https://www.metacritic.com/game/railway-empire/,0.74,0.051820315119007754
+551730,Toukiden 2,521,412,0.7907869481765835,Toukiden 2,PC,77.0,46.0,https://www.metacritic.com/game/toukiden-2/,0.77,0.020786948176583442
+646910,The Crew 2,10289,8133,0.7904558266109437,The Crew 2,PC,64.0,53.0,https://www.metacritic.com/game/the-crew-2/,0.64,0.1504558266109437
+502280,BERSERK and the Band of the Hawk,948,749,0.790084388185654,Berserk and the Band of the Hawk,PC,66.0,53.0,https://www.metacritic.com/game/berserk-and-the-band-of-the-hawk/,0.66,0.13008438818565393
+225540,Just Cause 3,36850,29079,0.7891180461329715,Just Cause 3,PC,74.0,50.0,https://www.metacritic.com/game/just-cause-3/,0.74,0.04911804613297155
+440900,Conan Exiles,32148,25327,0.7878250591016549,Conan Exiles,PC,68.0,32.0,https://www.metacritic.com/game/conan-exiles/,0.68,0.10782505910165485
+405710,Staxel,2125,1662,0.7821176470588236,Staxel,PC,61.0,7.0,https://www.metacritic.com/game/staxel/,0.61,0.1721176470588236
+247240,Volgarr the Viking,1427,1116,0.7820602662929222,Volgarr the Viking,PC,76.0,9.0,https://www.metacritic.com/game/volgarr-the-viking/,0.76,0.022060266292922237
+421020,DiRT 4,4176,3260,0.7806513409961686,DiRT 4,PC,85.0,44.0,https://www.metacritic.com/game/dirt-4/,0.85,-0.06934865900383136
+400940,Budget Cuts,1113,865,0.7771787960467206,Budget Cuts,PC,78.0,8.0,https://www.metacritic.com/game/budget-cuts/,0.78,-0.0028212039532794497
+552520,Far Cry 5,35253,27363,0.776189260488469,Far Cry 5,PC,81.0,83.0,https://www.metacritic.com/game/far-cry-5/,0.81,-0.03381073951153102
+640820,Pathfinder: Kingmaker,13210,10232,0.7745647236941711,Pathfinder: Kingmaker,PC,73.0,33.0,https://www.metacritic.com/game/pathfinder-kingmaker/,0.73,0.04456472369417108
+606280,Darksiders III,3967,3054,0.7698512730022687,Darksiders III,PC,64.0,59.0,https://www.metacritic.com/game/darksiders-iii/,0.64,0.12985127300226873
+671440,Rise of Industry,1881,1445,0.7682083997873471,Rise of Industry,PC,62.0,12.0,https://www.metacritic.com/game/rise-of-industry/,0.62,0.14820839978734712
+460930,Tom Clancy's Ghost Recon® Wildlands,19243,14699,0.7638621836511978,Tom Clancy's Ghost Recon: Wildlands,PC,70.0,64.0,https://www.metacritic.com/game/tom-clancys-ghost-recon-wildlands/,0.7,0.06386218365119789
+377160,Fallout 4,139127,106102,0.7626269523528862,Fallout 4,PC,87.0,58.0,https://www.metacritic.com/game/fallout-4/,0.87,-0.10737304764711375
+501080,Fishing: Barents Sea,909,692,0.7612761276127613,Fishing: Barents Sea,PC,69.0,5.0,https://www.metacritic.com/game/fishing-barents-sea/,0.69,0.07127612761276136
+346110,ARK: Survival Evolved,184576,138776,0.751863730929265,ARK: Survival Evolved,PC,70.0,18.0,https://www.metacritic.com/game/ark-survival-evolved/,0.7,0.051863730929264995
+271590,Grand Theft Auto V,319751,239415,0.7487544995949974,Grand Theft Auto V,PC,97.0,66.0,https://www.metacritic.com/game/grand-theft-auto-v/,0.97,-0.22124550040500257
+620590,Ancestors Legacy,2137,1595,0.7463734206832008,Ancestors Legacy,PC,77.0,22.0,https://www.metacritic.com/game/ancestors-legacy/,0.77,-0.023626579316799234
+428690,Youtubers Life,6338,4729,0.7461344272641212,Youtubers Life,PC,63.0,5.0,https://www.metacritic.com/game/youtubers-life/,0.63,0.11613442726412115
+427290,Vampyr,6686,4960,0.7418486389470536,Vampyr,PC,70.0,67.0,https://www.metacritic.com/game/vampyr/,0.7,0.041848638947053596
+526160,The Wild Eight,1504,1101,0.7320478723404256,The Wild Eight,PC,63.0,4.0,https://www.metacritic.com/game/the-wild-eight/,0.63,0.10204787234042556
+572410,Steel Division: Normandy 44,2841,2063,0.7261527631115804,Steel Division: Normandy 44,PC,83.0,24.0,https://www.metacritic.com/game/steel-division-normandy-44/,0.83,-0.10384723688841957
+582660,Black Desert Online,24805,17849,0.7195726668010481,Black Desert Online,PC,73.0,35.0,https://www.metacritic.com/game/black-desert-online/,0.73,-0.010427333198951838
+637670,Secret of Mana,1159,815,0.7031924072476272,Secret of Mana,PC,80.0,8.0,https://www.metacritic.com/game/secret-of-mana/,0.8,-0.09680759275237283
+272270,Torment: Tides of Numenera,2601,1794,0.6897347174163783,Torment: Tides of Numenera,PC,81.0,72.0,https://www.metacritic.com/game/torment-tides-of-numenera/,0.81,-0.12026528258362179
+574050,DRAGON QUEST HEROES™ II,348,240,0.6896551724137931,Dragon Quest Heroes II,PC,76.0,68.0,https://www.metacritic.com/game/dragon-quest-heroes-ii/,0.76,-0.07034482758620686
+297130,Titan Souls,2633,1811,0.687808583364983,Titan Souls,PC,74.0,46.0,https://www.metacritic.com/game/titan-souls/,0.74,-0.05219141663501703
+817130,WWE 2K19,1308,890,0.6804281345565749,WWE 2K19,PC,76.0,44.0,https://www.metacritic.com/game/wwe-2k19/,0.76,-0.0795718654434251
+275850,No Man's Sky,116212,78056,0.6716690186899804,No Man's Sky,PC,71.0,96.0,https://www.metacritic.com/game/no-mans-sky/,0.71,-0.03833098131001955
+593600,PixARK,2803,1842,0.6571530503032466,PixARK,PC,38.0,5.0,https://www.metacritic.com/game/pixark/,0.38,0.27715305030324655
+543900,METAL GEAR SURVIVE,2460,1610,0.6544715447154471,Metal Gear Survive,PC,60.0,70.0,https://www.metacritic.com/game/metal-gear-survive/,0.6,0.05447154471544713
+304390,For Honor,40861,26692,0.6532390298817944,For Honor,PC,78.0,59.0,https://www.metacritic.com/game/for-honor/,0.78,-0.12676097011820564
+578080,PLAYERUNKNOWN'S BATTLEGROUNDS,317846,195456,0.6149393102319991,PlayerUnknown's Battlegrounds,PC,86.0,46.0,https://www.metacritic.com/game/playerunknowns-battlegrounds/,0.86,-0.24506068976800088
+583950,Artifact,9452,5591,0.5915150232754972,Artifact,PC,76.0,20.0,https://www.metacritic.com/game/artifact/,0.76,-0.1684849767245028
+476600,Call of Duty: WWII,13329,7648,0.573786480606197,Call of Duty: WWII,PC,79.0,83.0,https://www.metacritic.com/game/call-of-duty-wwii/,0.79,-0.21621351939380307
+517630,Just Cause 4,8675,4823,0.5559654178674351,Just Cause 4,PC,68.0,43.0,https://www.metacritic.com/game/just-cause-4/,0.68,-0.12403458213256491
+510510,WWE 2K17,735,406,0.5523809523809524,WWE 2K17,PC,69.0,52.0,https://www.metacritic.com/game/wwe-2k17/,0.69,-0.13761904761904753
+543460,Dead Rising 4,1607,832,0.5177349097697573,Dead Rising 4,PC,72.0,86.0,https://www.metacritic.com/game/dead-rising-4/,0.72,-0.20226509023024264
+841370,NBA 2K19,4742,2335,0.49240826655419656,NBA 2K19,PC,82.0,49.0,https://www.metacritic.com/game/nba-2k19/,0.82,-0.3275917334458034
+730310,DYNASTY WARRIORS 9,1236,603,0.4878640776699029,Dynasty Warriors 9,PC,65.0,49.0,https://www.metacritic.com/game/dynasty-warriors-9/,0.65,-0.1621359223300971
+1225330,NBA 2K21,4228,2039,0.48226111636707664,NBA 2K21,PC,68.0,50.0,https://www.metacritic.com/game/nba-2k21/,0.68,-0.1977388836329234
+1056960,Wolfenstein: Youngblood,3228,1540,0.4770755885997522,Wolfenstein: Youngblood,PC,69.0,50.0,https://www.metacritic.com/game/wolfenstein-youngblood/,0.69,-0.21292441140024776
+292730,Call of Duty: Infinite Warfare,10810,4860,0.4495837187789084,Call of Duty: Infinite Warfare,PC,77.0,87.0,https://www.metacritic.com/game/call-of-duty-infinite-warfare/,0.77,-0.3204162812210916
+285190,"Warhammer 40,000: Dawn of War III",9732,4192,0.43074393752568846,"Warhammer 40,000: Dawn of War III",PC,77.0,76.0,https://www.metacritic.com/game/warhammer-40000-dawn-of-war-iii/,0.77,-0.33925606247431156
+247730,Nether,10540,4079,0.38700189753320685,Nether,PC,57.0,7.0,https://www.metacritic.com/game/nether/,0.57,-0.1829981024667931
+2870,X Rebirth,4102,1512,0.36860068259385664,X Rebirth,PC,33.0,24.0,https://www.metacritic.com/game/x-rebirth/,0.33,0.03860068259385663
+1015500,WWE 2K20,1783,656,0.3679192372406057,WWE 2K20,PC,43.0,29.0,https://www.metacritic.com/game/wwe-2k20/,0.43,-0.06208076275939428
+236510,Takedown: Red Sabre,3031,1093,0.3606070603761135,Takedown: Red Sabre,PC,34.0,17.0,https://www.metacritic.com/game/takedown-red-sabre/,0.34,0.020607060376113484
+577800,NBA 2K18,3818,1270,0.3326348873755893,NBA 2K18,PC,80.0,54.0,https://www.metacritic.com/game/nba-2k18/,0.8,-0.4673651126244107
+258180,Deus Ex: The Fall,2238,702,0.3136729222520107,Deus Ex: The Fall,PC,69.0,43.0,https://www.metacritic.com/game/deus-ex-the-fall/,0.69,-0.37632707774798924
+390340,Umbrella Corps,1055,305,0.2890995260663507,Umbrella Corps,PC,38.0,55.0,https://www.metacritic.com/game/umbrella-corps/,0.38,-0.0909004739336493
+352550,Urban Empire,848,245,0.28891509433962265,Urban Empire,PC,62.0,20.0,https://www.metacritic.com/game/urban-empire/,0.62,-0.33108490566037735
+282560,RollerCoaster Tycoon World,2862,711,0.24842767295597484,RollerCoaster Tycoon World,PC,43.0,7.0,https://www.metacritic.com/game/rollercoaster-tycoon-world/,0.43,-0.18157232704402515

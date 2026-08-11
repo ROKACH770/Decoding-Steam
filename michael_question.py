@@ -1,3 +1,5 @@
+import unicodedata
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -257,13 +259,11 @@ def step_3_sorting_and_preview(df):
     return df_sorted
 
 
-def read_saved_data():
+def read_saved_data(csv_path='output/games_raw.csv'):
     """Loads the saved CSV and JSON dataframes from the output directory."""
     print("\n" + "=" * 40)
     print("   LOADING SAVED DATA")
     print("=" * 40)
-
-    csv_path = 'output/games_raw.csv'
 
     if not os.path.exists(csv_path):
         print("Error: The output files don't exist yet. Run the scraper first!")
@@ -276,13 +276,45 @@ def read_saved_data():
 def create_metacritic_url(app_name):
     """Generates a direct Metacritic PC game URL from a Steam app name."""
     slug = str(app_name).lower()
-    # Remove special characters, keeping only lowercase letters, numbers, and spaces
-    slug = re.sub(r'[^a-z0-9\s]', '', slug)
+
+    # Convert Japanese full-width asterisk(＊) to standard asterisk (*) which is common in many Japanese game titles
+    slug = unicodedata.normalize("NFKC", slug)
+
+    # Replace asterisks with spaces to avoid URL issues, as Metacritic does not use asterisks in its slugs
+    slug = slug.replace('*', ' ')
+    
+    # Remove special characters, keeping only lowercase letters, numbers, spaces and hyphens
+    slug = re.sub(r'[^a-z0-9\s\-]', '', slug)
+
     # Replace one or more spaces with a single hyphen
     slug = re.sub(r'\s+', '-', slug.strip())
     
     # Target the PC platform URL structure
-    return f"https://www.metacritic.com/game/{slug}/"
+    return f"https://www.metacritic.com/game/{slug}/?platform=pc"
+
+
+def clean_title_for_merge(title):
+    """
+    Standardizes game titles for merging by stripping trademarks, 
+    punctuation, and excess spaces.
+    """
+    # Convert to string and lowercase
+    title = str(title).lower()
+    
+    # 1. Remove trademark and copyright symbols entirely
+    title = re.sub(r'[™®©]', '', title)
+    
+    # 2. Replace common separators (colons, dashes, slashes) with spaces 
+    # to prevent words from mashing together (e.g., "game:subtitle" -> "game subtitle")
+    title = re.sub(r'[:\-/,]', ' ', title)
+    
+    # 3. Remove all remaining non-alphanumeric characters (like !, +, etc.)
+    title = re.sub(r'[^a-z0-9\s]', '', title)
+    
+    # 4. Collapse multiple spaces into a single space and strip the edges
+    title = re.sub(r'\s+', ' ', title).strip()
+    
+    return title
 
 
 def crawl_metacritic(consensus_df, csv_path='output/games_raw.csv', cache_file='output/attempted_urls.txt'):
@@ -395,7 +427,8 @@ def main():
     crawl_metacritic(consensus_df, csv_path, cache_file)
 
     # Load and clean the Metacritic data
-    df_from_csv, _ = read_saved_data()
+    csv_path = 'output/games_raw.csv'
+    df_from_csv, _ = read_saved_data(csv_path)
     if df_from_csv is not None and not df_from_csv.empty:
         df_deduped = remove_duplicates(df_from_csv)
         mc_baseline_df = step_3_sorting_and_preview(df_deduped)
@@ -405,9 +438,9 @@ def main():
         print("   STAGE 3: MERGING & DELTA CALCULATION")
         print("=" * 40)
         
-        # Normalize titles to lowercase strings to ensure they match perfectly during the merge
-        consensus_df['merge_name'] = consensus_df['app_name'].str.lower().str.strip()
-        mc_baseline_df['merge_name'] = mc_baseline_df['Title'].str.lower().str.strip()
+        # Apply the aggressive regex cleaning to both datasets to maximize merge success
+        consensus_df['merge_name'] = consensus_df['app_name'].apply(clean_title_for_merge)
+        mc_baseline_df['merge_name'] = mc_baseline_df['Title'].apply(clean_title_for_merge)
 
         # Merge the datasets
         merged_df = pd.merge(consensus_df, mc_baseline_df, on='merge_name', how='inner')

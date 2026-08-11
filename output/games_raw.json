@@ -1,0 +1,1916 @@
+{
+    "records": [
+        {
+            "id": "1",
+            "url": "https://www.metacritic.com/game/hades/",
+            "Title": "Hades",
+            "Platform": "PC",
+            "Metascore": 93.0,
+            "NumberOfCriticReviews": 58.0
+        },
+        {
+            "id": "2",
+            "url": "https://www.metacritic.com/game/townscaper/",
+            "Title": "Townscaper",
+            "Platform": "PC",
+            "Metascore": 63.0,
+            "NumberOfCriticReviews": 6.0
+        },
+        {
+            "id": "3",
+            "url": "https://www.metacritic.com/game/a-short-hike/",
+            "Title": "A Short Hike",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 17.0
+        },
+        {
+            "id": "4",
+            "url": "https://www.metacritic.com/game/factorio/",
+            "Title": "Factorio",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 8.0
+        },
+        {
+            "id": "5",
+            "url": "https://www.metacritic.com/game/stardew-valley/",
+            "Title": "Stardew Valley",
+            "Platform": "PC",
+            "Metascore": 89.0,
+            "NumberOfCriticReviews": 30.0
+        },
+        {
+            "id": "6",
+            "url": "https://www.metacritic.com/game/portal-2/",
+            "Title": "Portal 2",
+            "Platform": "PC",
+            "Metascore": 95.0,
+            "NumberOfCriticReviews": 66.0
+        },
+        {
+            "id": "7",
+            "url": "https://www.metacritic.com/game/keep-talking-and-nobody-explodes/",
+            "Title": "Keep Talking and Nobody Explodes",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 10.0
+        },
+        {
+            "id": "8",
+            "url": "https://www.metacritic.com/game/rimworld/",
+            "Title": "RimWorld",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 8.0
+        },
+        {
+            "id": "9",
+            "url": "https://www.metacritic.com/game/dusk/",
+            "Title": "DUSK",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 19.0
+        },
+        {
+            "id": "10",
+            "url": "https://www.metacritic.com/game/a-hat-in-time/",
+            "Title": "A Hat in Time",
+            "Platform": "PC",
+            "Metascore": 79.0,
+            "NumberOfCriticReviews": 39.0
+        },
+        {
+            "id": "11",
+            "url": "https://www.metacritic.com/game/phoenix-wright-ace-attorney-trilogy/",
+            "Title": "Phoenix Wright: Ace Attorney Trilogy",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 34.0
+        },
+        {
+            "id": "12",
+            "url": "https://www.metacritic.com/game/baba-is-you/",
+            "Title": "Baba Is You",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 24.0
+        },
+        {
+            "id": "13",
+            "url": "https://www.metacritic.com/game/oneshot/",
+            "Title": "OneShot",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 8.0
+        },
+        {
+            "id": "14",
+            "url": "https://www.metacritic.com/game/terraria/",
+            "Title": "Terraria",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 39.0
+        },
+        {
+            "id": "15",
+            "url": "https://www.metacritic.com/game/the-binding-of-isaac-rebirth/",
+            "Title": "The Binding of Isaac: Rebirth",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 15.0
+        },
+        {
+            "id": "16",
+            "url": "https://www.metacritic.com/game/slay-the-spire/",
+            "Title": "Slay the Spire",
+            "Platform": "PC",
+            "Metascore": 89.0,
+            "NumberOfCriticReviews": 24.0
+        },
+        {
+            "id": "17",
+            "url": "https://www.metacritic.com/game/just-shapes-beats/",
+            "Title": "Just Shapes & Beats",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 17.0
+        },
+        {
+            "id": "18",
+            "url": "https://www.metacritic.com/game/persona-4-golden/",
+            "Title": "Persona 4 Golden",
+            "Platform": "PC",
+            "Metascore": 93.0,
+            "NumberOfCriticReviews": 61.0
+        },
+        {
+            "id": "19",
+            "url": "https://www.metacritic.com/game/finding-paradise/",
+            "Title": "Finding Paradise",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 18.0
+        },
+        {
+            "id": "20",
+            "url": "https://www.metacritic.com/game/phasmophobia/",
+            "Title": "Phasmophobia",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 9.0
+        },
+        {
+            "id": "21",
+            "url": "https://www.metacritic.com/game/the-witcher-3-wild-hunt/",
+            "Title": "The Witcher 3: Wild Hunt",
+            "Platform": "PC",
+            "Metascore": 92.0,
+            "NumberOfCriticReviews": 79.0
+        },
+        {
+            "id": "22",
+            "url": "https://www.metacritic.com/game/mount-blade-warband/",
+            "Title": "Mount & Blade: Warband",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 23.0
+        },
+        {
+            "id": "23",
+            "url": "https://www.metacritic.com/game/slime-rancher/",
+            "Title": "Slime Rancher",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 9.0
+        },
+        {
+            "id": "24",
+            "url": "https://www.metacritic.com/game/celeste/",
+            "Title": "Celeste",
+            "Platform": "PC",
+            "Metascore": 92.0,
+            "NumberOfCriticReviews": 36.0
+        },
+        {
+            "id": "25",
+            "url": "https://www.metacritic.com/game/the-room-two/",
+            "Title": "The Room Two",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 25.0
+        },
+        {
+            "id": "26",
+            "url": "https://www.metacritic.com/game/satisfactory/",
+            "Title": "Satisfactory",
+            "Platform": "PC",
+            "Metascore": 91.0,
+            "NumberOfCriticReviews": 18.0
+        },
+        {
+            "id": "27",
+            "url": "https://www.metacritic.com/game/gunpoint/",
+            "Title": "Gunpoint",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 33.0
+        },
+        {
+            "id": "28",
+            "url": "https://www.metacritic.com/game/euro-truck-simulator-2/",
+            "Title": "Euro Truck Simulator 2",
+            "Platform": "PC",
+            "Metascore": 79.0,
+            "NumberOfCriticReviews": 18.0
+        },
+        {
+            "id": "29",
+            "url": "https://www.metacritic.com/game/the-wolf-among-us/",
+            "Title": "The Wolf Among Us",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 13.0
+        },
+        {
+            "id": "30",
+            "url": "https://www.metacritic.com/game/danganronpa-2-goodbye-despair/",
+            "Title": "Danganronpa 2: Goodbye Despair",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 50.0
+        },
+        {
+            "id": "31",
+            "url": "https://www.metacritic.com/game/resident-evil-2/",
+            "Title": "Resident Evil 2",
+            "Platform": "PC",
+            "Metascore": 91.0,
+            "NumberOfCriticReviews": 85.0
+        },
+        {
+            "id": "32",
+            "url": "https://www.metacritic.com/game/deep-rock-galactic/",
+            "Title": "Deep Rock Galactic",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 20.0
+        },
+        {
+            "id": "33",
+            "url": "https://www.metacritic.com/game/there-is-no-game-wrong-dimension/",
+            "Title": "There is no game : Wrong dimension",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 10.0
+        },
+        {
+            "id": "34",
+            "url": "https://www.metacritic.com/game/battleblock-theater/",
+            "Title": "BattleBlock Theater",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 51.0
+        },
+        {
+            "id": "35",
+            "url": "https://www.metacritic.com/game/the-room/",
+            "Title": "The Room",
+            "Platform": "PC",
+            "Metascore": 75.0,
+            "NumberOfCriticReviews": 22.0
+        },
+        {
+            "id": "36",
+            "url": "https://www.metacritic.com/game/dishonored/",
+            "Title": "Dishonored",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 56.0
+        },
+        {
+            "id": "37",
+            "url": "https://www.metacritic.com/game/danganronpa-trigger-happy-havoc/",
+            "Title": "Danganronpa: Trigger Happy Havoc",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 55.0
+        },
+        {
+            "id": "38",
+            "url": "https://www.metacritic.com/game/hotline-miami/",
+            "Title": "Hotline Miami",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 51.0
+        },
+        {
+            "id": "39",
+            "url": "https://www.metacritic.com/game/south-park-the-stick-of-truth/",
+            "Title": "South Park: The Stick of Truth",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 48.0
+        },
+        {
+            "id": "40",
+            "url": "https://www.metacritic.com/game/ori-and-the-will-of-the-wisps/",
+            "Title": "Ori and the Will of the Wisps",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 71.0
+        },
+        {
+            "id": "41",
+            "url": "https://www.metacritic.com/game/mark-of-the-ninja/",
+            "Title": "Mark of the Ninja",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 51.0
+        },
+        {
+            "id": "42",
+            "url": "https://www.metacritic.com/game/hollow-knight/",
+            "Title": "Hollow Knight",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 28.0
+        },
+        {
+            "id": "43",
+            "url": "https://www.metacritic.com/game/doki-doki-literature-club/",
+            "Title": "Doki Doki Literature Club!",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 7.0
+        },
+        {
+            "id": "44",
+            "url": "https://www.metacritic.com/game/super-hexagon/",
+            "Title": "Super Hexagon",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 17.0
+        },
+        {
+            "id": "45",
+            "url": "https://www.metacritic.com/game/dont-starve/",
+            "Title": "Don't Starve",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 36.0
+        },
+        {
+            "id": "46",
+            "url": "https://www.metacritic.com/game/streets-of-rogue/",
+            "Title": "Streets of Rogue",
+            "Platform": "PC",
+            "Metascore": 82.0,
+            "NumberOfCriticReviews": 5.0
+        },
+        {
+            "id": "47",
+            "url": "https://www.metacritic.com/game/papers-please/",
+            "Title": "Papers, Please",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 40.0
+        },
+        {
+            "id": "48",
+            "url": "https://www.metacritic.com/game/broforce/",
+            "Title": "Broforce",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 32.0
+        },
+        {
+            "id": "49",
+            "url": "https://www.metacritic.com/game/beat-saber/",
+            "Title": "Beat Saber",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 24.0
+        },
+        {
+            "id": "50",
+            "url": "https://www.metacritic.com/game/detention/",
+            "Title": "Detention",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 18.0
+        },
+        {
+            "id": "51",
+            "url": "https://www.metacritic.com/game/the-walking-dead/",
+            "Title": "The Walking Dead: Survival Instinct",
+            "Platform": "PC",
+            "Metascore": 32.0,
+            "NumberOfCriticReviews": 30.0
+        },
+        {
+            "id": "52",
+            "url": "https://www.metacritic.com/game/shovel-knight-treasure-trove/",
+            "Title": "Shovel Knight: Treasure Trove",
+            "Platform": "PC",
+            "Metascore": 91.0,
+            "NumberOfCriticReviews": 17.0
+        },
+        {
+            "id": "53",
+            "url": "https://www.metacritic.com/game/castle-crashers/",
+            "Title": "Castle Crashers",
+            "Platform": "PC",
+            "Metascore": 82.0,
+            "NumberOfCriticReviews": 49.0
+        },
+        {
+            "id": "54",
+            "url": "https://www.metacritic.com/game/dead-cells/",
+            "Title": "Dead Cells",
+            "Platform": "PC",
+            "Metascore": 89.0,
+            "NumberOfCriticReviews": 36.0
+        },
+        {
+            "id": "55",
+            "url": "https://www.metacritic.com/game/ftl-faster-than-light/",
+            "Title": "FTL: Faster Than Light",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 42.0
+        },
+        {
+            "id": "56",
+            "url": "https://www.metacritic.com/game/the-legend-of-heroes-trails-of-cold-steel-ii/",
+            "Title": "The Legend of Heroes: Trails of Cold Steel II",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 26.0
+        },
+        {
+            "id": "57",
+            "url": "https://www.metacritic.com/game/duck-game/",
+            "Title": "Duck Game",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 9.0
+        },
+        {
+            "id": "58",
+            "url": "https://www.metacritic.com/game/dont-starve-together/",
+            "Title": "Don't Starve Together",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 4.0
+        },
+        {
+            "id": "59",
+            "url": "https://www.metacritic.com/game/american-truck-simulator/",
+            "Title": "American Truck Simulator",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 31.0
+        },
+        {
+            "id": "60",
+            "url": "https://www.metacritic.com/game/steinsgate/",
+            "Title": "Steins;Gate",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 16.0
+        },
+        {
+            "id": "61",
+            "url": "https://www.metacritic.com/game/to-the-moon/",
+            "Title": "To the Moon",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 26.0
+        },
+        {
+            "id": "62",
+            "url": "https://www.metacritic.com/game/sid-meiers-civilization-v/",
+            "Title": "Sid Meier's Civilization V",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 70.0
+        },
+        {
+            "id": "63",
+            "url": "https://www.metacritic.com/game/among-us/",
+            "Title": "Among Us",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 9.0
+        },
+        {
+            "id": "64",
+            "url": "https://www.metacritic.com/game/oxygen-not-included/",
+            "Title": "Oxygen Not Included",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 5.0
+        },
+        {
+            "id": "65",
+            "url": "https://www.metacritic.com/game/undertale/",
+            "Title": "Undertale",
+            "Platform": "PC",
+            "Metascore": 92.0,
+            "NumberOfCriticReviews": 43.0
+        },
+        {
+            "id": "66",
+            "url": "https://www.metacritic.com/game/cuphead/",
+            "Title": "Cuphead",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 72.0
+        },
+        {
+            "id": "67",
+            "url": "https://www.metacritic.com/game/enter-the-gungeon/",
+            "Title": "Enter the Gungeon",
+            "Platform": "PC",
+            "Metascore": 82.0,
+            "NumberOfCriticReviews": 33.0
+        },
+        {
+            "id": "68",
+            "url": "https://www.metacritic.com/game/black-mesa/",
+            "Title": "Black Mesa",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 26.0
+        },
+        {
+            "id": "69",
+            "url": "https://www.metacritic.com/game/yakuza-0/",
+            "Title": "Yakuza 0",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 87.0
+        },
+        {
+            "id": "70",
+            "url": "https://www.metacritic.com/game/subnautica/",
+            "Title": "Subnautica",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 39.0
+        },
+        {
+            "id": "71",
+            "url": "https://www.metacritic.com/game/gris/",
+            "Title": "GRIS",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 43.0
+        },
+        {
+            "id": "72",
+            "url": "https://www.metacritic.com/game/outlast/",
+            "Title": "Outlast",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 59.0
+        },
+        {
+            "id": "73",
+            "url": "https://www.metacritic.com/game/the-binding-of-isaac/",
+            "Title": "The Binding of Isaac",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 30.0
+        },
+        {
+            "id": "74",
+            "url": "https://www.metacritic.com/game/senran-kagura-estival-versus/",
+            "Title": "Senran Kagura: Estival Versus",
+            "Platform": "PC",
+            "Metascore": 67.0,
+            "NumberOfCriticReviews": 25.0
+        },
+        {
+            "id": "75",
+            "url": "https://www.metacritic.com/game/steinsgate-0/",
+            "Title": "Steins;Gate 0",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 20.0
+        },
+        {
+            "id": "76",
+            "url": "https://www.metacritic.com/game/monster-prom/",
+            "Title": "Monster Prom",
+            "Platform": "PC",
+            "Metascore": 73.0,
+            "NumberOfCriticReviews": 11.0
+        },
+        {
+            "id": "77",
+            "url": "https://www.metacritic.com/game/doom/",
+            "Title": "DOOM",
+            "Platform": "PC",
+            "Metascore": 79.0,
+            "NumberOfCriticReviews": 66.0
+        },
+        {
+            "id": "78",
+            "url": "https://www.metacritic.com/game/saints-row-the-third/",
+            "Title": "Saints Row: The Third",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 70.0
+        },
+        {
+            "id": "79",
+            "url": "https://www.metacritic.com/game/human-fall-flat/",
+            "Title": "Human: Fall Flat",
+            "Platform": "PC",
+            "Metascore": 70.0,
+            "NumberOfCriticReviews": 21.0
+        },
+        {
+            "id": "80",
+            "url": "https://www.metacritic.com/game/tomb-raider/",
+            "Title": "Tomb Raider",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 70.0
+        },
+        {
+            "id": "81",
+            "url": "https://www.metacritic.com/game/super-meat-boy/",
+            "Title": "Super Meat Boy",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 51.0
+        },
+        {
+            "id": "82",
+            "url": "https://www.metacritic.com/game/overcooked-2/",
+            "Title": "Overcooked! 2",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 38.0
+        },
+        {
+            "id": "83",
+            "url": "https://www.metacritic.com/game/kenshi/",
+            "Title": "Kenshi",
+            "Platform": "PC",
+            "Metascore": 75.0,
+            "NumberOfCriticReviews": 9.0
+        },
+        {
+            "id": "84",
+            "url": "https://www.metacritic.com/game/night-in-the-woods/",
+            "Title": "Night in the Woods",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 30.0
+        },
+        {
+            "id": "85",
+            "url": "https://www.metacritic.com/game/crusader-kings-iii/",
+            "Title": "Crusader Kings III",
+            "Platform": "PC",
+            "Metascore": 91.0,
+            "NumberOfCriticReviews": 61.0
+        },
+        {
+            "id": "86",
+            "url": "https://www.metacritic.com/game/total-war-warhammer-ii/",
+            "Title": "Total War: WARHAMMER II",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 69.0
+        },
+        {
+            "id": "87",
+            "url": "https://www.metacritic.com/game/bioshock-infinite/",
+            "Title": "BioShock Infinite",
+            "Platform": "PC",
+            "Metascore": 94.0,
+            "NumberOfCriticReviews": 68.0
+        },
+        {
+            "id": "88",
+            "url": "https://www.metacritic.com/game/cave-story/",
+            "Title": "Cave Story",
+            "Platform": "PC",
+            "Metascore": 89.0,
+            "NumberOfCriticReviews": 25.0
+        },
+        {
+            "id": "89",
+            "url": "https://www.metacritic.com/game/into-the-breach/",
+            "Title": "Into the Breach",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 56.0
+        },
+        {
+            "id": "90",
+            "url": "https://www.metacritic.com/game/pit-people/",
+            "Title": "Pit People",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 15.0
+        },
+        {
+            "id": "91",
+            "url": "https://www.metacritic.com/game/20xx/",
+            "Title": "20XX",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 14.0
+        },
+        {
+            "id": "92",
+            "url": "https://www.metacritic.com/game/dying-light/",
+            "Title": "Dying Light",
+            "Platform": "PC",
+            "Metascore": 74.0,
+            "NumberOfCriticReviews": 58.0
+        },
+        {
+            "id": "93",
+            "url": "https://www.metacritic.com/game/my-time-at-portia/",
+            "Title": "My Time At Portia",
+            "Platform": "PC",
+            "Metascore": 73.0,
+            "NumberOfCriticReviews": 37.0
+        },
+        {
+            "id": "94",
+            "url": "https://www.metacritic.com/game/momodora-reverie-under-the-moonlight/",
+            "Title": "Momodora: Reverie Under the Moonlight",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 22.0
+        },
+        {
+            "id": "95",
+            "url": "https://www.metacritic.com/game/resident-evil-7-biohazard/",
+            "Title": "Resident Evil 7: biohazard",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 100.0
+        },
+        {
+            "id": "96",
+            "url": "https://www.metacritic.com/game/farm-together/",
+            "Title": "Farm Together",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 4.0
+        },
+        {
+            "id": "97",
+            "url": "https://www.metacritic.com/game/axiom-verge/",
+            "Title": "Axiom Verge",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 61.0
+        },
+        {
+            "id": "98",
+            "url": "https://www.metacritic.com/game/far-lone-sails/",
+            "Title": "FAR: Lone Sails",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 24.0
+        },
+        {
+            "id": "99",
+            "url": "https://www.metacritic.com/game/the-elder-scrolls-v-skyrim/",
+            "Title": "The Elder Scrolls V: Skyrim",
+            "Platform": "PC",
+            "Metascore": 96.0,
+            "NumberOfCriticReviews": 89.0
+        },
+        {
+            "id": "100",
+            "url": "https://www.metacritic.com/game/dark-souls-iii/",
+            "Title": "Dark Souls III",
+            "Platform": "PC",
+            "Metascore": 89.0,
+            "NumberOfCriticReviews": 69.0
+        },
+        {
+            "id": "101",
+            "url": "https://www.metacritic.com/game/thimbleweed-park/",
+            "Title": "Thimbleweed Park",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 59.0
+        },
+        {
+            "id": "102",
+            "url": "https://www.metacritic.com/game/sekiro-shadows-die-twice/",
+            "Title": "Sekiro: Shadows Die Twice",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 77.0
+        },
+        {
+            "id": "103",
+            "url": "https://www.metacritic.com/game/warhammer-40000-mechanicus/",
+            "Title": "Warhammer 40,000: Mechanicus",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 19.0
+        },
+        {
+            "id": "104",
+            "url": "https://www.metacritic.com/game/tales-of-berseria/",
+            "Title": "Tales of Berseria",
+            "Platform": "PC",
+            "Metascore": 79.0,
+            "NumberOfCriticReviews": 57.0
+        },
+        {
+            "id": "105",
+            "url": "https://www.metacritic.com/game/cities-skylines/",
+            "Title": "Cities: Skylines",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 60.0
+        },
+        {
+            "id": "106",
+            "url": "https://www.metacritic.com/game/death-stranding/",
+            "Title": "Death Stranding",
+            "Platform": "PC",
+            "Metascore": 82.0,
+            "NumberOfCriticReviews": 111.0
+        },
+        {
+            "id": "107",
+            "url": "https://www.metacritic.com/game/rise-of-the-tomb-raider/",
+            "Title": "Rise of the Tomb Raider",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 102.0
+        },
+        {
+            "id": "108",
+            "url": "https://www.metacritic.com/game/farming-simulator-19/",
+            "Title": "Farming Simulator 19",
+            "Platform": "PC",
+            "Metascore": 73.0,
+            "NumberOfCriticReviews": 16.0
+        },
+        {
+            "id": "109",
+            "url": "https://www.metacritic.com/game/frostpunk/",
+            "Title": "Frostpunk",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 67.0
+        },
+        {
+            "id": "110",
+            "url": "https://www.metacritic.com/game/two-point-hospital/",
+            "Title": "Two Point Hospital",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 55.0
+        },
+        {
+            "id": "111",
+            "url": "https://www.metacritic.com/game/crash-bandicoot-n-sane-trilogy/",
+            "Title": "Crash Bandicoot N. Sane Trilogy",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 85.0
+        },
+        {
+            "id": "112",
+            "url": "https://www.metacritic.com/game/devil-may-cry-hd-collection/",
+            "Title": "Devil May Cry HD Collection",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 32.0
+        },
+        {
+            "id": "113",
+            "url": "https://www.metacritic.com/game/guacamelee-super-turbo-championship-edition/",
+            "Title": "Guacamelee! Super Turbo Championship Edition",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 30.0
+        },
+        {
+            "id": "114",
+            "url": "https://www.metacritic.com/game/little-nightmares/",
+            "Title": "Little Nightmares",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 52.0
+        },
+        {
+            "id": "115",
+            "url": "https://www.metacritic.com/game/ghost-of-a-tale/",
+            "Title": "Ghost of a Tale",
+            "Platform": "PC",
+            "Metascore": 75.0,
+            "NumberOfCriticReviews": 25.0
+        },
+        {
+            "id": "116",
+            "url": "https://www.metacritic.com/game/house-flipper/",
+            "Title": "House Flipper",
+            "Platform": "PC",
+            "Metascore": 67.0,
+            "NumberOfCriticReviews": 7.0
+        },
+        {
+            "id": "117",
+            "url": "https://www.metacritic.com/game/the-end-is-nigh/",
+            "Title": "The End Is Nigh",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 15.0
+        },
+        {
+            "id": "118",
+            "url": "https://www.metacritic.com/game/hearts-of-iron-iv/",
+            "Title": "Hearts of Iron IV",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 37.0
+        },
+        {
+            "id": "119",
+            "url": "https://www.metacritic.com/game/arma-3/",
+            "Title": "Arma 3",
+            "Platform": "PC",
+            "Metascore": 74.0,
+            "NumberOfCriticReviews": 38.0
+        },
+        {
+            "id": "120",
+            "url": "https://www.metacritic.com/game/ultimate-marvel-vs-capcom-3/",
+            "Title": "Ultimate Marvel vs. Capcom 3",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 48.0
+        },
+        {
+            "id": "121",
+            "url": "https://www.metacritic.com/game/darkest-dungeon/",
+            "Title": "Darkest Dungeon",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 56.0
+        },
+        {
+            "id": "122",
+            "url": "https://www.metacritic.com/game/dragon-ball-fighterz/",
+            "Title": "Dragon Ball FighterZ",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 74.0
+        },
+        {
+            "id": "123",
+            "url": "https://www.metacritic.com/game/hitman-2/",
+            "Title": "Hitman 2",
+            "Platform": "PC",
+            "Metascore": 82.0,
+            "NumberOfCriticReviews": 70.0
+        },
+        {
+            "id": "124",
+            "url": "https://www.metacritic.com/game/assassins-creed-odyssey/",
+            "Title": "Assassin's Creed Odyssey",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 86.0
+        },
+        {
+            "id": "125",
+            "url": "https://www.metacritic.com/game/banished/",
+            "Title": "Banished",
+            "Platform": "PC",
+            "Metascore": 73.0,
+            "NumberOfCriticReviews": 32.0
+        },
+        {
+            "id": "126",
+            "url": "https://www.metacritic.com/game/salt-and-sanctuary/",
+            "Title": "Salt and Sanctuary",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 56.0
+        },
+        {
+            "id": "127",
+            "url": "https://www.metacritic.com/game/monster-hunter-world/",
+            "Title": "Monster Hunter: World",
+            "Platform": "PC",
+            "Metascore": 90.0,
+            "NumberOfCriticReviews": 93.0
+        },
+        {
+            "id": "128",
+            "url": "https://www.metacritic.com/game/planet-coaster/",
+            "Title": "Planet Coaster",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 57.0
+        },
+        {
+            "id": "129",
+            "url": "https://www.metacritic.com/game/for-the-king/",
+            "Title": "For the King",
+            "Platform": "PC",
+            "Metascore": 79.0,
+            "NumberOfCriticReviews": 12.0
+        },
+        {
+            "id": "130",
+            "url": "https://www.metacritic.com/game/tom-clancys-rainbow-six-siege/",
+            "Title": "Tom Clancy's Rainbow Six Siege",
+            "Platform": "PC",
+            "Metascore": 73.0,
+            "NumberOfCriticReviews": 40.0
+        },
+        {
+            "id": "131",
+            "url": "https://www.metacritic.com/game/mutant-year-zero-road-to-eden/",
+            "Title": "Mutant Year Zero: Road to Eden",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 57.0
+        },
+        {
+            "id": "132",
+            "url": "https://www.metacritic.com/game/rocket-league/",
+            "Title": "Rocket League",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 50.0
+        },
+        {
+            "id": "133",
+            "url": "https://www.metacritic.com/game/doom-eternal/",
+            "Title": "DOOM Eternal",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 61.0
+        },
+        {
+            "id": "134",
+            "url": "https://www.metacritic.com/game/final-fantasy-xii-the-zodiac-age/",
+            "Title": "Final Fantasy XII: The Zodiac Age",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 75.0
+        },
+        {
+            "id": "135",
+            "url": "https://www.metacritic.com/game/a-way-out/",
+            "Title": "A Way Out",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 62.0
+        },
+        {
+            "id": "136",
+            "url": "https://www.metacritic.com/game/the-elder-scrolls-v-skyrim-special-edition/",
+            "Title": "The Elder Scrolls V: Skyrim Special Edition",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 63.0
+        },
+        {
+            "id": "137",
+            "url": "https://www.metacritic.com/game/final-fantasy-xiv-online/",
+            "Title": "Final Fantasy XIV Online",
+            "Platform": "PC",
+            "Metascore": 49.0,
+            "NumberOfCriticReviews": 26.0
+        },
+        {
+            "id": "138",
+            "url": "https://www.metacritic.com/game/sniper-elite-4/",
+            "Title": "Sniper Elite 4",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 55.0
+        },
+        {
+            "id": "139",
+            "url": "https://www.metacritic.com/game/god-eater-3/",
+            "Title": "God Eater 3",
+            "Platform": "PC",
+            "Metascore": 71.0,
+            "NumberOfCriticReviews": 60.0
+        },
+        {
+            "id": "140",
+            "url": "https://www.metacritic.com/game/football-manager-2019/",
+            "Title": "Football Manager 2019",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 32.0
+        },
+        {
+            "id": "141",
+            "url": "https://www.metacritic.com/game/pillars-of-eternity-ii-deadfire/",
+            "Title": "Pillars of Eternity II: Deadfire",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 71.0
+        },
+        {
+            "id": "142",
+            "url": "https://www.metacritic.com/game/bomber-crew/",
+            "Title": "Bomber Crew",
+            "Platform": "PC",
+            "Metascore": 75.0,
+            "NumberOfCriticReviews": 11.0
+        },
+        {
+            "id": "143",
+            "url": "https://www.metacritic.com/game/stellaris/",
+            "Title": "Stellaris",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 57.0
+        },
+        {
+            "id": "144",
+            "url": "https://www.metacritic.com/game/void-bastards/",
+            "Title": "Void Bastards",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 27.0
+        },
+        {
+            "id": "145",
+            "url": "https://www.metacritic.com/game/europa-universalis-iv/",
+            "Title": "Europa Universalis IV",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 34.0
+        },
+        {
+            "id": "146",
+            "url": "https://www.metacritic.com/game/foundation/",
+            "Title": "Foundation",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 5.0
+        },
+        {
+            "id": "147",
+            "url": "https://www.metacritic.com/game/kingdom-two-crowns/",
+            "Title": "Kingdom Two Crowns",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 11.0
+        },
+        {
+            "id": "148",
+            "url": "https://www.metacritic.com/game/rust/",
+            "Title": "Rust",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 11.0
+        },
+        {
+            "id": "149",
+            "url": "https://www.metacritic.com/game/northgard/",
+            "Title": "Northgard",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 14.0
+        },
+        {
+            "id": "150",
+            "url": "https://www.metacritic.com/game/total-war-three-kingdoms/",
+            "Title": "Total War: Three Kingdoms",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 64.0
+        },
+        {
+            "id": "151",
+            "url": "https://www.metacritic.com/game/warhammer-vermintide-2/",
+            "Title": "Warhammer: Vermintide 2",
+            "Platform": "PC",
+            "Metascore": 82.0,
+            "NumberOfCriticReviews": 54.0
+        },
+        {
+            "id": "152",
+            "url": "https://www.metacritic.com/game/dark-souls-remastered/",
+            "Title": "Dark Souls Remastered",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 53.0
+        },
+        {
+            "id": "153",
+            "url": "https://www.metacritic.com/game/thehunter-call-of-the-wild/",
+            "Title": "theHunter: Call of the Wild",
+            "Platform": "PC",
+            "Metascore": 64.0,
+            "NumberOfCriticReviews": 13.0
+        },
+        {
+            "id": "154",
+            "url": "https://www.metacritic.com/game/iconoclasts/",
+            "Title": "Iconoclasts",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 23.0
+        },
+        {
+            "id": "155",
+            "url": "https://www.metacritic.com/game/xcom-2/",
+            "Title": "XCOM 2",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 104.0
+        },
+        {
+            "id": "156",
+            "url": "https://www.metacritic.com/game/day-of-infamy/",
+            "Title": "Day of Infamy",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 10.0
+        },
+        {
+            "id": "157",
+            "url": "https://www.metacritic.com/game/insurgency-sandstorm/",
+            "Title": "Insurgency: Sandstorm",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 30.0
+        },
+        {
+            "id": "158",
+            "url": "https://www.metacritic.com/game/chrono-trigger/",
+            "Title": "Chrono Trigger",
+            "Platform": "PC",
+            "Metascore": 92.0,
+            "NumberOfCriticReviews": 57.0
+        },
+        {
+            "id": "159",
+            "url": "https://www.metacritic.com/game/mordhau/",
+            "Title": "MORDHAU",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 21.0
+        },
+        {
+            "id": "160",
+            "url": "https://www.metacritic.com/game/ni-no-kuni-ii-revenant-kingdom/",
+            "Title": "Ni no Kuni II: Revenant Kingdom",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 84.0
+        },
+        {
+            "id": "161",
+            "url": "https://www.metacritic.com/game/shadow-complex-remastered/",
+            "Title": "Shadow Complex Remastered",
+            "Platform": "PC",
+            "Metascore": 74.0,
+            "NumberOfCriticReviews": 14.0
+        },
+        {
+            "id": "162",
+            "url": "https://www.metacritic.com/game/payday-2/",
+            "Title": "Payday 2",
+            "Platform": "PC",
+            "Metascore": 79.0,
+            "NumberOfCriticReviews": 51.0
+        },
+        {
+            "id": "163",
+            "url": "https://www.metacritic.com/game/assassins-creed-origins/",
+            "Title": "Assassin's Creed Origins",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 63.0
+        },
+        {
+            "id": "164",
+            "url": "https://www.metacritic.com/game/sword-art-online-fatal-bullet/",
+            "Title": "Sword Art Online: Fatal Bullet",
+            "Platform": "PC",
+            "Metascore": 64.0,
+            "NumberOfCriticReviews": 42.0
+        },
+        {
+            "id": "165",
+            "url": "https://www.metacritic.com/game/cyberdimension-neptunia-4-goddesses-online/",
+            "Title": "Cyberdimension Neptunia: 4 Goddesses Online",
+            "Platform": "PC",
+            "Metascore": 71.0,
+            "NumberOfCriticReviews": 12.0
+        },
+        {
+            "id": "166",
+            "url": "https://www.metacritic.com/game/jurassic-world-evolution/",
+            "Title": "Jurassic World Evolution",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 57.0
+        },
+        {
+            "id": "167",
+            "url": "https://www.metacritic.com/game/borderlands-3/",
+            "Title": "Borderlands 3",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 53.0
+        },
+        {
+            "id": "168",
+            "url": "https://www.metacritic.com/game/senran-kagura-peach-beach-splash/",
+            "Title": "Senran Kagura: Peach Beach Splash",
+            "Platform": "PC",
+            "Metascore": 70.0,
+            "NumberOfCriticReviews": 25.0
+        },
+        {
+            "id": "169",
+            "url": "https://www.metacritic.com/game/battletech/",
+            "Title": "BattleTech",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 62.0
+        },
+        {
+            "id": "170",
+            "url": "https://www.metacritic.com/game/nioh-complete-edition/",
+            "Title": "Nioh: Complete Edition",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 23.0
+        },
+        {
+            "id": "171",
+            "url": "https://www.metacritic.com/game/fairy-fencer-f-advent-dark-force/",
+            "Title": "Fairy Fencer F: Advent Dark Force",
+            "Platform": "PC",
+            "Metascore": 71.0,
+            "NumberOfCriticReviews": 21.0
+        },
+        {
+            "id": "172",
+            "url": "https://www.metacritic.com/game/surviving-mars/",
+            "Title": "Surviving Mars",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 39.0
+        },
+        {
+            "id": "173",
+            "url": "https://www.metacritic.com/game/dead-by-daylight/",
+            "Title": "Dead by Daylight",
+            "Platform": "PC",
+            "Metascore": 64.0,
+            "NumberOfCriticReviews": 18.0
+        },
+        {
+            "id": "174",
+            "url": "https://www.metacritic.com/game/soulcalibur-vi/",
+            "Title": "SoulCalibur VI",
+            "Platform": "PC",
+            "Metascore": 84.0,
+            "NumberOfCriticReviews": 78.0
+        },
+        {
+            "id": "175",
+            "url": "https://www.metacritic.com/game/they-are-billions/",
+            "Title": "They Are Billions",
+            "Platform": "PC",
+            "Metascore": 72.0,
+            "NumberOfCriticReviews": 19.0
+        },
+        {
+            "id": "176",
+            "url": "https://www.metacritic.com/game/hunt-showdown/",
+            "Title": "Hunt: Showdown",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 25.0
+        },
+        {
+            "id": "177",
+            "url": "https://www.metacritic.com/game/total-war-warhammer/",
+            "Title": "Total War: WARHAMMER",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 77.0
+        },
+        {
+            "id": "178",
+            "url": "https://www.metacritic.com/game/kingdom-come-deliverance/",
+            "Title": "Kingdom Come: Deliverance",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 60.0
+        },
+        {
+            "id": "179",
+            "url": "https://www.metacritic.com/game/final-fantasy-xv-windows-edition/",
+            "Title": "Final Fantasy XV: Royal Edition",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 29.0
+        },
+        {
+            "id": "180",
+            "url": "https://www.metacritic.com/game/sid-meiers-civilization-vi/",
+            "Title": "Sid Meier's Civilization VI",
+            "Platform": "PC",
+            "Metascore": 88.0,
+            "NumberOfCriticReviews": 84.0
+        },
+        {
+            "id": "181",
+            "url": "https://www.metacritic.com/game/age-of-empires-definitive-edition/",
+            "Title": "Age of Empires: Definitive Edition",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 50.0
+        },
+        {
+            "id": "182",
+            "url": "https://www.metacritic.com/game/the-elder-scrolls-online/",
+            "Title": "The Elder Scrolls Online",
+            "Platform": "PC",
+            "Metascore": 71.0,
+            "NumberOfCriticReviews": 64.0
+        },
+        {
+            "id": "183",
+            "url": "https://www.metacritic.com/game/we-were-here-too/",
+            "Title": "We Were Here Too",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 7.0
+        },
+        {
+            "id": "184",
+            "url": "https://www.metacritic.com/game/styx-shards-of-darkness/",
+            "Title": "Styx: Shards of Darkness",
+            "Platform": "PC",
+            "Metascore": 72.0,
+            "NumberOfCriticReviews": 38.0
+        },
+        {
+            "id": "185",
+            "url": "https://www.metacritic.com/game/railway-empire/",
+            "Title": "Railway Empire",
+            "Platform": "PC",
+            "Metascore": 74.0,
+            "NumberOfCriticReviews": 21.0
+        },
+        {
+            "id": "186",
+            "url": "https://www.metacritic.com/game/toukiden-2/",
+            "Title": "Toukiden 2",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 46.0
+        },
+        {
+            "id": "187",
+            "url": "https://www.metacritic.com/game/the-crew-2/",
+            "Title": "The Crew 2",
+            "Platform": "PC",
+            "Metascore": 64.0,
+            "NumberOfCriticReviews": 53.0
+        },
+        {
+            "id": "188",
+            "url": "https://www.metacritic.com/game/berserk-and-the-band-of-the-hawk/",
+            "Title": "Berserk and the Band of the Hawk",
+            "Platform": "PC",
+            "Metascore": 66.0,
+            "NumberOfCriticReviews": 53.0
+        },
+        {
+            "id": "189",
+            "url": "https://www.metacritic.com/game/just-cause-3/",
+            "Title": "Just Cause 3",
+            "Platform": "PC",
+            "Metascore": 74.0,
+            "NumberOfCriticReviews": 50.0
+        },
+        {
+            "id": "190",
+            "url": "https://www.metacritic.com/game/conan-exiles/",
+            "Title": "Conan Exiles",
+            "Platform": "PC",
+            "Metascore": 68.0,
+            "NumberOfCriticReviews": 32.0
+        },
+        {
+            "id": "191",
+            "url": "https://www.metacritic.com/game/staxel/",
+            "Title": "Staxel",
+            "Platform": "PC",
+            "Metascore": 61.0,
+            "NumberOfCriticReviews": 7.0
+        },
+        {
+            "id": "192",
+            "url": "https://www.metacritic.com/game/volgarr-the-viking/",
+            "Title": "Volgarr the Viking",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 9.0
+        },
+        {
+            "id": "193",
+            "url": "https://www.metacritic.com/game/dirt-4/",
+            "Title": "DiRT 4",
+            "Platform": "PC",
+            "Metascore": 85.0,
+            "NumberOfCriticReviews": 44.0
+        },
+        {
+            "id": "194",
+            "url": "https://www.metacritic.com/game/budget-cuts/",
+            "Title": "Budget Cuts",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 8.0
+        },
+        {
+            "id": "195",
+            "url": "https://www.metacritic.com/game/far-cry-5/",
+            "Title": "Far Cry 5",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 83.0
+        },
+        {
+            "id": "196",
+            "url": "https://www.metacritic.com/game/pathfinder-kingmaker/",
+            "Title": "Pathfinder: Kingmaker",
+            "Platform": "PC",
+            "Metascore": 73.0,
+            "NumberOfCriticReviews": 33.0
+        },
+        {
+            "id": "197",
+            "url": "https://www.metacritic.com/game/darksiders-iii/",
+            "Title": "Darksiders III",
+            "Platform": "PC",
+            "Metascore": 64.0,
+            "NumberOfCriticReviews": 59.0
+        },
+        {
+            "id": "198",
+            "url": "https://www.metacritic.com/game/rise-of-industry/",
+            "Title": "Rise of Industry",
+            "Platform": "PC",
+            "Metascore": 62.0,
+            "NumberOfCriticReviews": 12.0
+        },
+        {
+            "id": "199",
+            "url": "https://www.metacritic.com/game/tom-clancys-ghost-recon-wildlands/",
+            "Title": "Tom Clancy's Ghost Recon: Wildlands",
+            "Platform": "PC",
+            "Metascore": 70.0,
+            "NumberOfCriticReviews": 64.0
+        },
+        {
+            "id": "200",
+            "url": "https://www.metacritic.com/game/fallout-4/",
+            "Title": "Fallout 4",
+            "Platform": "PC",
+            "Metascore": 87.0,
+            "NumberOfCriticReviews": 58.0
+        },
+        {
+            "id": "201",
+            "url": "https://www.metacritic.com/game/fishing-barents-sea/",
+            "Title": "Fishing: Barents Sea",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 5.0
+        },
+        {
+            "id": "202",
+            "url": "https://www.metacritic.com/game/ark-survival-evolved/",
+            "Title": "ARK: Survival Evolved",
+            "Platform": "PC",
+            "Metascore": 70.0,
+            "NumberOfCriticReviews": 18.0
+        },
+        {
+            "id": "203",
+            "url": "https://www.metacritic.com/game/grand-theft-auto-v/",
+            "Title": "Grand Theft Auto V",
+            "Platform": "PC",
+            "Metascore": 97.0,
+            "NumberOfCriticReviews": 66.0
+        },
+        {
+            "id": "204",
+            "url": "https://www.metacritic.com/game/ancestors-legacy/",
+            "Title": "Ancestors Legacy",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 22.0
+        },
+        {
+            "id": "205",
+            "url": "https://www.metacritic.com/game/youtubers-life/",
+            "Title": "Youtubers Life",
+            "Platform": "PC",
+            "Metascore": 63.0,
+            "NumberOfCriticReviews": 5.0
+        },
+        {
+            "id": "206",
+            "url": "https://www.metacritic.com/game/vampyr/",
+            "Title": "Vampyr",
+            "Platform": "PC",
+            "Metascore": 70.0,
+            "NumberOfCriticReviews": 67.0
+        },
+        {
+            "id": "207",
+            "url": "https://www.metacritic.com/game/the-wild-eight/",
+            "Title": "The Wild Eight",
+            "Platform": "PC",
+            "Metascore": 63.0,
+            "NumberOfCriticReviews": 4.0
+        },
+        {
+            "id": "208",
+            "url": "https://www.metacritic.com/game/steel-division-normandy-44/",
+            "Title": "Steel Division: Normandy 44",
+            "Platform": "PC",
+            "Metascore": 83.0,
+            "NumberOfCriticReviews": 24.0
+        },
+        {
+            "id": "209",
+            "url": "https://www.metacritic.com/game/black-desert-online/",
+            "Title": "Black Desert Online",
+            "Platform": "PC",
+            "Metascore": 73.0,
+            "NumberOfCriticReviews": 35.0
+        },
+        {
+            "id": "210",
+            "url": "https://www.metacritic.com/game/secret-of-mana/",
+            "Title": "Secret of Mana",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 8.0
+        },
+        {
+            "id": "211",
+            "url": "https://www.metacritic.com/game/torment-tides-of-numenera/",
+            "Title": "Torment: Tides of Numenera",
+            "Platform": "PC",
+            "Metascore": 81.0,
+            "NumberOfCriticReviews": 72.0
+        },
+        {
+            "id": "212",
+            "url": "https://www.metacritic.com/game/dragon-quest-heroes-ii/",
+            "Title": "Dragon Quest Heroes II",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 68.0
+        },
+        {
+            "id": "213",
+            "url": "https://www.metacritic.com/game/titan-souls/",
+            "Title": "Titan Souls",
+            "Platform": "PC",
+            "Metascore": 74.0,
+            "NumberOfCriticReviews": 46.0
+        },
+        {
+            "id": "214",
+            "url": "https://www.metacritic.com/game/wwe-2k19/",
+            "Title": "WWE 2K19",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 44.0
+        },
+        {
+            "id": "215",
+            "url": "https://www.metacritic.com/game/no-mans-sky/",
+            "Title": "No Man's Sky",
+            "Platform": "PC",
+            "Metascore": 71.0,
+            "NumberOfCriticReviews": 96.0
+        },
+        {
+            "id": "216",
+            "url": "https://www.metacritic.com/game/pixark/",
+            "Title": "PixARK",
+            "Platform": "PC",
+            "Metascore": 38.0,
+            "NumberOfCriticReviews": 5.0
+        },
+        {
+            "id": "217",
+            "url": "https://www.metacritic.com/game/metal-gear-survive/",
+            "Title": "Metal Gear Survive",
+            "Platform": "PC",
+            "Metascore": 60.0,
+            "NumberOfCriticReviews": 70.0
+        },
+        {
+            "id": "218",
+            "url": "https://www.metacritic.com/game/for-honor/",
+            "Title": "For Honor",
+            "Platform": "PC",
+            "Metascore": 78.0,
+            "NumberOfCriticReviews": 59.0
+        },
+        {
+            "id": "219",
+            "url": "https://www.metacritic.com/game/playerunknowns-battlegrounds/",
+            "Title": "PlayerUnknown's Battlegrounds",
+            "Platform": "PC",
+            "Metascore": 86.0,
+            "NumberOfCriticReviews": 46.0
+        },
+        {
+            "id": "220",
+            "url": "https://www.metacritic.com/game/artifact/",
+            "Title": "Artifact",
+            "Platform": "PC",
+            "Metascore": 76.0,
+            "NumberOfCriticReviews": 20.0
+        },
+        {
+            "id": "221",
+            "url": "https://www.metacritic.com/game/call-of-duty-wwii/",
+            "Title": "Call of Duty: WWII",
+            "Platform": "PC",
+            "Metascore": 79.0,
+            "NumberOfCriticReviews": 83.0
+        },
+        {
+            "id": "222",
+            "url": "https://www.metacritic.com/game/just-cause-4/",
+            "Title": "Just Cause 4",
+            "Platform": "PC",
+            "Metascore": 68.0,
+            "NumberOfCriticReviews": 43.0
+        },
+        {
+            "id": "223",
+            "url": "https://www.metacritic.com/game/wwe-2k17/",
+            "Title": "WWE 2K17",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 52.0
+        },
+        {
+            "id": "224",
+            "url": "https://www.metacritic.com/game/dead-rising-4/",
+            "Title": "Dead Rising 4",
+            "Platform": "PC",
+            "Metascore": 72.0,
+            "NumberOfCriticReviews": 86.0
+        },
+        {
+            "id": "225",
+            "url": "https://www.metacritic.com/game/nba-2k19/",
+            "Title": "NBA 2K19",
+            "Platform": "PC",
+            "Metascore": 82.0,
+            "NumberOfCriticReviews": 49.0
+        },
+        {
+            "id": "226",
+            "url": "https://www.metacritic.com/game/dynasty-warriors-9/",
+            "Title": "Dynasty Warriors 9",
+            "Platform": "PC",
+            "Metascore": 65.0,
+            "NumberOfCriticReviews": 49.0
+        },
+        {
+            "id": "227",
+            "url": "https://www.metacritic.com/game/nba-2k21/",
+            "Title": "NBA 2K21",
+            "Platform": "PC",
+            "Metascore": 68.0,
+            "NumberOfCriticReviews": 50.0
+        },
+        {
+            "id": "228",
+            "url": "https://www.metacritic.com/game/wolfenstein-youngblood/",
+            "Title": "Wolfenstein: Youngblood",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 50.0
+        },
+        {
+            "id": "229",
+            "url": "https://www.metacritic.com/game/call-of-duty-infinite-warfare/",
+            "Title": "Call of Duty: Infinite Warfare",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 87.0
+        },
+        {
+            "id": "230",
+            "url": "https://www.metacritic.com/game/warhammer-40000-dawn-of-war-iii/",
+            "Title": "Warhammer 40,000: Dawn of War III",
+            "Platform": "PC",
+            "Metascore": 77.0,
+            "NumberOfCriticReviews": 76.0
+        },
+        {
+            "id": "231",
+            "url": "https://www.metacritic.com/game/nether/",
+            "Title": "Nether",
+            "Platform": "PC",
+            "Metascore": 57.0,
+            "NumberOfCriticReviews": 7.0
+        },
+        {
+            "id": "232",
+            "url": "https://www.metacritic.com/game/x-rebirth/",
+            "Title": "X Rebirth",
+            "Platform": "PC",
+            "Metascore": 33.0,
+            "NumberOfCriticReviews": 24.0
+        },
+        {
+            "id": "233",
+            "url": "https://www.metacritic.com/game/wwe-2k20/",
+            "Title": "WWE 2K20",
+            "Platform": "PC",
+            "Metascore": 43.0,
+            "NumberOfCriticReviews": 29.0
+        },
+        {
+            "id": "234",
+            "url": "https://www.metacritic.com/game/takedown-red-sabre/",
+            "Title": "Takedown: Red Sabre",
+            "Platform": "PC",
+            "Metascore": 34.0,
+            "NumberOfCriticReviews": 17.0
+        },
+        {
+            "id": "235",
+            "url": "https://www.metacritic.com/game/nba-2k18/",
+            "Title": "NBA 2K18",
+            "Platform": "PC",
+            "Metascore": 80.0,
+            "NumberOfCriticReviews": 54.0
+        },
+        {
+            "id": "236",
+            "url": "https://www.metacritic.com/game/deus-ex-the-fall/",
+            "Title": "Deus Ex: The Fall",
+            "Platform": "PC",
+            "Metascore": 69.0,
+            "NumberOfCriticReviews": 43.0
+        },
+        {
+            "id": "237",
+            "url": "https://www.metacritic.com/game/umbrella-corps/",
+            "Title": "Umbrella Corps",
+            "Platform": "PC",
+            "Metascore": 38.0,
+            "NumberOfCriticReviews": 55.0
+        },
+        {
+            "id": "238",
+            "url": "https://www.metacritic.com/game/urban-empire/",
+            "Title": "Urban Empire",
+            "Platform": "PC",
+            "Metascore": 62.0,
+            "NumberOfCriticReviews": 20.0
+        },
+        {
+            "id": "239",
+            "url": "https://www.metacritic.com/game/rollercoaster-tycoon-world/",
+            "Title": "RollerCoaster Tycoon World",
+            "Platform": "PC",
+            "Metascore": 43.0,
+            "NumberOfCriticReviews": 7.0
+        }
+    ]
+}
