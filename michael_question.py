@@ -3,6 +3,7 @@ import unicodedata
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import roman
 
 import os
 import re
@@ -110,24 +111,22 @@ def parse_game_data(soup, source_category, url):
     data['url'] = url
 
     # Title
-    title_elem = soup.find('h1', class_=re.compile(r'hero-title__text'))
+    title_elem = soup.find('div', class_=re.compile(r'subpage-header__navigation'))
     if title_elem:
         data['Title'] = title_elem.get_text(strip=True)
     else:
         print(f"Warning: Title not found for {url}")
 
     # Metascore & Critic Reviews Count
-    metascore_elem = soup.find('span', attrs={'data-testid': re.compile(r'global-score-value')})
-    if metascore_elem:
-        score_text = metascore_elem.get_text(strip=True)
-        if score_text.isdigit():
-            data['Metascore'] = int(score_text)
-        else:
-            print(f"Warning: Metascore is not a digit for {url}: {score_text}")
+    parent_div = soup.find('div', class_=re.compile(r'score-card-left__score-number'))
+    score = parent_div.find('span').text.strip() if parent_div else "TBD"
+    if score and score.isdigit():
+        data['Metascore'] = int(score)
     else:
-        print(f"Warning: Metascore not found for {url}")
+        print(f"Warning: Metascore not found or invalid for {url}: {score}")
 
-    critic_count_elem = soup.find('a', href=re.compile(r'/game/[^/]+/critic-reviews/'))
+    # Number of Critic Reviews
+    critic_count_elem = soup.find('div', class_=re.compile(r'count'))
     if critic_count_elem:
         count_match = re.search(r'Based on (\d+) Critic Reviews', critic_count_elem.get_text())
         if count_match:
@@ -275,22 +274,57 @@ def read_saved_data(csv_path='output/games_raw.csv'):
 
 def create_metacritic_url(app_name):
     """Generates a direct Metacritic PC game URL from a Steam app name."""
-    slug = str(app_name).lower()
+    base_slug = str(app_name).lower()
 
-    # Convert Japanese full-width asterisk(＊) to standard asterisk (*) which is common in many Japanese game titles
-    slug = unicodedata.normalize("NFKC", slug)
+    # Normalize the string to NFKC form to handle special characters consistently
+    base_slug = "".join(
+        " " if char != unicodedata.normalize("NFKC", char) else char 
+        for char in base_slug
+    )
 
-    # Replace asterisks with spaces to avoid URL issues, as Metacritic does not use asterisks in its slugs
-    slug = slug.replace('*', ' ')
+    # Turn colons and asterisks into spaces, as Metacritic replaces them with hyphens in its slugs
+    base_slug = re.sub(r'[:*]', ' ', base_slug)
+
+    # sometimes ™, ®, and other symbols turn into (TM), (R), etc.
+    base_slug = re.sub(r'\((tm|r|c)\)', ' ', base_slug)
+
+    # Expand "goty" to Metacritic's exact preferred phrase structure, there are many GOTY editions that are not recognized if we don't do this
+    base_slug = base_slug.replace("goty", "game of the year")
     
-    # Remove special characters, keeping only lowercase letters, numbers, spaces and hyphens
-    slug = re.sub(r'[^a-z0-9\s\-]', '', slug)
+    def format_slug(text):
+        """Helper to strip punctuation and format into a hyphenated slug."""
+        s = re.sub(r'[^a-z0-9\s\-]', '', text)
+        return re.sub(r'\s+', '-', s.strip())
 
-    # Replace one or more spaces with a single hyphen
-    slug = re.sub(r'\s+', '-', slug.strip())
-    
-    # Target the PC platform URL structure
-    return f"https://www.metacritic.com/game/{slug}/?platform=pc"
+    # Start with the default baseline URL
+    urls = [f"https://www.metacritic.com/game/{format_slug(base_slug)}/critic-reviews/?platform=pc"]
+
+    # Steam decodes games with Arabic numerals (e.g., "Final Fantasy 7") while Metacritic often uses Roman numerals (e.g., "Final Fantasy VII").
+    arabic_match = re.search(r'\b\d+\b', base_slug)
+    roman_match = re.search(r'\b[ivxlcm]+\b', base_slug)
+
+    # Alternative 1: Arabic to Roman
+    if arabic_match:
+        num_str = arabic_match.group()
+        try:
+            roman_version = roman.toRoman(int(num_str)).lower()
+            alt_slug = re.sub(rf'\b{num_str}\b', roman_version, base_slug)
+            urls.append(f"https://www.metacritic.com/game/{format_slug(alt_slug)}/critic-reviews/?platform=pc")
+        except roman.InvalidRomanNumeralError:
+            pass
+            
+    # Alternative 2: Roman to Arabic
+    elif roman_match:
+        rom_str = roman_match.group()
+        try:
+            arabic_version = str(roman.fromRoman(rom_str.upper()))
+            alt_slug = re.sub(rf'\b{rom_str}\b', arabic_version, base_slug)
+            urls.append(f"https://www.metacritic.com/game/{format_slug(alt_slug)}/critic-reviews/?platform=pc")
+        except roman.InvalidRomanNumeralError:
+            pass
+
+    # Return unique URLs while preserving the order (Default first, Alternative second)
+    return list(dict.fromkeys(urls))
 
 
 def clean_title_for_merge(title):
@@ -340,6 +374,8 @@ def crawl_metacritic(consensus_df, csv_path='output/games_raw.csv', cache_file='
         existing_data = df_existing.to_dict('records')
         print(f"Loaded {len(existing_data)} previously saved valid games.")
 
+    successful_urls = {item['url'] for item in existing_data if item.get('url')}
+
     driver = get_browser()
     new_games_data = []
 
@@ -350,35 +386,42 @@ def crawl_metacritic(consensus_df, csv_path='output/games_raw.csv', cache_file='
     # Open the cache file in append mode to log URLs as we go
     with open(cache_file, 'a', encoding='utf-8') as f_cache:
         for i, app_name in enumerate(game_names, start=1):
-            url = create_metacritic_url(app_name)
+            candidate_urls = create_metacritic_url(app_name)
 
-            if url in existing_urls:
+            # Check if we already successfully scraped this game using ANY of its URL variations
+            if any(url in successful_urls for url in candidate_urls):
                 continue
 
-            # Log the attempt immediately so we never try it again
-            f_cache.write(f"{url}\n")
-            f_cache.flush()  # Ensure it writes to disk immediately
-            existing_urls.add(url)
+            # Try each candidate URL
+            for url in candidate_urls:
+                if url in existing_urls:
+                    continue # We already tried this specific URL and it failed
 
-            # Wait for the main h1 title block to load as confirmation the page exists
-            print(f"\n  Fetching New Game: {url}")
-            game_soup = get_soup_with_wait(driver, url, "h1")
-            
-            # If the page times out (e.g., game doesn't exist on Metacritic or URL is slightly off), skip it
-            if not game_soup:
-                print(f"    -> Skipping: Page not found or failed to load for '{app_name}'")
-                continue
+                # Log the attempt immediately so we never try it again
+                f_cache.write(f"{url}\n")
+                f_cache.flush()  # Ensure it writes to disk immediately
+                existing_urls.add(url)
 
-            # Parse the data, hardcoding "PC" as the platform since we are coming from Steam
-            game_info = parse_game_data(game_soup, "PC", url)
-            
-            if game_info and game_info.get('Title'):
-                new_games_data.append(game_info)
-                print(f"    Collected: {game_info['Title'][:50]} (Metascore: {game_info['Metascore']})")
-                print(f"    game index: {i} out of {len(game_names)}")
+                # Wait for the main h1 title block to load as confirmation the page exists
+                print(f"\n  Fetching New Game: {url}")
+                game_soup = get_soup_with_wait(driver, url, "h1")
+                
+                # If the page times out (e.g., game doesn't exist on Metacritic or URL is slightly off), skip it
+                if not game_soup:
+                    print(f"    -> Skipping: Page not found or failed to load for '{app_name}'")
+                    continue
 
-            # Add a respectful delay to avoid getting IP-banned by Metacritic
-            time.sleep(1)
+                # Parse the data, hardcoding "PC" as the platform since we are coming from Steam
+                game_info = parse_game_data(game_soup, "PC", url)
+                
+                if game_info and game_info.get('Title'):
+                    new_games_data.append(game_info)
+                    print(f"    Collected: {game_info['Title'][:50]} (Metascore: {game_info['Metascore']})")
+                    print(f"    game index: {i} out of {len(game_names)}")
+                    break  # Stop trying other candidate URLs for this game since we succeeded
+
+                # Add a respectful delay to avoid getting IP-banned by Metacritic
+                time.sleep(1)
 
     print(f"\nCrawling complete! Collected data for {len(new_games_data) + len(existing_data)} out of {len(game_names)} games, which is {len(new_games_data)/len(game_names)*100:.2f}%.")
 
