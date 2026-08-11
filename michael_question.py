@@ -1,12 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import requests
 
 import os
 import re
 import json
-import math
 import time
 from urllib.parse import urljoin
 import pandas as pd
@@ -40,6 +38,9 @@ def calculate_steam_consensus(df):
     # Sort the games from highest rated to lowest for better visualization
     consensus_df = consensus_df.sort_values(by='steam_consensus', ascending=False)
 
+    # Save consensus data to CSV
+    consensus_df.to_csv('steam_consensus.csv', index=False)
+
     return consensus_df
 
 def plot_steam_consensus(consensus_df):
@@ -70,8 +71,7 @@ def plot_steam_consensus(consensus_df):
 def get_browser():
     """Initializes and returns a Chrome browser instance configured to bypass Cloudflare."""
     options = uc.ChromeOptions()
-    # Metacritic requires a real browser fingerprint. Do not run headless mode.
-    driver = uc.Chrome(options=options, version_main=147) # <-- EDIT VERSION IF NEEDED
+    driver = uc.Chrome(options=options)
     return driver
 
 
@@ -183,6 +183,10 @@ def build_and_save_dataframe(all_games_data):
             # safely handling missing or invalid data
             df_games[col] = pd.to_numeric(df_games[col].replace("None", pd.NA), errors='coerce')
 
+    # Remove games without a Metascore before saving CSVs
+    if 'Metascore' in df_games.columns:
+        df_games = df_games.dropna(subset=['Metascore'])
+
     df_games.to_csv('output/games_raw.csv', index=False, encoding='utf-8')
 
     records_list = []
@@ -247,8 +251,8 @@ def step_3_sorting_and_preview(df):
     print(df_after[display_cols].to_string())
     
     # Save the final sorted baseline dataset
-    # df_sorted.to_csv('output/games_baseline_final.csv', index=False, encoding='utf-8')
-    # print("\nSaved final baseline dataset to output/games_baseline_final.csv")
+    df_sorted.to_csv('output/games_baseline_final.csv', index=False, encoding='utf-8')
+    print("\nSaved final baseline dataset to output/games_baseline_final.csv")
 
     return df_sorted
 
@@ -281,41 +285,86 @@ def create_metacritic_url(app_name):
     return f"https://www.metacritic.com/game/{slug}/"
 
 
-def crawl_metacritic(consensus_df):
+def crawl_metacritic(consensus_df, csv_path='output/games_raw.csv', cache_file='output/attempted_urls.txt'):
     """Handles targeted web scraping on Metacritic based on Steam game titles."""
+
+    os.makedirs('output', exist_ok=True)
+    existing_urls = set()
+    existing_data = []
+
+    # 1. Load existing data to build the "Skip List"
+    if os.path.exists(cache_file):
+        with open(cache_file, 'r', encoding='utf-8') as f:
+            existing_urls = set(line.strip() for line in f if line.strip())
+        print(f"Loaded {len(existing_urls)} previously attempted URLs from {cache_file}.")
+
+    # 2. Load existing valid data to append to
+    if os.path.exists(csv_path):
+        df_existing = pd.read_csv(csv_path)
+        # Ensure we only treat as "existing valid data" rows that have a Metascore
+        if 'Metascore' in df_existing.columns:
+            df_existing = df_existing.dropna(subset=['Metascore'])
+        df_existing = df_existing.where(pd.notnull(df_existing), None)
+        existing_data = df_existing.to_dict('records')
+        print(f"Loaded {len(existing_data)} previously saved valid games.")
+
     driver = get_browser()
-    all_games_data = []
+    new_games_data = []
 
     # Get a list of unique game names from the Steam dataset
     game_names = consensus_df['app_name'].unique()
     print(f"Found {len(game_names)} unique Steam games to look up on Metacritic.")
 
-    for app_name in game_names:
-        url = create_metacritic_url(app_name)
-        print(f"\n  Fetching: {url}")
+    # Open the cache file in append mode to log URLs as we go
+    with open(cache_file, 'a', encoding='utf-8') as f_cache:
+        for i, app_name in enumerate(game_names, start=1):
+            url = create_metacritic_url(app_name)
 
-        # Wait for the main h1 title block to load as confirmation the page exists
-        game_soup = get_soup_with_wait(driver, url, "h1")
-        
-        # If the page times out (e.g., game doesn't exist on Metacritic or URL is slightly off), skip it
-        if not game_soup:
-            print(f"    -> Skipping: Page not found or failed to load for '{app_name}'")
-            continue
+            if url in existing_urls:
+                continue
 
-        # Parse the data, hardcoding "PC" as the platform since we are coming from Steam
-        game_info = parse_game_data(game_soup, "PC", url)
-        
-        if game_info and game_info.get('Title'):
-            all_games_data.append(game_info)
-            print(f"    Collected: {game_info['Title'][:50]} (Metascore: {game_info['Metascore']})")
+            # Log the attempt immediately so we never try it again
+            f_cache.write(f"{url}\n")
+            f_cache.flush()  # Ensure it writes to disk immediately
+            existing_urls.add(url)
 
-        # Add a respectful delay to avoid getting IP-banned by Metacritic
-        time.sleep(1)
+            # Wait for the main h1 title block to load as confirmation the page exists
+            print(f"\n  Fetching New Game: {url}")
+            game_soup = get_soup_with_wait(driver, url, "h1")
+            
+            # If the page times out (e.g., game doesn't exist on Metacritic or URL is slightly off), skip it
+            if not game_soup:
+                print(f"    -> Skipping: Page not found or failed to load for '{app_name}'")
+                continue
 
-    print(f"\nCrawling complete! Collected data for {len(all_games_data)} out of {len(game_names)} games, which is {len(all_games_data)/len(game_names)*100:.2f}%.")
+            # Parse the data, hardcoding "PC" as the platform since we are coming from Steam
+            game_info = parse_game_data(game_soup, "PC", url)
+            
+            if game_info and game_info.get('Title'):
+                new_games_data.append(game_info)
+                print(f"    Collected: {game_info['Title'][:50]} (Metascore: {game_info['Metascore']})")
+                print(f"    game index: {i} out of {len(game_names)}")
 
-    driver.quit()
-    build_and_save_dataframe(all_games_data)
+            # Add a respectful delay to avoid getting IP-banned by Metacritic
+            time.sleep(1)
+
+    print(f"\nCrawling complete! Collected data for {len(new_games_data) + len(existing_data)} out of {len(game_names)} games, which is {len(new_games_data)/len(game_names)*100:.2f}%.")
+
+    # --- ULTIMATE SAFE SHUTDOWN SEQUENCE ---
+    try:
+        driver.quit()
+    except Exception:
+        pass
+    
+    # Monkey-patch the driver to do nothing when Python's garbage collector tries to delete it
+    if hasattr(driver, 'quit'):
+        driver.quit = lambda: None 
+
+    all_games_data = existing_data + new_games_data
+    if new_games_data:
+        build_and_save_dataframe(all_games_data)
+    else:
+        print("No new games were added to the dataset. Everything is up to date!")
 
 
 def main():
@@ -332,12 +381,18 @@ def main():
     print("   STAGE 2: METACRITIC BASELINE")
     print("=" * 40)
     csv_path = 'output/games_raw.csv'
+    cache_file = 'output/attempted_urls.txt'
+    df = pd.read_csv('output/games_raw.csv')
+    # Only include rows with a Metascore when seeding the attempted URLs cache
+    if 'Metascore' in df.columns:
+        df = df.dropna(subset=['Metascore'])
 
-    if not os.path.exists(csv_path):
-        print("Crawling Metacritic...")
-        crawl_metacritic(consensus_df)
-    else:
-        print("Metacritic raw data already exists, skipping crawl.")
+    # Write all the URLs we already successfully grabbed into the new cache file
+    # We need this for the first run only the Steam Reviews dataset, so we don't have to re-scrape them
+    with open('output/attempted_urls.txt', 'w') as f:
+        for url in df['url'].dropna().unique():
+            f.write(f"{url}\n")
+    crawl_metacritic(consensus_df, csv_path, cache_file)
 
     # Load and clean the Metacritic data
     df_from_csv, _ = read_saved_data()
@@ -360,6 +415,9 @@ def main():
         # Calculate the anomaly Delta (Steam Consensus - Normalized Metascore)
         merged_df['Metascore_Normalized'] = merged_df['Metascore'] / 100.0 # metascore is 0-100, normalize to 0.0-1.0
         merged_df['delta'] = merged_df['steam_consensus'] - merged_df['Metascore_Normalized']
+
+        # Remove any rows that still do not have a Metascore
+        merged_df = merged_df.dropna(subset=['Metascore'])
         
         # Clean up temporary columns and save
         merged_df.drop(columns=['merge_name'], inplace=True)
