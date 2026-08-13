@@ -19,7 +19,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 BASE_URL = "https://www.metacritic.com/"
 
-def calculate_steam_consensus(df):
+def calculate_steam_consensus(df, out_csv='./output/steam_consensus.csv'):
     """
     This function calculates the Steam consensus for each game in the dataset.
     
@@ -42,9 +42,7 @@ def calculate_steam_consensus(df):
     consensus_df = consensus_df.sort_values(by='steam_consensus', ascending=False)
 
     # Save consensus data to CSV
-    consensus_df.to_csv('steam_consensus.csv', index=False)
-
-    return consensus_df
+    consensus_df.to_csv(out_csv, index=False)
 
 def plot_steam_consensus(consensus_df):
     """
@@ -65,6 +63,7 @@ def plot_steam_consensus(consensus_df):
     plt.xlabel('Steam Consensus (Positive Review Ratio)', fontsize=10)
     plt.ylabel('Number of Games', fontsize=10)
     plt.tight_layout()
+    plt.savefig('./output/steam_consensus_vs_metascore.png')
     plt.show()
 
     # plt.savefig('steam_consensus.png')
@@ -74,7 +73,7 @@ def plot_steam_consensus(consensus_df):
 def get_browser():
     """Initializes and returns a Chrome browser instance configured to bypass Cloudflare."""
     options = uc.ChromeOptions()
-    driver = uc.Chrome(options=options)
+    driver = uc.Chrome(options=options, version_main=151)  # Run this with chrome, fill here your version number
     return driver
 
 
@@ -128,7 +127,7 @@ def parse_game_data(soup, source_category, url):
     # Number of Critic Reviews
     critic_count_elem = soup.find('div', class_=re.compile(r'count'))
     if critic_count_elem:
-        count_match = re.search(r'Based on (\d+) Critic Reviews', critic_count_elem.get_text())
+        count_match = re.search(r'Showing (\d+) Critic Reviews', critic_count_elem.get_text())
         if count_match:
             data['NumberOfCriticReviews'] = int(count_match.group(1))
         else: 
@@ -188,7 +187,7 @@ def build_and_save_dataframe(all_games_data):
     if 'Metascore' in df_games.columns:
         df_games = df_games.dropna(subset=['Metascore'])
 
-    df_games.to_csv('output/games_raw.csv', index=False, encoding='utf-8')
+    df_games.to_csv('./output/games_raw.csv', index=False, encoding='utf-8')
 
     records_list = []
     for index, row in df_games.iterrows():
@@ -202,7 +201,7 @@ def build_and_save_dataframe(all_games_data):
         ordered_dict.update(row_dict)
         records_list.append(ordered_dict)
 
-    with open('output/games_raw.json', 'w', encoding='utf-8') as f:
+    with open('./output/games_raw.json', 'w', encoding='utf-8') as f:
         # json.dump({"records": {"record": records_list}}, f, indent=4, ensure_ascii=False)
         json.dump({"records": records_list}, f, indent=4, ensure_ascii=False)
 
@@ -252,13 +251,13 @@ def step_3_sorting_and_preview(df):
     print(df_after[display_cols].to_string())
     
     # Save the final sorted baseline dataset
-    df_sorted.to_csv('output/games_baseline_final.csv', index=False, encoding='utf-8')
-    print("\nSaved final baseline dataset to output/games_baseline_final.csv")
+    df_sorted.to_csv('./output/games_baseline_final.csv', index=False, encoding='utf-8')
+    print("\nSaved final baseline dataset to ./output/games_baseline_final.csv")
 
     return df_sorted
 
 
-def read_saved_data(csv_path='output/games_raw.csv'):
+def read_saved_data(csv_path='./output/games_raw.csv'):
     """Loads the saved CSV and JSON dataframes from the output directory."""
     print("\n" + "=" * 40)
     print("   LOADING SAVED DATA")
@@ -351,10 +350,10 @@ def clean_title_for_merge(title):
     return title
 
 
-def crawl_metacritic(consensus_df, csv_path='output/games_raw.csv', cache_file='output/attempted_urls.txt'):
+def crawl_metacritic(consensus_df, csv_path='./output/games_raw.csv', cache_file='./output/attempted_urls.txt'):
     """Handles targeted web scraping on Metacritic based on Steam game titles."""
 
-    os.makedirs('output', exist_ok=True)
+    os.makedirs('./output', exist_ok=True)
     existing_urls = set()
     existing_data = []
 
@@ -442,6 +441,45 @@ def crawl_metacritic(consensus_df, csv_path='output/games_raw.csv', cache_file='
         print("No new games were added to the dataset. Everything is up to date!")
 
 
+def plot_consensus_vs_metascore(merged_df):
+    """
+    Visualizes the disparity between Steam players and Metacritic professional reviews.
+    Includes a reference line to easily spot games with high Delta anomalies.
+    """
+    plt.figure(figsize=(10, 6))
+    
+    # Create the scatter plot using your established color scheme
+    sns.scatterplot(
+        data=merged_df, 
+        x='Metascore_Normalized', 
+        y='steam_consensus',
+        alpha=0.7,
+        color='#2a475e',
+        edgecolor='w',
+        s=80
+    )
+    
+    # Add a red dashed line representing perfect agreement (where Delta = 0)
+    plt.plot([0, 1], [0, 1], color='red', linestyle='--', linewidth=2, label='Perfect Agreement (Delta = 0)')
+    
+    # Formatting the chart
+    plt.title('Steam Consensus vs. Normalized Metascore', fontsize=14, fontweight='bold')
+    plt.xlabel('Normalized Metascore (Critics)', fontsize=12)
+    plt.ylabel('Steam Consensus (Players)', fontsize=12)
+    
+    # Set limits to 0.0 - 1.0 since both metrics are percentages/normalized
+    plt.xlim(0, 1.05)
+    plt.ylim(0, 1.05)
+    
+    plt.legend()
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.tight_layout()
+    
+    plt.savefig('./output/steam_consensus_vs_metascore.png')
+    plt.close()
+
+
+
 def main():
     print("\n" + "=" * 40)
     print("   STAGE 1: STEAM CONSENSUS")
@@ -449,7 +487,9 @@ def main():
     # Read and calculate the Steam reviews dataset
     print("Reading the Steam reviews dataset...")
     steam_df = pd.read_csv("./steam_reviews_english.csv")
-    consensus_df = calculate_steam_consensus(steam_df)
+    out_csv = 'output/steam_consensus.csv'
+    # calculate_steam_consensus(steam_df, consensus_csv=out_csv)
+    consensus_df = pd.read_csv(out_csv)
     print(f"Successfully calculated consensus for {len(consensus_df)} Steam games.")
 
     print("\n" + "=" * 40)
@@ -457,17 +497,21 @@ def main():
     print("=" * 40)
     csv_path = 'output/games_raw.csv'
     cache_file = 'output/attempted_urls.txt'
-    df = pd.read_csv('output/games_raw.csv')
-    # Only include rows with a Metascore when seeding the attempted URLs cache
-    if 'Metascore' in df.columns:
-        df = df.dropna(subset=['Metascore'])
+    if os.path.exists(csv_path):
+        df = pd.read_csv('output/games_raw.csv')
+        # Only include rows with a Metascore when seeding the attempted URLs cache
+        if 'Metascore' in df.columns:
+            df = df.dropna(subset=['Metascore'])
+    else:
+        df = pd.DataFrame()
 
     # Write all the URLs we already successfully grabbed into the new cache file
     # We need this for the first run only the Steam Reviews dataset, so we don't have to re-scrape them
-    with open('output/attempted_urls.txt', 'w') as f:
-        for url in df['url'].dropna().unique():
-            f.write(f"{url}\n")
-    crawl_metacritic(consensus_df, csv_path, cache_file)
+    if os.path.exists('output/games_raw.csv'):
+        with open('output/attempted_urls.txt', 'w') as f:
+            for url in df['url'].dropna().unique():
+                f.write(f"{url}\n")
+    # crawl_metacritic(consensus_df, csv_path, cache_file)
 
     # Load and clean the Metacritic data
     csv_path = 'output/games_raw.csv'
@@ -502,6 +546,8 @@ def main():
         print("\nFinal Merged Dataset Created!")
         print(merged_df[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].head(10).to_string())
         print("\nSaved to: output/final_project_dataset.csv")
+
+    plot_consensus_vs_metascore(merged_df)
 
 
 
