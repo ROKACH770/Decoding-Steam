@@ -479,6 +479,29 @@ def plot_consensus_vs_metascore(merged_df):
     plt.close()
 
 
+def print_consensus_disparities(merged_df, top_n=5):
+    """
+    Identifies and prints the games with the largest disparities 
+    between Steam player consensus and Metacritic scores.
+    """
+    # Sort for High Positive Delta (Players > Critics)
+    player_favorites = merged_df.sort_values(by='delta', ascending=False).head(top_n)
+    
+    # Sort for High Negative Delta (Critics > Players)
+    critic_favorites = merged_df.sort_values(by='delta', ascending=True).head(top_n)
+    
+    print(f"\n{'='*50}")
+    print("   EXTREME OUTLIERS: PLAYERS > CRITICS (Top Left)")
+    print(f"{'='*50}")
+    # Explicitly selecting columns to display, strictly excluding URLs
+    print(player_favorites[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].to_string(index=False))
+
+    print(f"\n{'='*50}")
+    print("   EXTREME OUTLIERS: CRITICS > PLAYERS (Bottom Right)")
+    print(f"{'='*50}")
+    # Explicitly selecting columns to display, strictly excluding URLs
+    print(critic_favorites[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].to_string(index=False))
+
 
 def main():
     print("\n" + "=" * 40)
@@ -487,7 +510,7 @@ def main():
     # Read and calculate the Steam reviews dataset
     print("Reading the Steam reviews dataset...")
     steam_df = pd.read_csv("./steam_reviews_english.csv")
-    out_csv = 'output/steam_consensus.csv'
+    out_csv = './output/steam_consensus.csv'
     # calculate_steam_consensus(steam_df, consensus_csv=out_csv)
     consensus_df = pd.read_csv(out_csv)
     print(f"Successfully calculated consensus for {len(consensus_df)} Steam games.")
@@ -495,10 +518,10 @@ def main():
     print("\n" + "=" * 40)
     print("   STAGE 2: METACRITIC BASELINE")
     print("=" * 40)
-    csv_path = 'output/games_raw.csv'
-    cache_file = 'output/attempted_urls.txt'
+    csv_path = './output/games_raw.csv'
+    cache_file = './output/attempted_urls.txt'
     if os.path.exists(csv_path):
-        df = pd.read_csv('output/games_raw.csv')
+        df = pd.read_csv('./output/games_raw.csv')
         # Only include rows with a Metascore when seeding the attempted URLs cache
         if 'Metascore' in df.columns:
             df = df.dropna(subset=['Metascore'])
@@ -507,14 +530,14 @@ def main():
 
     # Write all the URLs we already successfully grabbed into the new cache file
     # We need this for the first run only the Steam Reviews dataset, so we don't have to re-scrape them
-    if os.path.exists('output/games_raw.csv'):
-        with open('output/attempted_urls.txt', 'w') as f:
+    if os.path.exists('./output/games_raw.csv'):
+        with open('./output/attempted_urls.txt', 'w') as f:
             for url in df['url'].dropna().unique():
                 f.write(f"{url}\n")
     # crawl_metacritic(consensus_df, csv_path, cache_file)
 
     # Load and clean the Metacritic data
-    csv_path = 'output/games_raw.csv'
+    csv_path = './output/games_raw.csv'
     df_from_csv, _ = read_saved_data(csv_path)
     if df_from_csv is not None and not df_from_csv.empty:
         df_deduped = remove_duplicates(df_from_csv)
@@ -541,13 +564,14 @@ def main():
         
         # Clean up temporary columns and save
         merged_df.drop(columns=['merge_name'], inplace=True)
-        merged_df.to_csv('output/final_project_dataset.csv', index=False)
+        merged_df.to_csv('./output/final_project_dataset.csv', index=False)
         
         print("\nFinal Merged Dataset Created!")
         print(merged_df[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].head(10).to_string())
-        print("\nSaved to: output/final_project_dataset.csv")
+        print("\nSaved to: ./output/final_project_dataset.csv")
 
     plot_consensus_vs_metascore(merged_df)
+    print_consensus_disparities(merged_df)
 
 
 
