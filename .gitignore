@@ -1,6 +1,6 @@
-./venv
-./idea
-./steam_reviews_english.csv
-./output
-./2.py
-./test.py
+.venv/
+.idea/
+steam_reviews_english.csv
+output/
+2.py
+test.py
