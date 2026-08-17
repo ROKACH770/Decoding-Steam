@@ -38,6 +38,9 @@ def calculate_steam_consensus(df, out_csv='./output/steam_consensus.csv'):
     # Calculate the percentage of positive reviews (0.0 to 1.0)
     consensus_df['steam_consensus'] = consensus_df['total_positive'] / consensus_df['total_reviews']
 
+    # Filter out games with fewer than 50 reviews for better reliability
+    consensus_df = consensus_df[consensus_df['total_reviews'] >= 50]
+
     # Sort the games from highest rated to lowest for better visualization
     consensus_df = consensus_df.sort_values(by='steam_consensus', ascending=False)
 
@@ -186,6 +189,11 @@ def build_and_save_dataframe(all_games_data):
     # Remove games without a Metascore before saving CSVs
     if 'Metascore' in df_games.columns:
         df_games = df_games.dropna(subset=['Metascore'])
+
+    # Filter games with fewer than 10 critic reviews for better reliability
+    if 'NumberOfCriticReviews' in df_games.columns:
+        df_games = df_games[df_games['NumberOfCriticReviews'] >= 10]
+
 
     df_games.to_csv('./output/games_raw.csv', index=False, encoding='utf-8')
 
@@ -463,10 +471,10 @@ def plot_consensus_vs_metascore(merged_df):
     plt.plot([0, 1], [0, 1], color='red', linestyle='--', linewidth=2, label='Perfect Agreement (Delta = 0)')
     
     # Formatting the chart
-    plt.title('Steam Consensus vs. Normalized Metascore', fontsize=14, fontweight='bold')
-    plt.xlabel('Normalized Metascore (Critics)', fontsize=12)
-    plt.ylabel('Steam Consensus (Players)', fontsize=12)
-    
+    plt.title('Steam Consensus vs. Normalized Metascore', fontsize=20, fontweight='bold')
+    plt.xlabel('Normalized Metascore (Critics)', fontsize=16)
+    plt.ylabel('Steam Consensus (Players)', fontsize=16)
+
     # Set limits to 0.0 - 1.0 since both metrics are percentages/normalized
     plt.xlim(0, 1.05)
     plt.ylim(0, 1.05)
@@ -511,7 +519,7 @@ def main():
     print("Reading the Steam reviews dataset...")
     steam_df = pd.read_csv("./steam_reviews_english.csv")
     out_csv = './output/steam_consensus.csv'
-    # calculate_steam_consensus(steam_df, consensus_csv=out_csv)
+    calculate_steam_consensus(steam_df, out_csv=out_csv)
     consensus_df = pd.read_csv(out_csv)
     print(f"Successfully calculated consensus for {len(consensus_df)} Steam games.")
 
@@ -534,7 +542,7 @@ def main():
         with open('./output/attempted_urls.txt', 'w') as f:
             for url in df['url'].dropna().unique():
                 f.write(f"{url}\n")
-    # crawl_metacritic(consensus_df, csv_path, cache_file)
+    crawl_metacritic(consensus_df, csv_path, cache_file)
 
     # Load and clean the Metacritic data
     csv_path = './output/games_raw.csv'
@@ -558,6 +566,20 @@ def main():
         # Calculate the anomaly Delta (Steam Consensus - Normalized Metascore)
         merged_df['Metascore_Normalized'] = merged_df['Metascore'] / 100.0 # metascore is 0-100, normalize to 0.0-1.0
         merged_df['delta'] = merged_df['steam_consensus'] - merged_df['Metascore_Normalized']
+
+        # Evaluate the proportion of games with |delta| > 0.25
+        total_games = len(merged_df)
+        outlier_mask = abs(merged_df['delta']) > 0.25
+        outlier_count = outlier_mask.sum()
+        outlier_pct = (outlier_count / total_games) * 100
+        
+        print("\n" + "=" * 40)
+        print("   THRESHOLD EVALUATION CHECK")
+        print("=" * 40)
+        print(f"Total merged games        : {total_games}")
+        print(f"Games with |Delta| > 0.25 : {outlier_count}")
+        print(f"Proportion of outliers    : {outlier_pct:.2f}%")
+        print(f"Success Criterion Met     : {'YES' if outlier_pct > 5 else 'NO'}")
 
         # Remove any rows that still do not have a Metascore
         merged_df = merged_df.dropna(subset=['Metascore'])
