@@ -1,0 +1,9 @@
+{
+  "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "source_file": "steam_reviews_english.csv",
+  "prepared_utc": "2026-08-19T21:04:55.976939+00:00",
+  "games": 315,
+  "clusters": 2520,
+  "review_sample_size": 91377,
+  "random_seed": 42
+}
