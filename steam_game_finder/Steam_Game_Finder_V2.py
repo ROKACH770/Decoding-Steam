@@ -157,9 +157,8 @@ def show_game(result, rank):
 
 # -------------------- Page --------------------
 
-st.title("🎮 Steam Game Finder")
+st.title("Steam Game Finder")
 st.write("Describe the type of game you're looking for. Results are based on similar Steam reviews.")
-st.caption(f"Version {APP_VERSION}")
 
 missing = missing_data_files()
 if missing:
@@ -186,7 +185,7 @@ with st.form("search_form"):
     result_count = col2.selectbox("Results", [3, 5, 8], index=1)
     submitted = col3.form_submit_button("Find games", use_container_width=True)
 
-surprise = st.button("🎲 Surprise me")
+surprise = st.button("Surprise me")
 
 if submitted:
     if not wanted.strip():
