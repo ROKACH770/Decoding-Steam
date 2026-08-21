@@ -1,3 +1,5 @@
+Note: the provided datasets are 20k review samples of the respective original
+
 ###Question 1###
 
 Place steam_reviews_english.csv inside Q1, then run:
