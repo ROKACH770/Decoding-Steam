@@ -17,7 +17,7 @@ CANDIDATE_POOL_SIZE = 20
 AVOID_PENALTY = 0.75
 MIN_REVIEW_LENGTH = 90
 
-st.set_page_config(page_title="Steam Game Finder", page_icon="🎮", layout="wide")
+st.set_page_config(page_title="Steam Game Finder", layout="wide")
 
 st.markdown("""
 <style>
@@ -34,7 +34,7 @@ st.markdown("""
 
 def missing_data_files():
     """Return the profile files that still need to be created."""
-    required = ["game_profiles.csv", "vibe_clusters.csv", "vibe_embeddings.npy", "manifest.json"]
+    required = ["game_profiles.csv", "review_clusters.csv", "review_cluster_embeddings.npy", "manifest.json"]
     return [name for name in required if not (DATA_DIR / name).exists()]
 
 
@@ -42,8 +42,8 @@ def missing_data_files():
 def load_profiles():
     """Load the game table, review themes, embeddings and build details."""
     games = pd.read_csv(DATA_DIR / "game_profiles.csv")
-    clusters = pd.read_csv(DATA_DIR / "vibe_clusters.csv")
-    embeddings = np.load(DATA_DIR / "vibe_embeddings.npy")
+    clusters = pd.read_csv(DATA_DIR / "review_clusters.csv")
+    embeddings = np.load(DATA_DIR / "review_cluster_embeddings.npy")
     manifest = json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))
     return games, clusters, embeddings, manifest
 
@@ -159,7 +159,7 @@ def show_game(result, rank):
 
 # -------------------- Page --------------------
 
-st.title("🎮 Steam Game Finder")
+st.title("Steam Game Finder")
 st.write("Describe the type of game you're looking for. Results are based on similar Steam reviews.")
 
 missing = missing_data_files()
@@ -187,7 +187,7 @@ with st.form("search_form"):
     result_count = col2.selectbox("Results", [3, 5, 8], index=1)
     submitted = col3.form_submit_button("Find games", use_container_width=True)
 
-surprise = st.button("🎲 Surprise me")
+surprise = st.button("Surprise me")
 
 if submitted:
     if not wanted.strip():
