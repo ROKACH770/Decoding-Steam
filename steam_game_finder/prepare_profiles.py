@@ -172,8 +172,8 @@ def save_profiles(games, clusters, embeddings):
     """Save the compact files loaded by the Streamlit app."""
     DATA_DIR.mkdir(exist_ok=True)
     games.to_csv(DATA_DIR / "game_profiles.csv", index=False)
-    clusters.to_csv(DATA_DIR / "vibe_clusters.csv", index=False)
-    np.save(DATA_DIR / "vibe_embeddings.npy", embeddings)
+    clusters.to_csv(DATA_DIR / "review_clusters.csv", index=False)
+    np.save(DATA_DIR / "review_cluster_embeddings.npy", embeddings)
 
     manifest = {
         "model_name": MODEL_NAME,
