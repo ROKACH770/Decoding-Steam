@@ -9,7 +9,7 @@ from pathlib import Path
 API_KEY = "placeholder"
 
 PROJECT_DIR = Path(__file__).resolve().parent
-FULL_REVIEWS_CSV = PROJECT_DIR / "steam_reviews_english.csv"
+FULL_REVIEWS_CSV = PROJECT_DIR.parent / "steam_reviews_english.csv"
 API_OUTPUT_CSV = PROJECT_DIR / "steam_reviews_with_achievements.csv"
 
 # These checkpoints are not part of the submitted dataset. They only prevent repeated API calls.
