@@ -13,7 +13,7 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS, TfidfVectorizer
 # --- Settings ---
 
 PROJECT_DIR = Path(__file__).resolve().parent
-INPUT_CSV = PROJECT_DIR / "steam_reviews_with_achievements.csv"
+INPUT_CSV = PROJECT_DIR.parent / "steam_reviews_with_achievements.csv"
 OUTPUT_DIR = PROJECT_DIR / "achievement_review_plots"
 
 MAX_REVIEWS_PER_GAME = 1_000
