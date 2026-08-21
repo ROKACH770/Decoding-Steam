@@ -13,34 +13,28 @@ from sentence_transformers import SentenceTransformer
 
 HERE = Path(__file__).resolve().parent
 DATA_DIR = HERE / "data"
-AVOID_SIMILARITY_CUTOFF = 0.28
+CANDIDATE_POOL_SIZE = 20
+AVOID_PENALTY = 0.75
 MIN_REVIEW_LENGTH = 90
-APP_VERSION = "2.0"
 
 st.set_page_config(page_title="Steam Game Finder", page_icon="🎮", layout="wide")
 
 st.markdown("""
 <style>
-    .block-container {max-width: 1350px; padding-top: 2.2rem;}
+    .block-container {max-width: 1100px; padding-top: 2.2rem;}
     h1 {font-size: 3rem !important; margin-bottom: 0.25rem !important;}
     .game-card {border: 1px solid #30363d; border-radius: 14px; padding: 1rem 1.2rem; margin: 0.8rem 0;}
     .game-name {font-size: 2rem; font-weight: 700; margin-top: 0.2rem;}
     .review {border-left: 4px solid #2a9d8f; padding-left: 0.8rem; color: #c7c7c7;}
     .concern {border-left-color: #e76f51;}
-    .small-label {font-size: 0.95rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05rem;}
-    [data-testid="stAppViewContainer"] p, [data-testid="stAppViewContainer"] label {font-size: 1.08rem;}
-    [data-testid="stMetricLabel"] p {font-size: 1rem !important;}
-    [data-testid="stMetricValue"] {font-size: 2rem;}
-    .removed-panel {border: 1px solid #e76f51; border-radius: 14px; padding: 1rem 1.1rem; margin-top: 0.8rem;}
-    .removed-title {font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem;}
-    .removed-game {font-size: 1.08rem; margin: 0.35rem 0;}
+    .small-label {font-size: 0.82rem; color: #8b949e; text-transform: uppercase; letter-spacing: 0.05rem;}
 </style>
 """, unsafe_allow_html=True)
 
 
 def missing_data_files():
     """Return the profile files that still need to be created."""
-    required = ["game_profiles.csv", "review_clusters.csv", "review_cluster_embeddings.npy", "manifest.json"]
+    required = ["game_profiles.csv", "vibe_clusters.csv", "vibe_embeddings.npy", "manifest.json"]
     return [name for name in required if not (DATA_DIR / name).exists()]
 
 
@@ -48,8 +42,8 @@ def missing_data_files():
 def load_profiles():
     """Load the game table, review themes, embeddings and build details."""
     games = pd.read_csv(DATA_DIR / "game_profiles.csv")
-    clusters = pd.read_csv(DATA_DIR / "review_clusters.csv")
-    embeddings = np.load(DATA_DIR / "review_cluster_embeddings.npy")
+    clusters = pd.read_csv(DATA_DIR / "vibe_clusters.csv")
+    embeddings = np.load(DATA_DIR / "vibe_embeddings.npy")
     manifest = json.loads((DATA_DIR / "manifest.json").read_text(encoding="utf-8"))
     return games, clusters, embeddings, manifest
 
@@ -66,6 +60,13 @@ def shorten(text, length=420):
     return text if len(text) <= length else text[:length].rsplit(" ", 1)[0] + "…"
 
 
+def relative_scale(values):
+    """Scale query scores from zero to one for the current game list."""
+    values = pd.Series(values, dtype=float)
+    span = values.max() - values.min()
+    return (values - values.min()) / span if span > 1e-9 else pd.Series(np.zeros(len(values)), index=values.index)
+
+
 def choose_review(indexes, clusters, scores=None):
     """Prefer a useful excerpt when several cluster reviews are available."""
     lengths = clusters.loc[indexes, "representative_review"].fillna("").astype(str).str.len().to_numpy()
@@ -80,7 +81,7 @@ def choose_review(indexes, clusters, scores=None):
 
 
 def score_games(games, clusters, embeddings, wanted_vector, avoid_vector=None):
-    """Find request matches and flag the strongest avoid-text matches."""
+    """Shortlist relevant games, then apply the avoid penalty."""
     wanted_scores = embeddings @ wanted_vector
     avoid_scores = embeddings @ avoid_vector if avoid_vector is not None else np.zeros(len(embeddings))
     results = []
@@ -100,15 +101,13 @@ def score_games(games, clusters, embeddings, wanted_vector, avoid_vector=None):
         positive_review_index = choose_review(positive_indexes, clusters, wanted_scores)
 
         avoid_score = 0.0
-        avoid_review_index = None
         if avoid_vector is not None and len(negative_indexes):
             avoid_match_index = negative_indexes[np.argmax(avoid_scores[negative_indexes])]
             avoid_score = float(avoid_scores[avoid_match_index])
-            avoid_review_index = avoid_match_index
 
         negative_review = ""
         if len(negative_indexes):
-            negative_index = avoid_review_index if avoid_review_index is not None else choose_review(negative_indexes, clusters)
+            negative_index = choose_review(negative_indexes, clusters)
             negative_review = clusters.loc[negative_index, "representative_review"]
 
         game = game_lookup.loc[app_id]
@@ -127,13 +126,16 @@ def score_games(games, clusters, embeddings, wanted_vector, avoid_vector=None):
     if ranked.empty:
         return ranked
 
-    ranked = ranked.sort_values(["wanted_similarity", "recommendation_rate"], ascending=False)
-    ranked["blocked_by_avoid"] = False
-
     if avoid_vector is not None:
-        ranked.loc[ranked["avoid_similarity"] >= AVOID_SIMILARITY_CUTOFF, "blocked_by_avoid"] = True
+        ranked = ranked.nlargest(min(CANDIDATE_POOL_SIZE, len(ranked)), "wanted_similarity").copy()
+        ranked["wanted_score"] = relative_scale(ranked["wanted_similarity"])
+        ranked["avoid_penalty"] = relative_scale(ranked["avoid_similarity"])
+        ranked["rank_score"] = ranked["wanted_score"] - AVOID_PENALTY * ranked["avoid_penalty"]
+    else:
+        ranked["avoid_penalty"] = 0.0
+        ranked["rank_score"] = ranked["wanted_similarity"]
 
-    return ranked
+    return ranked.sort_values(["rank_score", "recommendation_rate"], ascending=False)
 
 
 def show_game(result, rank):
@@ -159,7 +161,6 @@ def show_game(result, rank):
 
 st.title("🎮 Steam Game Finder")
 st.write("Describe the type of game you're looking for. Results are based on similar Steam reviews.")
-st.caption(f"Version {APP_VERSION}")
 
 missing = missing_data_files()
 if missing:
@@ -196,36 +197,26 @@ if submitted:
         query_vectors = model.encode(query_texts, normalize_embeddings=True, convert_to_numpy=True)
         eligible_games = games[games["recommendation_rate"] >= minimum_rating]
         ranked_games = score_games(eligible_games, clusters, embeddings, query_vectors[0], query_vectors[1] if avoid.strip() else None)
-        ranked = ranked_games[~ranked_games["blocked_by_avoid"]].head(result_count)
+        ranked = ranked_games.head(result_count)
 
         if ranked.empty:
-            if ranked_games.empty:
-                st.info("No games passed that recommendation-rate filter. Try lowering it.")
-            else:
-                st.info("Every close match also matched what you wanted to avoid. Try making the avoid text more specific.")
+            st.info("No games passed that recommendation-rate filter. Try lowering it.")
         else:
-            removed = pd.DataFrame()
             if avoid.strip():
                 original_top = ranked_games.nlargest(min(result_count, len(ranked_games)), "wanted_similarity")
-                removed = original_top[original_top["blocked_by_avoid"]]
+                removed = original_top[~original_top["app_id"].isin(ranked["app_id"])]
+                st.sidebar.markdown("**Moved down by your avoid list**")
+                st.sidebar.caption(f"These games were in the original top {result_count} before the avoid text was applied.")
+                if len(removed):
+                    for game_name in removed["app_name"]:
+                        st.sidebar.write(f"• {game_name}")
+                else:
+                    st.sidebar.write("No original top match was removed.")
 
-            result_column, removed_column = st.columns([4.2, 1], gap="large")
-            with result_column:
-                st.subheader("Your matches")
-                st.caption("The match score shows how similar your request is to the review sample. It is not a prediction that you will like the game.")
-                for rank, result in enumerate(ranked.itertuples(index=False), start=1):
-                    show_game(result, rank)
-
-            with removed_column:
-                if avoid.strip():
-                    removed_games = "".join(f"<div class='removed-game'>• {escape(str(name))}</div>" for name in removed["app_name"])
-                    if not removed_games:
-                        removed_games = "<div class='removed-game'>No original top match was removed.</div>"
-                    st.markdown(
-                        "<div class='removed-panel'><div class='removed-title'>Removed by your avoid list</div>"
-                        f"<div>These games were originally in the top {result_count}.</div>{removed_games}</div>",
-                        unsafe_allow_html=True,
-                    )
+            st.subheader("Your matches")
+            st.caption("The match score shows how similar your request is to the review sample. It is not a prediction that you will like the game.")
+            for rank, result in enumerate(ranked.itertuples(index=False), start=1):
+                show_game(result, rank)
 
 if surprise:
     available = games[games["recommendation_rate"] >= 70]
@@ -250,8 +241,8 @@ if surprise:
 with st.expander("How it works"):
     st.write(
         "A small language model compares your description with a sample of positive Steam reviews for each game. "
-        "If you enter something to avoid, it also checks the negative reviews and removes games whose complaints closely match that problem. "
-        "The remaining games are ordered by their match to your request."
+        "It first keeps the games that best match what you asked for. If you enter something to avoid, it then checks the negative reviews "
+        "inside that group and lowers games whose complaints closely match your avoid text."
     )
     st.write(
         "The Surprise me button ignores the text boxes and picks a random game with a recommendation rate of at least 70%. "
