@@ -23,7 +23,7 @@ This creates the figures comparing Steam recommendation rates with PC Metascores
 
 The game profiles are already stored in steam_game_finder/data. Start the website with:
 
-streamlit run steam_game_finder/app.py
+streamlit run steam_game_finder/Steam_Game_Finder_V2.py
 
 Live version: https://decoding-steam-nqyymps7t5widxiwf9aaj7.streamlit.app/
 
