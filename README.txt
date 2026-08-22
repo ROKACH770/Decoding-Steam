@@ -1,4 +1,5 @@
-Note: the provided datasets are 20k review samples of the respective original
+Note: the provided datasets (except the metacritic one) are 20k review samples of the respective original
+Link to the full datasets: https://drive.google.com/drive/folders/16YC2iPewKuZXPFlivaWJXb-VNfcmORuE?usp=drive_link
 
 ###Question 1###
 run: python Q1/question1.py
