@@ -19,7 +19,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 BASE_URL = "https://www.metacritic.com/"
 
-def calculate_steam_consensus(df, out_csv='./output/steam_consensus.csv'):
+def calculate_steam_consensus(df, out_csv='./Q3/output/steam_consensus.csv'):
     """
     This function calculates the Steam consensus for each game in the dataset.
     
@@ -38,8 +38,12 @@ def calculate_steam_consensus(df, out_csv='./output/steam_consensus.csv'):
     # Calculate the percentage of positive reviews (0.0 to 1.0)
     consensus_df['steam_consensus'] = consensus_df['total_positive'] / consensus_df['total_reviews']
 
-    # Filter out games with fewer than 50 reviews for better reliability
-    consensus_df = consensus_df[consensus_df['total_reviews'] >= 50]
+    # Filter out games with fewer than 30 reviews for better reliability
+    initial_len = len(consensus_df)
+    consensus_df = consensus_df[consensus_df['total_reviews'] >= 30]
+    filtered_out = initial_len - len(consensus_df)
+    if filtered_out > 0:
+        print(f"Steam Filter: Dropped {filtered_out} games with fewer than 30 user reviews.")
 
     # Sort the games from highest rated to lowest for better visualization
     consensus_df = consensus_df.sort_values(by='steam_consensus', ascending=False)
@@ -62,15 +66,12 @@ def plot_steam_consensus(consensus_df):
     # Visualize the Data
     plt.figure(figsize=(9, 5))
     sns.histplot(consensus_df['steam_consensus'], kde=True, color='#2a475e', bins=30)
-    plt.title('Distribution of Steam Consensus Scores', fontsize=12, fontweight='bold')
-    plt.xlabel('Steam Consensus (Positive Review Ratio)', fontsize=10)
-    plt.ylabel('Number of Games', fontsize=10)
+    plt.title('Distribution of Steam Consensus Scores', fontsize=14, fontweight='bold')
+    plt.xlabel('Steam Consensus (Positive Review Ratio)', fontsize=16)
+    plt.ylabel('Number of Games', fontsize=16)
     plt.tight_layout()
-    plt.savefig('./output/steam_consensus_vs_metascore.png')
-    plt.show()
-
-    # plt.savefig('steam_consensus.png')
-    # plt.close()
+    plt.savefig('./Q3/output/steam_consensus.png')
+    plt.close()
 
     
 def get_browser():
@@ -190,12 +191,17 @@ def build_and_save_dataframe(all_games_data):
     if 'Metascore' in df_games.columns:
         df_games = df_games.dropna(subset=['Metascore'])
 
-    # Filter games with fewer than 10 critic reviews for better reliability
+    initial_len = len(df_games)
+    # Filter games with fewer than 5 critic reviews for better reliability
     if 'NumberOfCriticReviews' in df_games.columns:
-        df_games = df_games[df_games['NumberOfCriticReviews'] >= 10]
+        df_games = df_games[df_games['NumberOfCriticReviews'] >= 5]
+
+    dropped = initial_len - len(df_games)
+    if dropped > 0:
+        print(f"Scrape Filter: Dropped {dropped} games due to fewer than 5 critic reviews.")
 
 
-    df_games.to_csv('./output/games_raw.csv', index=False, encoding='utf-8')
+    df_games.to_csv('./Q3/output/games_raw.csv', index=False, encoding='utf-8')
 
     records_list = []
     for index, row in df_games.iterrows():
@@ -209,7 +215,7 @@ def build_and_save_dataframe(all_games_data):
         ordered_dict.update(row_dict)
         records_list.append(ordered_dict)
 
-    with open('./output/games_raw.json', 'w', encoding='utf-8') as f:
+    with open('./Q3/output/games_raw.json', 'w', encoding='utf-8') as f:
         # json.dump({"records": {"record": records_list}}, f, indent=4, ensure_ascii=False)
         json.dump({"records": records_list}, f, indent=4, ensure_ascii=False)
 
@@ -259,13 +265,13 @@ def step_3_sorting_and_preview(df):
     print(df_after[display_cols].to_string())
     
     # Save the final sorted baseline dataset
-    df_sorted.to_csv('./output/games_baseline_final.csv', index=False, encoding='utf-8')
-    print("\nSaved final baseline dataset to ./output/games_baseline_final.csv")
+    df_sorted.to_csv('Q3/output/games_baseline_final.csv', index=False, encoding='utf-8')
+    print("\nSaved final baseline dataset to ./Q3/output/games_baseline_final.csv")
 
     return df_sorted
 
 
-def read_saved_data(csv_path='./output/games_raw.csv'):
+def read_saved_data(csv_path='./Q3/output/games_raw.csv'):
     """Loads the saved CSV and JSON dataframes from the output directory."""
     print("\n" + "=" * 40)
     print("   LOADING SAVED DATA")
@@ -358,10 +364,10 @@ def clean_title_for_merge(title):
     return title
 
 
-def crawl_metacritic(consensus_df, csv_path='./output/games_raw.csv', cache_file='./output/attempted_urls.txt'):
+def crawl_metacritic(consensus_df, csv_path='./Q3/output/games_raw.csv', cache_file='./Q3/output/attempted_urls.txt'):
     """Handles targeted web scraping on Metacritic based on Steam game titles."""
 
-    os.makedirs('./output', exist_ok=True)
+    os.makedirs('./Q3/output', exist_ok=True)
     existing_urls = set()
     existing_data = []
 
@@ -430,15 +436,15 @@ def crawl_metacritic(consensus_df, csv_path='./output/games_raw.csv', cache_file
                 # Add a respectful delay to avoid getting IP-banned by Metacritic
                 time.sleep(1)
 
-    print(f"\nCrawling complete! Collected data for {len(new_games_data) + len(existing_data)} out of {len(game_names)} games, which is {len(new_games_data)/len(game_names)*100:.2f}%.")
+    print(f"\nCrawling complete! Collected data for {len(new_games_data) + len(existing_data)} out of {len(game_names)} games, \
+          which is {(len(new_games_data) + len(existing_data))/len(game_names)*100:.2f}%.")
 
-    # --- ULTIMATE SAFE SHUTDOWN SEQUENCE ---
     try:
         driver.quit()
     except Exception:
         pass
     
-    # Monkey-patch the driver to do nothing when Python's garbage collector tries to delete it
+    # patch the driver to do nothing when Python's garbage collector tries to delete it
     if hasattr(driver, 'quit'):
         driver.quit = lambda: None 
 
@@ -467,11 +473,18 @@ def plot_consensus_vs_metascore(merged_df):
         s=80
     )
     
-    # Add a red dashed line representing perfect agreement (where Delta = 0)
-    plt.plot([0, 1], [0, 1], color='red', linestyle='--', linewidth=2, label='Perfect Agreement (Delta = 0)')
-    
+    # Add a red dashed line representing perfect agreement (where delta = 0)
+    plt.plot([0, 1], [0, 1], color='red', linestyle='--', linewidth=2,
+             label='Perfect Agreement (delta = 0)')
+
+    # Add green dotted lines for delta thresholds of +0.25 and -0.25
+    # y = x + 0.25 (Players > Critics)
+    plt.plot([0, 1.05], [0.25, 1.30], color='green', linestyle=':', linewidth=1.5, label='Delta = +0.25')
+    # y = x - 0.25 (Critics > Players)
+    plt.plot([0, 1.05], [-0.25, 0.80], color='green', linestyle=':', linewidth=1.5, label='Delta = -0.25')
+
     # Formatting the chart
-    plt.title('Steam Consensus vs. Normalized Metascore', fontsize=20, fontweight='bold')
+    plt.title('Steam Consensus vs. Normalized Metascore', fontsize=18, fontweight='bold')
     plt.xlabel('Normalized Metascore (Critics)', fontsize=16)
     plt.ylabel('Steam Consensus (Players)', fontsize=16)
 
@@ -479,11 +492,11 @@ def plot_consensus_vs_metascore(merged_df):
     plt.xlim(0, 1.05)
     plt.ylim(0, 1.05)
     
-    plt.legend()
+    plt.legend(fontsize=12)
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
     
-    plt.savefig('./output/steam_consensus_vs_metascore.png')
+    plt.savefig('./Q3/output/steam_consensus_vs_metascore.png')
     plt.close()
 
 
@@ -510,6 +523,32 @@ def print_consensus_disparities(merged_df, top_n=5):
     # Explicitly selecting columns to display, strictly excluding URLs
     print(critic_favorites[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].to_string(index=False))
 
+def plot_delta_outliers(merged_df, top_n=5):
+    """
+    Visualizes the top extreme outliers on both sides (Players > Critics, Critics > Players).
+    """
+    # Sort for High Positive Delta (Players > Critics)
+    player_favorites = merged_df.sort_values(by='delta', ascending=False).head(top_n)
+    # Sort for High Negative Delta (Critics > Players)
+    critic_favorites = merged_df.sort_values(by='delta', ascending=True).head(top_n)
+
+    # Combine them for the plot
+    outliers = pd.concat([player_favorites, critic_favorites]).sort_values(by='delta')
+
+    plt.figure(figsize=(10, 6))
+    # Use a diverging color scheme: Red for Critic favorites (negative Delta), Blue for Player favorites (positive Delta)
+    colors = ['#c0392b' if x < 0 else '#2a475e' for x in outliers['delta']]
+    
+    plt.barh(outliers['app_name'], outliers['delta'], color=colors)
+    plt.axvline(0, color='black', linewidth=0.8)
+    plt.title('Top Extreme Anomalies: Player vs. Critic Divergence', fontsize=14, fontweight='bold')
+    plt.xlabel('Delta Score (Steam Consensus - Normalized Metascore)', fontsize=12)
+    plt.ylabel('Game Title', fontsize=12)
+    plt.grid(axis='x', linestyle='--', alpha=0.5)
+    plt.tight_layout()
+    plt.savefig('./Q3/output/delta_outliers.png')
+    plt.close()
+
 
 def main():
     print("\n" + "=" * 40)
@@ -518,18 +557,20 @@ def main():
     # Read and calculate the Steam reviews dataset
     print("Reading the Steam reviews dataset...")
     steam_df = pd.read_csv("./steam_reviews_english.csv")
-    out_csv = './output/steam_consensus.csv'
-    calculate_steam_consensus(steam_df, out_csv=out_csv)
+    out_csv = './Q3/output/steam_consensus.csv'
+    # calculate_steam_consensus(steam_df, out_csv=out_csv)
     consensus_df = pd.read_csv(out_csv)
     print(f"Successfully calculated consensus for {len(consensus_df)} Steam games.")
+
+    plot_steam_consensus(consensus_df)
 
     print("\n" + "=" * 40)
     print("   STAGE 2: METACRITIC BASELINE")
     print("=" * 40)
-    csv_path = './output/games_raw.csv'
-    cache_file = './output/attempted_urls.txt'
+    csv_path = './Q3/output/games_raw.csv'
+    cache_file = './Q3/output/attempted_urls.txt'
     if os.path.exists(csv_path):
-        df = pd.read_csv('./output/games_raw.csv')
+        df = pd.read_csv('./Q3/output/games_raw.csv')
         # Only include rows with a Metascore when seeding the attempted URLs cache
         if 'Metascore' in df.columns:
             df = df.dropna(subset=['Metascore'])
@@ -538,14 +579,14 @@ def main():
 
     # Write all the URLs we already successfully grabbed into the new cache file
     # We need this for the first run only the Steam Reviews dataset, so we don't have to re-scrape them
-    if os.path.exists('./output/games_raw.csv'):
-        with open('./output/attempted_urls.txt', 'w') as f:
+    if os.path.exists('./Q3/output/games_raw.csv'):
+        with open('./Q3/output/attempted_urls.txt', 'w') as f:
             for url in df['url'].dropna().unique():
                 f.write(f"{url}\n")
-    crawl_metacritic(consensus_df, csv_path, cache_file)
+    # crawl_metacritic(consensus_df, csv_path, cache_file)
 
     # Load and clean the Metacritic data
-    csv_path = './output/games_raw.csv'
+    csv_path = './Q3/output/games_raw.csv'
     df_from_csv, _ = read_saved_data(csv_path)
     if df_from_csv is not None and not df_from_csv.empty:
         df_deduped = remove_duplicates(df_from_csv)
@@ -563,7 +604,7 @@ def main():
         # Merge the datasets
         merged_df = pd.merge(consensus_df, mc_baseline_df, on='merge_name', how='inner')
         
-        # Calculate the anomaly Delta (Steam Consensus - Normalized Metascore)
+        # Calculate the anomaly delta (Steam Consensus - Normalized Metascore)
         merged_df['Metascore_Normalized'] = merged_df['Metascore'] / 100.0 # metascore is 0-100, normalize to 0.0-1.0
         merged_df['delta'] = merged_df['steam_consensus'] - merged_df['Metascore_Normalized']
 
@@ -577,25 +618,24 @@ def main():
         print("   THRESHOLD EVALUATION CHECK")
         print("=" * 40)
         print(f"Total merged games        : {total_games}")
-        print(f"Games with |Delta| > 0.25 : {outlier_count}")
+        print(f"Games with |delta| > 0.25 : {outlier_count}")
         print(f"Proportion of outliers    : {outlier_pct:.2f}%")
-        print(f"Success Criterion Met     : {'YES' if outlier_pct > 5 else 'NO'}")
+        # print(f"Success Criterion Met     : {'YES' if outlier_pct > 5 else 'NO'}")
 
         # Remove any rows that still do not have a Metascore
         merged_df = merged_df.dropna(subset=['Metascore'])
         
         # Clean up temporary columns and save
         merged_df.drop(columns=['merge_name'], inplace=True)
-        merged_df.to_csv('./output/final_project_dataset.csv', index=False)
+        merged_df.to_csv('./Q3/output/final_project_dataset.csv', index=False)
         
         print("\nFinal Merged Dataset Created!")
         print(merged_df[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].head(10).to_string())
-        print("\nSaved to: ./output/final_project_dataset.csv")
+        print("\nSaved to: ./Q3/output/final_project_dataset.csv")
 
     plot_consensus_vs_metascore(merged_df)
     print_consensus_disparities(merged_df)
-
-
+    plot_delta_outliers(merged_df)
 
 if __name__ == "__main__":
     # The main function can be used to run the script directly

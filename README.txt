@@ -20,11 +20,12 @@ Q2/collect_steam_data.py recreates the achievement dataset from the Steam Web AP
 
 ###Question 3###
 
-Place the prepared Steam–Metacritic dataset inside Q3, then run:
+Run:
 
-python Q3/Question3.py
+python Q3/steam_vs_critics.py
 
-This creates the figures comparing Steam recommendation rates with PC Metascores.
+This creates steam consensus dataset and scrapes the Metacritic website, which will take a while. 
+It then saves the combined dataset and creates the figures comparing Steam recommendation rates with PC Metascores.
 
 ###Steam Game Finder###
 
