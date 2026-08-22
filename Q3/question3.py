@@ -627,11 +627,11 @@ def main():
         
         # Clean up temporary columns and save
         merged_df.drop(columns=['merge_name'], inplace=True)
-        merged_df.to_csv('./Q3/output/final_project_dataset.csv', index=False)
+        merged_df.to_csv('./Q3/output/final_Q3_dataset.csv', index=False)
         
         print("\nFinal Merged Dataset Created!")
         print(merged_df[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].head(10).to_string())
-        print("\nSaved to: ./Q3/output/final_project_dataset.csv")
+        print("\nSaved to: ./Q3/output/final_Q3_dataset.csv")
 
     plot_consensus_vs_metascore(merged_df)
     print_consensus_disparities(merged_df)
