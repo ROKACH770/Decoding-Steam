@@ -1,6 +1,7 @@
 Note: the provided datasets (except the metacritic one) are 20k review samples of the respective original
 Link to the full datasets: https://drive.google.com/drive/folders/16YC2iPewKuZXPFlivaWJXb-VNfcmORuE?usp=drive_link
 
+run_all_questions.py runs the questions sequentially (but not the website or the sekiro example)
 ###Question 1###
 run: python Q1/question1.py
 
