@@ -160,7 +160,7 @@ def plot_playtime_and_group_sizes():
     ax1.axvline(50.0, color=GROUP_COLORS["Long-play negative"], linestyle="--", linewidth=3, label="50-hour cutoff (≥ 50 hours)")
     ax1.set_title("Playtime Distribution and Cutoffs", pad=15, fontsize=20)
     ax1.set_xlabel("Playtime in Hours (Log Scale)", labelpad=10, fontsize=18)
-    ax1.set_ylabel("Relative Concentration of Reviews\n(Kernel Density Estimate)", labelpad=10, fontsize=17)
+    ax1.set_ylabel("Relative Concentration of Reviews\n(Higher = More Reviews Near This Playtime)", labelpad=10, fontsize=17)
     ax1.tick_params(axis="both", labelsize=15)
     ax1.legend(loc="upper right", frameon=True, facecolor="white", framealpha=0.95, fontsize=11)
 
