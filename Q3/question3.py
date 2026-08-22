@@ -484,7 +484,7 @@ def main():
     print("Reading the Steam reviews dataset...")
     steam_df = pd.read_csv("./steam_reviews_english.csv")
     out_csv = './Q3/output/steam_consensus.csv'
-    # calculate_steam_consensus(steam_df, out_csv=out_csv)
+    calculate_steam_consensus(steam_df, out_csv=out_csv)
     consensus_df = pd.read_csv(out_csv)
     print(f"Successfully calculated consensus for {len(consensus_df)} Steam games.")
 
