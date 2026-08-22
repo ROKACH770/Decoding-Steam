@@ -1,33 +1,23 @@
+import os
+import re
+import json
+import time
 import unicodedata
 
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import roman
-
-import os
-import re
-import json
-import time
-from urllib.parse import urljoin
-import pandas as pd
 from bs4 import BeautifulSoup
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-BASE_URL = "https://www.metacritic.com/"
 
 def calculate_steam_consensus(df, out_csv='./Q3/output/steam_consensus.csv'):
     """
-    This function calculates the Steam consensus for each game in the dataset.
-    
-    Parameters:
-    df (pd.DataFrame): The DataFrame containing Steam reviews data.
-    
-    Returns:
-    pd.DataFrame: A DataFrame with app_id, app_name, total_reviews, total_positive, and steam_consensus.
+    Calculates the Steam consensus (positive review ratio) for each game.
     """
     # Group by app_id and app_name to calculate total reviews and total positive reviews
     consensus_df = df.groupby(['app_id', 'app_name']).agg(
@@ -42,20 +32,20 @@ def calculate_steam_consensus(df, out_csv='./Q3/output/steam_consensus.csv'):
     initial_len = len(consensus_df)
     consensus_df = consensus_df[consensus_df['total_reviews'] >= 30]
     filtered_out = initial_len - len(consensus_df)
+    
     if filtered_out > 0:
         print(f"Steam Filter: Dropped {filtered_out} games with fewer than 30 user reviews.")
 
     # Sort the games from highest rated to lowest for better visualization
     consensus_df = consensus_df.sort_values(by='steam_consensus', ascending=False)
-
-    # Save consensus data to CSV
     consensus_df.to_csv(out_csv, index=False)
 
 
 def get_browser():
     """Initializes and returns a Chrome browser instance configured to bypass Cloudflare."""
     options = uc.ChromeOptions()
-    driver = uc.Chrome(options=options, version_main=151)  # Run this with chrome, fill here your version number
+    # Explicitly matched to local Chrome version to prevent SessionNotCreated exceptions
+    driver = uc.Chrome(options=options, version_main=151)
     return driver
 
 
@@ -83,9 +73,7 @@ def parse_game_data(soup, source_category, url):
         return None
 
     data = {field: None for field in [
-        'Title', 'Platform', 'Metascore', 'NumberOfCriticReviews', 
-        # 'ReleaseDate', 'Developer', 'Publisher', 'Genres',
-        'url'
+        'Title', 'Platform', 'Metascore', 'NumberOfCriticReviews', 'url'
     ]}
     
     data['Platform'] = source_category
@@ -98,7 +86,7 @@ def parse_game_data(soup, source_category, url):
     else:
         print(f"Warning: Title not found for {url}")
 
-    # Metascore & Critic Reviews Count
+    # Metascore 
     parent_div = soup.find('div', class_=re.compile(r'score-card-left__score-number'))
     score = parent_div.find('span').text.strip() if parent_div else "TBD"
     if score and score.isdigit():
@@ -117,45 +105,19 @@ def parse_game_data(soup, source_category, url):
     else:
         print(f"Warning: Critic review count element not found for {url}")
 
-
-    # # Details Block (Release Date, Developer, Publisher, Genres)
-    # details_meta = soup.find_all('div', class_=re.compile(r'c-gameDetails_Section|c-productionDetailsNonSpecs'))
-    # for block in details_meta:
-    #     text = block.get_text(separator=" ", strip=True)
-        
-    #     if 'Release Date' in text and not data['ReleaseDate']:
-    #         date_match = re.search(r'Release Date:\s*([A-Za-z]+\s+\d+,\s+\d{4})', text)
-    #         if date_match:
-    #             data['ReleaseDate'] = date_match.group(1)
-        
-    #     if 'Developer' in text and not data['Developer']:
-    #         dev_elem = block.find('a') or block.find('span', class_=re.compile(r'value'))
-    #         if dev_elem:
-    #             data['Developer'] = dev_elem.get_text(strip=True)
-                
-    #     if 'Publisher' in text and not data['Publisher']:
-    #         pub_elem = block.find('a') or block.find('span', class_=re.compile(r'value'))
-    #         if pub_elem:
-    #             data['Publisher'] = pub_elem.get_text(strip=True)
-                
-    #     if 'Genre' in text and not data['Genres']:
-    #         genre_links = block.find_all('a')
-    #         if genre_links:
-    #             data['Genres'] = ", ".join([g.get_text(strip=True) for g in genre_links])
-
     return data
 
 
 def build_and_save_dataframe(all_games_data):
     """
     Constructs the initial Pandas DataFrame, casts numeric fields,
-    and exports the raw data to CSV and JSON formats.
+    filters out games with fewer than 5 critic reviews, and exports.
     """
     if not all_games_data:
         print("No games collected to save.")
         return None
 
-    os.makedirs('output', exist_ok=True)
+    os.makedirs('./Q3/output', exist_ok=True)
     df_games = pd.DataFrame(all_games_data)
 
     numeric_columns = ['Metascore', 'NumberOfCriticReviews']
@@ -178,7 +140,6 @@ def build_and_save_dataframe(all_games_data):
     if dropped > 0:
         print(f"Scrape Filter: Dropped {dropped} games due to fewer than 5 critic reviews.")
 
-
     df_games.to_csv('./Q3/output/games_raw.csv', index=False, encoding='utf-8')
 
     records_list = []
@@ -194,7 +155,6 @@ def build_and_save_dataframe(all_games_data):
         records_list.append(ordered_dict)
 
     with open('./Q3/output/games_raw.json', 'w', encoding='utf-8') as f:
-        # json.dump({"records": {"record": records_list}}, f, indent=4, ensure_ascii=False)
         json.dump({"records": records_list}, f, indent=4, ensure_ascii=False)
 
     print(f"Step 2 Complete! Processed {len(df_games)} raw games out of {len(all_games_data)}, which is {len(df_games)/len(all_games_data)*100:.2f}%.")
@@ -203,13 +163,8 @@ def build_and_save_dataframe(all_games_data):
 
 def remove_duplicates(df):
     """
-    Removes duplicate games found within the same platform (sanity check, not supposed to happen).
+    Removes duplicate games found within the same platform.
     """
-    print("\n" + "=" * 40)
-    print("   REMOVING DUPLICATES")
-    print("=" * 40)
-    print(f"Total games before removing dupes: {len(df)}")
-
     # Drop duplicate URLs
     if 'url' in df.columns:
         df = df.drop_duplicates(subset=['Platform', 'url'], keep='first')
@@ -243,7 +198,7 @@ def step_3_sorting_and_preview(df):
     print(df_after[display_cols].to_string())
     
     # Save the final sorted baseline dataset
-    df_sorted.to_csv('Q3/output/games_baseline_final.csv', index=False, encoding='utf-8')
+    df_sorted.to_csv('./Q3/output/games_baseline_final.csv', index=False, encoding='utf-8')
     print("\nSaved final baseline dataset to ./Q3/output/games_baseline_final.csv")
 
     return df_sorted
@@ -273,13 +228,13 @@ def create_metacritic_url(app_name):
         for char in base_slug
     )
 
-    # Turn colons and asterisks into spaces, as Metacritic replaces them with hyphens in its slugs
+    # Turn colons and asterisks into spaces, as Metacritic replaces them with hyphens
     base_slug = re.sub(r'[:*]', ' ', base_slug)
 
     # sometimes ™, ®, and other symbols turn into (TM), (R), etc.
     base_slug = re.sub(r'\((tm|r|c)\)', ' ', base_slug)
 
-    # Expand "goty" to Metacritic's exact preferred phrase structure, there are many GOTY editions that are not recognized if we don't do this
+    # Expand "goty" to Metacritic's exact preferred phrase structure
     base_slug = base_slug.replace("goty", "game of the year")
     
     def format_slug(text):
@@ -290,7 +245,7 @@ def create_metacritic_url(app_name):
     # Start with the default baseline URL
     urls = [f"https://www.metacritic.com/game/{format_slug(base_slug)}/critic-reviews/?platform=pc"]
 
-    # Steam decodes games with Arabic numerals (e.g., "Final Fantasy 7") while Metacritic often uses Roman numerals (e.g., "Final Fantasy VII").
+    # Handle Roman to Arabic numeral swaps
     arabic_match = re.search(r'\b\d+\b', base_slug)
     roman_match = re.search(r'\b[ivxlcm]+\b', base_slug)
 
@@ -314,7 +269,6 @@ def create_metacritic_url(app_name):
         except roman.InvalidRomanNumeralError:
             pass
 
-    # Return unique URLs while preserving the order (Default first, Alternative second)
     return list(dict.fromkeys(urls))
 
 
@@ -323,20 +277,15 @@ def clean_title_for_merge(title):
     Standardizes game titles for merging by stripping trademarks, 
     punctuation, and excess spaces.
     """
-    # Convert to string and lowercase
     title = str(title).lower()
     
-    # 1. Remove trademark and copyright symbols entirely
+    # Remove trademark and copyright symbols entirely
     title = re.sub(r'[™®©]', '', title)
-    
-    # 2. Replace common separators (colons, dashes, slashes) with spaces 
-    # to prevent words from mashing together (e.g., "game:subtitle" -> "game subtitle")
+    # Replace common separators (colons, dashes, slashes) with spaces 
     title = re.sub(r'[:\-/,]', ' ', title)
-    
-    # 3. Remove all remaining non-alphanumeric characters (like !, +, etc.)
+    # Remove all remaining non-alphanumeric characters
     title = re.sub(r'[^a-z0-9\s]', '', title)
-    
-    # 4. Collapse multiple spaces into a single space and strip the edges
+    # Collapse multiple spaces into a single space and strip the edges
     title = re.sub(r'\s+', ' ', title).strip()
     
     return title
@@ -344,21 +293,19 @@ def clean_title_for_merge(title):
 
 def crawl_metacritic(consensus_df, csv_path='./Q3/output/games_raw.csv', cache_file='./Q3/output/attempted_urls.txt'):
     """Handles targeted web scraping on Metacritic based on Steam game titles."""
-
     os.makedirs('./Q3/output', exist_ok=True)
     existing_urls = set()
     existing_data = []
 
-    # 1. Load existing data to build the "Skip List"
+    # Load existing data to build the "Skip List"
     if os.path.exists(cache_file):
         with open(cache_file, 'r', encoding='utf-8') as f:
             existing_urls = set(line.strip() for line in f if line.strip())
         print(f"Loaded {len(existing_urls)} previously attempted URLs from {cache_file}.")
 
-    # 2. Load existing valid data to append to
+    # Load existing valid data to append to
     if os.path.exists(csv_path):
         df_existing = pd.read_csv(csv_path)
-        # Ensure we only treat as "existing valid data" rows that have a Metascore
         if 'Metascore' in df_existing.columns:
             df_existing = df_existing.dropna(subset=['Metascore'])
         df_existing = df_existing.where(pd.notnull(df_existing), None)
@@ -370,7 +317,6 @@ def crawl_metacritic(consensus_df, csv_path='./Q3/output/games_raw.csv', cache_f
     driver = get_browser()
     new_games_data = []
 
-    # Get a list of unique game names from the Steam dataset
     game_names = consensus_df['app_name'].unique()
     print(f"Found {len(game_names)} unique Steam games to look up on Metacritic.")
 
@@ -379,50 +325,44 @@ def crawl_metacritic(consensus_df, csv_path='./Q3/output/games_raw.csv', cache_f
         for i, app_name in enumerate(game_names, start=1):
             candidate_urls = create_metacritic_url(app_name)
 
-            # Check if we already successfully scraped this game using ANY of its URL variations
             if any(url in successful_urls for url in candidate_urls):
                 continue
 
             # Try each candidate URL
             for url in candidate_urls:
                 if url in existing_urls:
-                    continue # We already tried this specific URL and it failed
+                    continue 
 
-                # Log the attempt immediately so we never try it again
                 f_cache.write(f"{url}\n")
-                f_cache.flush()  # Ensure it writes to disk immediately
+                f_cache.flush() 
                 existing_urls.add(url)
 
-                # Wait for the main h1 title block to load as confirmation the page exists
                 print(f"\n  Fetching New Game: {url}")
                 game_soup = get_soup_with_wait(driver, url, "h1")
                 
-                # If the page times out (e.g., game doesn't exist on Metacritic or URL is slightly off), skip it
                 if not game_soup:
                     print(f"    -> Skipping: Page not found or failed to load for '{app_name}'")
                     continue
 
-                # Parse the data, hardcoding "PC" as the platform since we are coming from Steam
                 game_info = parse_game_data(game_soup, "PC", url)
                 
                 if game_info and game_info.get('Title'):
                     new_games_data.append(game_info)
                     print(f"    Collected: {game_info['Title'][:50]} (Metascore: {game_info['Metascore']})")
                     print(f"    game index: {i} out of {len(game_names)}")
-                    break  # Stop trying other candidate URLs for this game since we succeeded
+                    break 
 
-                # Add a respectful delay to avoid getting IP-banned by Metacritic
                 time.sleep(1)
 
-    print(f"\nCrawling complete! Collected data for {len(new_games_data) + len(existing_data)} out of {len(game_names)} games, \
-          which is {(len(new_games_data) + len(existing_data))/len(game_names)*100:.2f}%.")
+    total_collected = len(new_games_data) + len(existing_data)
+    success_rate = (total_collected / len(game_names)) * 100
+    print(f"\nCrawling complete! Collected data for {total_collected} out of {len(game_names)} games, which is {success_rate:.2f}%.")
 
     try:
         driver.quit()
     except Exception:
         pass
     
-    # patch the driver to do nothing when Python's garbage collector tries to delete it
     if hasattr(driver, 'quit'):
         driver.quit = lambda: None 
 
@@ -436,11 +376,9 @@ def crawl_metacritic(consensus_df, csv_path='./Q3/output/games_raw.csv', cache_f
 def plot_consensus_vs_metascore(merged_df):
     """
     Visualizes the disparity between Steam players and Metacritic professional reviews.
-    Includes a reference line to easily spot games with high delta anomalies.
     """
     plt.figure(figsize=(10, 6))
     
-    # Create the scatter plot using your established color scheme
     sns.scatterplot(
         data=merged_df, 
         x='Metascore_Normalized', 
@@ -451,22 +389,14 @@ def plot_consensus_vs_metascore(merged_df):
         s=80
     )
     
-    # Add a red dashed line representing perfect agreement (where delta = 0)
-    plt.plot([0, 1], [0, 1], color='red', linestyle='--', linewidth=2,
-             label='Perfect Agreement (delta = 0)')
-
-    # Add green dotted lines for delta thresholds of +0.25 and -0.25
-    # y = x + 0.25 (Players > Critics)
-    plt.plot([0, 1.05], [0.25, 1.30], color='green', linestyle=':', linewidth=1.5, label='delta = +0.25')
-    # y = x - 0.25 (Critics > Players)
-    plt.plot([0, 1.05], [-0.25, 0.80], color='green', linestyle=':', linewidth=1.5, label='delta = -0.25')
+    # Perfect agreement line
+    plt.plot([0, 1], [0, 1], color='red', linestyle='--', linewidth=2, label='Perfect Agreement (Delta = 0)')
 
     # Formatting the chart
     plt.title('Steam Consensus vs. Normalized Metascore', fontsize=18, fontweight='bold')
     plt.xlabel('Normalized Metascore (Critics)', fontsize=16)
     plt.ylabel('Steam Consensus (Players)', fontsize=16)
 
-    # Set limits to 0.0 - 1.0 since both metrics are percentages/normalized
     plt.xlim(0, 1.05)
     plt.ylim(0, 1.05)
     
@@ -474,94 +404,74 @@ def plot_consensus_vs_metascore(merged_df):
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
     
-    plt.savefig('./Q3/output/steam_consensus_vs_metascore.png')
+    plt.savefig('./Q3/output/steam_consensus_vs_metascore.png', dpi=300)
     plt.close()
 
 
 def print_consensus_disparities(merged_df, top_n=5):
     """
-    Identifies and prints the games with the largest disparities 
-    between Steam player consensus and Metacritic scores.
+    Identifies and prints the games with the largest disparities.
     """
-    # Sort for High Positive delta (Players > Critics)
     player_favorites = merged_df.sort_values(by='delta', ascending=False).head(top_n)
-    
-    # Sort for High Negative delta (Critics > Players)
     critic_favorites = merged_df.sort_values(by='delta', ascending=True).head(top_n)
     
     print(f"\n{'='*50}")
     print("   EXTREME OUTLIERS: PLAYERS > CRITICS (Top Left)")
     print(f"{'='*50}")
-    # Explicitly selecting columns to display, strictly excluding URLs
     print(player_favorites[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].to_string(index=False))
 
     print(f"\n{'='*50}")
     print("   EXTREME OUTLIERS: CRITICS > PLAYERS (Bottom Right)")
     print(f"{'='*50}")
-    # Explicitly selecting columns to display, strictly excluding URLs
     print(critic_favorites[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].to_string(index=False))
 
 
 def plot_delta_outliers(merged_df, top_n=5):
     """
-    Visualizes the top extreme outliers on both sides (Players > Critics, Critics > Players).
-    Enhanced with explicit data labels for absolute clarity on border values.
+    Visualizes the top extreme outliers with explicit data labels and a high-contrast palette.
     """
-    # Sort for High Positive Delta (Players > Critics)
     player_favorites = merged_df.sort_values(by='delta', ascending=False).head(top_n)
-    # Sort for High Negative Delta (Critics > Players)
     critic_favorites = merged_df.sort_values(by='delta', ascending=True).head(top_n)
-
-    # Combine them for the plot (total 10 games)
     outliers = pd.concat([player_favorites, critic_favorites]).sort_values(by='delta')
 
     plt.figure(figsize=(11, 7))
     
-    # Use a diverging color scheme: Red for Critic favorites, Blue for Player favorites
-    colors = ['#c0392b' if x < 0 else '#2a475e' for x in outliers['delta']]
+    # Modern, Vibrant Palette: Crimson for Critics, Azure Blue for Players
+    colors = ['#e63946' if x < 0 else '#0077b6' for x in outliers['delta']]
     
-    # Plot the horizontal bars
     bars = plt.barh(outliers['app_name'], outliers['delta'], color=colors, edgecolor='none')
     
-    # Add exact numeric labels to the end of every bar ---
+    # Add exact numeric labels to the end of every bar
     for bar, delta_val in zip(bars, outliers['delta']):
-        # Offset the text slightly past the end of the bar
         offset = 0.015 if delta_val > 0 else -0.015
         ha = 'left' if delta_val > 0 else 'right'
         
         plt.text(delta_val + offset, bar.get_y() + bar.get_height()/2, 
-                 f'{delta_val:+.3f}',  # Format to 3 decimal places with a +/- sign
-                 va='center', ha=ha, fontsize=10, fontweight='bold', color='black')
+                 f'{delta_val:+.3f}', 
+                 va='center', ha=ha, fontsize=10, fontweight='bold', color='#333333')
     
-    # Add a prominent center baseline
     plt.axvline(0, color='black', linewidth=1.5)
     
-    # Threshold Highlights
-    threshold_color = '#27ae60' 
-    plt.axvline(x=0.25, color=threshold_color, linestyle='--', linewidth=2.5, label='Delta Threshold (±0.25)')
+    # High-Contrast Amber Thresholds
+    threshold_color = '#ffb703'
+    plt.axvline(x=0.25, color=threshold_color, linestyle='--', linewidth=2.5, label='Anomaly Threshold (±0.25)')
     plt.axvline(x=-0.25, color=threshold_color, linestyle='--', linewidth=2.5)
     
-    # Subtle background shading to highlight the extreme zones
-    plt.axvspan(0.25, outliers['delta'].max() + 0.15, color=threshold_color, alpha=0.08)
-    plt.axvspan(outliers['delta'].min() - 0.15, -0.25, color=threshold_color, alpha=0.08)
+    # Subtle gold background shading to highlight the extreme zones
+    plt.axvspan(0.25, outliers['delta'].max() + 0.15, color=threshold_color, alpha=0.15)
+    plt.axvspan(outliers['delta'].min() - 0.15, -0.25, color=threshold_color, alpha=0.15)
 
-    # Expand the x-axis limits dynamically so the new text labels do not get cut off
     plt.xlim(outliers['delta'].min() - 0.15, outliers['delta'].max() + 0.15)
 
-    # Formatting the chart
     plt.title('Top Extreme Anomalies: Player vs. Critic Divergence', fontsize=16, fontweight='bold', pad=15)
     plt.xlabel('Delta Score (Steam Consensus - Normalized Metascore)', fontsize=13)
     plt.ylabel('Game Title', fontsize=13)
     
-    # Legend and Grid adjustments
     plt.legend(loc='upper left', fontsize=11, framealpha=0.95)
-    plt.grid(axis='x', linestyle='--', alpha=0.4)
+    plt.grid(axis='x', linestyle=':', color='#bdc3c7', alpha=0.6)
     
-    # Clean up the outer borders (spines) for a modern look
     sns.despine(left=True, bottom=False, top=True, right=True)
-    
     plt.tight_layout()
-    
     plt.savefig('./Q3/output/delta_outliers.png', dpi=300)
     plt.close()
 
@@ -570,7 +480,7 @@ def main():
     print("\n" + "=" * 40)
     print("   STAGE 1: STEAM CONSENSUS")
     print("=" * 40)
-    # Read and calculate the Steam reviews dataset
+    
     print("Reading the Steam reviews dataset...")
     steam_df = pd.read_csv("./steam_reviews_english.csv")
     out_csv = './Q3/output/steam_consensus.csv'
@@ -583,24 +493,21 @@ def main():
     print("=" * 40)
     csv_path = './Q3/output/games_raw.csv'
     cache_file = './Q3/output/attempted_urls.txt'
+    
     if os.path.exists(csv_path):
         df = pd.read_csv('./Q3/output/games_raw.csv')
-        # Only include rows with a Metascore when seeding the attempted URLs cache
         if 'Metascore' in df.columns:
             df = df.dropna(subset=['Metascore'])
     else:
         df = pd.DataFrame()
 
-    # Write all the URLs we already successfully grabbed into the new cache file
-    # We need this for the first run only the Steam Reviews dataset, so we don't have to re-scrape them
     if os.path.exists('./Q3/output/games_raw.csv'):
         with open('./Q3/output/attempted_urls.txt', 'w') as f:
             for url in df['url'].dropna().unique():
                 f.write(f"{url}\n")
-    # crawl_metacritic(consensus_df, csv_path, cache_file)
+                
+    crawl_metacritic(consensus_df, csv_path, cache_file)
 
-    # Load and clean the Metacritic data
-    csv_path = './Q3/output/games_raw.csv'
     df_from_csv, _ = read_saved_data(csv_path)
     if df_from_csv is not None and not df_from_csv.empty:
         df_deduped = remove_duplicates(df_from_csv)
@@ -611,18 +518,14 @@ def main():
         print("   STAGE 3: MERGING & DELTA CALCULATION")
         print("=" * 40)
         
-        # Apply the aggressive regex cleaning to both datasets to maximize merge success
         consensus_df['merge_name'] = consensus_df['app_name'].apply(clean_title_for_merge)
         mc_baseline_df['merge_name'] = mc_baseline_df['Title'].apply(clean_title_for_merge)
 
-        # Merge the datasets
         merged_df = pd.merge(consensus_df, mc_baseline_df, on='merge_name', how='inner')
         
-        # Calculate the anomaly delta (Steam Consensus - Normalized Metascore)
-        merged_df['Metascore_Normalized'] = merged_df['Metascore'] / 100.0 # metascore is 0-100, normalize to 0.0-1.0
+        merged_df['Metascore_Normalized'] = merged_df['Metascore'] / 100.0 
         merged_df['delta'] = merged_df['steam_consensus'] - merged_df['Metascore_Normalized']
 
-        # Evaluate the proportion of games with |delta| > 0.25
         total_games = len(merged_df)
         outlier_mask = abs(merged_df['delta']) > 0.25
         outlier_count = outlier_mask.sum()
@@ -634,12 +537,8 @@ def main():
         print(f"Total merged games        : {total_games}")
         print(f"Games with |delta| > 0.25 : {outlier_count}")
         print(f"Proportion of outliers    : {outlier_pct:.2f}%")
-        # print(f"Success Criterion Met     : {'YES' if outlier_pct > 5 else 'NO'}")
 
-        # Remove any rows that still do not have a Metascore
         merged_df = merged_df.dropna(subset=['Metascore'])
-        
-        # Clean up temporary columns and save
         merged_df.drop(columns=['merge_name'], inplace=True)
         merged_df.to_csv('./final_Q3_dataset.csv', index=False)
         
@@ -652,5 +551,4 @@ def main():
     plot_delta_outliers(merged_df)
 
 if __name__ == "__main__":
-    # The main function can be used to run the script directly
     main()
