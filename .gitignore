@@ -1,10 +1,4 @@
 .venv/
 .idea/
 steam_reviews_english.csv
-Q3/output/attempted_urls.txt
-Q3/output/delta_outliers.png
-Q3/output/games_baseline_final.csv
-Q3/output/games_raw.csv
-Q3/output/games_raw.json
-Q3/output/steam_consensus_vs_metascore.png
-Q3/output/steam_consensus.csv
+Q3/output/

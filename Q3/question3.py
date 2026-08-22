@@ -477,6 +477,7 @@ def plot_delta_outliers(merged_df, top_n=5):
 
 
 def main():
+    os.makedirs('./Q3/output', exist_ok=True)
     print("\n" + "=" * 40)
     print("   STAGE 1: STEAM CONSENSUS")
     print("=" * 40)
