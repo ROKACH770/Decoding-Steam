@@ -22,8 +22,8 @@ Run:
 
 python Q3/question3.py
 
-This creates steam consensus dataset and scrapes the Metacritic website, which will take a while. 
-It then saves the combined dataset and creates the figures comparing Steam recommendation rates with PC Metascores.
+This checks if "final_Q3_dataset.csv" exists. If not, it creates a steam consensus dataset and scrapes the Metacritic website and combines them, which will take a while. 
+Either way, it creates the figures comparing Steam recommendation rates with PC Metascores.
 
 ###Steam Game Finder###
 
