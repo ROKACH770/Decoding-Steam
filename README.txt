@@ -1,18 +1,14 @@
 Note: the provided datasets are 20k review samples of the respective original
 
 ###Question 1###
-
-Place steam_reviews_english.csv inside Q1, then run:
-
-python Q1/Question1.py
+run: python Q1/question1.py
 
 The first run creates a smaller Parquet file and the three Question 1 figures. Later runs reuse the Parquet file.
+Figures are saved under Q1.
 
 ###Question 2###
 
-Place steam_reviews_with_achievements.csv inside Q2, then run:
-
-python Q2/analyze_steam_data.py
+run: python Q2/question2.py
 
 The figures are saved in Q2/achievement_review_plots.
 
@@ -29,9 +25,9 @@ It then saves the combined dataset and creates the figures comparing Steam recom
 
 ###Steam Game Finder###
 
-The compact game profiles are already stored in steam_game_finder/data. Start the website with:
+The game profiles are already stored in steam_game_finder/data. Start the website with:
 
-streamlit run steam_game_finder/app.py
+streamlit run steam_game_finder/Steam_Game_Finder_V2.py
 
 Live version: https://decoding-steam-nqyymps7t5widxiwf9aaj7.streamlit.app/
 
