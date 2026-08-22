@@ -51,29 +51,7 @@ def calculate_steam_consensus(df, out_csv='./Q3/output/steam_consensus.csv'):
     # Save consensus data to CSV
     consensus_df.to_csv(out_csv, index=False)
 
-def plot_steam_consensus(consensus_df):
-    """
-    This function reads the Steam reviews dataset, calculates the consensus per game,
-    and visualizes the results in a bar plot.
-    """
-    # Display the results
-    print("--- Summary Statistics ---")
-    print(consensus_df['steam_consensus'].describe())
 
-    print("\n--- Game Consensus Data ---")
-    print(consensus_df[['app_name', 'total_reviews', 'total_positive', 'steam_consensus']].head())
-
-    # Visualize the Data
-    plt.figure(figsize=(9, 5))
-    sns.histplot(consensus_df['steam_consensus'], kde=True, color='#2a475e', bins=30)
-    plt.title('Distribution of Steam Consensus Scores', fontsize=14, fontweight='bold')
-    plt.xlabel('Steam Consensus (Positive Review Ratio)', fontsize=16)
-    plt.ylabel('Number of Games', fontsize=16)
-    plt.tight_layout()
-    plt.savefig('./Q3/output/steam_consensus.png')
-    plt.close()
-
-    
 def get_browser():
     """Initializes and returns a Chrome browser instance configured to bypass Cloudflare."""
     options = uc.ChromeOptions()
@@ -458,7 +436,7 @@ def crawl_metacritic(consensus_df, csv_path='./Q3/output/games_raw.csv', cache_f
 def plot_consensus_vs_metascore(merged_df):
     """
     Visualizes the disparity between Steam players and Metacritic professional reviews.
-    Includes a reference line to easily spot games with high Delta anomalies.
+    Includes a reference line to easily spot games with high delta anomalies.
     """
     plt.figure(figsize=(10, 6))
     
@@ -479,9 +457,9 @@ def plot_consensus_vs_metascore(merged_df):
 
     # Add green dotted lines for delta thresholds of +0.25 and -0.25
     # y = x + 0.25 (Players > Critics)
-    plt.plot([0, 1.05], [0.25, 1.30], color='green', linestyle=':', linewidth=1.5, label='Delta = +0.25')
+    plt.plot([0, 1.05], [0.25, 1.30], color='green', linestyle=':', linewidth=1.5, label='delta = +0.25')
     # y = x - 0.25 (Critics > Players)
-    plt.plot([0, 1.05], [-0.25, 0.80], color='green', linestyle=':', linewidth=1.5, label='Delta = -0.25')
+    plt.plot([0, 1.05], [-0.25, 0.80], color='green', linestyle=':', linewidth=1.5, label='delta = -0.25')
 
     # Formatting the chart
     plt.title('Steam Consensus vs. Normalized Metascore', fontsize=18, fontweight='bold')
@@ -505,10 +483,10 @@ def print_consensus_disparities(merged_df, top_n=5):
     Identifies and prints the games with the largest disparities 
     between Steam player consensus and Metacritic scores.
     """
-    # Sort for High Positive Delta (Players > Critics)
+    # Sort for High Positive delta (Players > Critics)
     player_favorites = merged_df.sort_values(by='delta', ascending=False).head(top_n)
     
-    # Sort for High Negative Delta (Critics > Players)
+    # Sort for High Negative delta (Critics > Players)
     critic_favorites = merged_df.sort_values(by='delta', ascending=True).head(top_n)
     
     print(f"\n{'='*50}")
@@ -523,30 +501,68 @@ def print_consensus_disparities(merged_df, top_n=5):
     # Explicitly selecting columns to display, strictly excluding URLs
     print(critic_favorites[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].to_string(index=False))
 
+
 def plot_delta_outliers(merged_df, top_n=5):
     """
     Visualizes the top extreme outliers on both sides (Players > Critics, Critics > Players).
+    Enhanced with explicit data labels for absolute clarity on border values.
     """
     # Sort for High Positive Delta (Players > Critics)
     player_favorites = merged_df.sort_values(by='delta', ascending=False).head(top_n)
     # Sort for High Negative Delta (Critics > Players)
     critic_favorites = merged_df.sort_values(by='delta', ascending=True).head(top_n)
 
-    # Combine them for the plot
+    # Combine them for the plot (total 10 games)
     outliers = pd.concat([player_favorites, critic_favorites]).sort_values(by='delta')
 
-    plt.figure(figsize=(10, 6))
-    # Use a diverging color scheme: Red for Critic favorites (negative Delta), Blue for Player favorites (positive Delta)
+    plt.figure(figsize=(11, 7))
+    
+    # Use a diverging color scheme: Red for Critic favorites, Blue for Player favorites
     colors = ['#c0392b' if x < 0 else '#2a475e' for x in outliers['delta']]
     
-    plt.barh(outliers['app_name'], outliers['delta'], color=colors)
-    plt.axvline(0, color='black', linewidth=0.8)
-    plt.title('Top Extreme Anomalies: Player vs. Critic Divergence', fontsize=14, fontweight='bold')
-    plt.xlabel('Delta Score (Steam Consensus - Normalized Metascore)', fontsize=12)
-    plt.ylabel('Game Title', fontsize=12)
-    plt.grid(axis='x', linestyle='--', alpha=0.5)
+    # Plot the horizontal bars
+    bars = plt.barh(outliers['app_name'], outliers['delta'], color=colors, edgecolor='none')
+    
+    # Add exact numeric labels to the end of every bar ---
+    for bar, delta_val in zip(bars, outliers['delta']):
+        # Offset the text slightly past the end of the bar
+        offset = 0.015 if delta_val > 0 else -0.015
+        ha = 'left' if delta_val > 0 else 'right'
+        
+        plt.text(delta_val + offset, bar.get_y() + bar.get_height()/2, 
+                 f'{delta_val:+.3f}',  # Format to 3 decimal places with a +/- sign
+                 va='center', ha=ha, fontsize=10, fontweight='bold', color='black')
+    
+    # Add a prominent center baseline
+    plt.axvline(0, color='black', linewidth=1.5)
+    
+    # Threshold Highlights
+    threshold_color = '#27ae60' 
+    plt.axvline(x=0.25, color=threshold_color, linestyle='--', linewidth=2.5, label='Delta Threshold (±0.25)')
+    plt.axvline(x=-0.25, color=threshold_color, linestyle='--', linewidth=2.5)
+    
+    # Subtle background shading to highlight the extreme zones
+    plt.axvspan(0.25, outliers['delta'].max() + 0.15, color=threshold_color, alpha=0.08)
+    plt.axvspan(outliers['delta'].min() - 0.15, -0.25, color=threshold_color, alpha=0.08)
+
+    # Expand the x-axis limits dynamically so the new text labels do not get cut off
+    plt.xlim(outliers['delta'].min() - 0.15, outliers['delta'].max() + 0.15)
+
+    # Formatting the chart
+    plt.title('Top Extreme Anomalies: Player vs. Critic Divergence', fontsize=16, fontweight='bold', pad=15)
+    plt.xlabel('Delta Score (Steam Consensus - Normalized Metascore)', fontsize=13)
+    plt.ylabel('Game Title', fontsize=13)
+    
+    # Legend and Grid adjustments
+    plt.legend(loc='upper left', fontsize=11, framealpha=0.95)
+    plt.grid(axis='x', linestyle='--', alpha=0.4)
+    
+    # Clean up the outer borders (spines) for a modern look
+    sns.despine(left=True, bottom=False, top=True, right=True)
+    
     plt.tight_layout()
-    plt.savefig('./Q3/output/delta_outliers.png')
+    
+    plt.savefig('./Q3/output/delta_outliers.png', dpi=300)
     plt.close()
 
 
@@ -561,8 +577,6 @@ def main():
     # calculate_steam_consensus(steam_df, out_csv=out_csv)
     consensus_df = pd.read_csv(out_csv)
     print(f"Successfully calculated consensus for {len(consensus_df)} Steam games.")
-
-    plot_steam_consensus(consensus_df)
 
     print("\n" + "=" * 40)
     print("   STAGE 2: METACRITIC BASELINE")
@@ -627,11 +641,11 @@ def main():
         
         # Clean up temporary columns and save
         merged_df.drop(columns=['merge_name'], inplace=True)
-        merged_df.to_csv('./Q3/output/final_Q3_dataset.csv', index=False)
+        merged_df.to_csv('./final_Q3_dataset.csv', index=False)
         
         print("\nFinal Merged Dataset Created!")
         print(merged_df[['app_name', 'steam_consensus', 'Metascore_Normalized', 'delta']].head(10).to_string())
-        print("\nSaved to: ./Q3/output/final_Q3_dataset.csv")
+        print("\nSaved to: ./final_Q3_dataset.csv")
 
     plot_consensus_vs_metascore(merged_df)
     print_consensus_disparities(merged_df)
