@@ -478,6 +478,27 @@ def plot_delta_outliers(merged_df, top_n=5):
 
 def main():
     os.makedirs('./Q3/output', exist_ok=True)
+
+    # If the completed dataset is already available (which will be the case for you), skip the Steam aggregation,
+    # Metacritic scraping, and merge stages below and use it directly.
+    final_dataset_path = './final_Q3_dataset.csv'
+    if os.path.exists(final_dataset_path):
+        print(f"Loading existing final dataset: {final_dataset_path}")
+        merged_df = pd.read_csv(final_dataset_path)
+
+        if 'Metascore_Normalized' not in merged_df.columns:
+            merged_df['Metascore_Normalized'] = merged_df['Metascore'] / 100.0
+        if 'delta' not in merged_df.columns:
+            merged_df['delta'] = (
+                merged_df['steam_consensus'] - merged_df['Metascore_Normalized']
+            )
+
+        plot_consensus_vs_metascore(merged_df)
+        print_consensus_disparities(merged_df)
+        plot_delta_outliers(merged_df)
+        return
+
+    # else, if the final dataset is not available, run the full pipeline
     print("\n" + "=" * 40)
     print("   STAGE 1: STEAM CONSENSUS")
     print("=" * 40)
@@ -506,7 +527,7 @@ def main():
         with open('./Q3/output/attempted_urls.txt', 'w') as f:
             for url in df['url'].dropna().unique():
                 f.write(f"{url}\n")
-                
+
     crawl_metacritic(consensus_df, csv_path, cache_file)
 
     df_from_csv, _ = read_saved_data(csv_path)
