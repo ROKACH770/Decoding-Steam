@@ -1,21 +1,21 @@
 Note: the provided datasets are 20k review samples of the respective original
 
 ###Question 1###
-run: python Q1/Question1.py
+run: python Q1/question1.py
 
 The first run creates a smaller Parquet file and the three Question 1 figures. Later runs reuse the Parquet file.
 Figures are saved under Q1.
 
 ###Question 2###
 
-run: python Q2/analyze_steam_data.py
+run: python Q2/question2.py
 
 The figures are saved in Q2/achievement_review_plots.
 
 Q2/collect_steam_data.py recreates the achievement dataset from the Steam Web API. It requires a Steam API key and takes a long time, so it is not needed when the prepared CSV is already included.
 
 ###Question 3###
-run: python Q3/Question3.py
+run: python Q3/question3.py
 
 This creates the figures comparing Steam recommendation rates with PC Metascores.
 
